@@ -131,4 +131,4 @@ class UNTIBackend(BaseOAuth2):
         return result
 
     def get_redirect_uri(self, state=None):
-        return 'https://dashboard.2035.university/complete/unti/'
+        return 'https://dashboard.2035.university/complete/unti'
