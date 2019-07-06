@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import environ
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
+print('The .env file has been loaded. See base.py for more information')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -22,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '775x_*4z(zm@j4g_+ooa=zld!t%lhatml68c@ag=)k7!(es96$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DJANGO_DEBUG', False)
 
 ALLOWED_HOSTS = ['*']
 
@@ -36,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'center.apps.CenterConfig',
+    'social_core',
+    'social_django',
+
 ]
 
 MIDDLEWARE = [
@@ -69,10 +76,20 @@ TEMPLATES = [
     },
 ]
 
-SSO_UNTI_URL = os.getenv("SSO_UNTI_URL")
+AUTH_USER_MODEL = 'center.User'
+# USER_FIELDS = (
+#    'email',
+#    'username',
+#    'first_name',
+#    'last_name',
+#    'unti_id',
+#    'leader_id',
+# )
 
-SOCIAL_AUTH_UNTI_KEY = os.getenv("SOCIAL_AUTH_UNTI_KEY")
-SOCIAL_AUTH_UNTI_SECRET = os.getenv("SOCIAL_AUTH_UNTI_SECRET")
+SSO_UNTI_URL = env("SSO_UNTI_URL")
+
+SOCIAL_AUTH_UNTI_KEY = env("SOCIAL_AUTH_UNTI_KEY")
+SOCIAL_AUTH_UNTI_SECRET = env("SOCIAL_AUTH_UNTI_SECRET")
 
 WSGI_APPLICATION = 'center.wsgi.application'
 
@@ -86,17 +103,17 @@ DATABASES = {
     },
     'dwh-test': {
         'ENGINE': 'django.db.backends.mysql',
-        'USER': os.getenv("DWH_TEST_USER"),
-        'PASSWORD': os.getenv("DWH_TEST_PASSWORD"),
-        'HOST': os.getenv("DWH_TEST_HOST"),
-        'PORT': os.getenv("DWH_TEST_PORT")
+        'USER': env("DWH_TEST_USER"),
+        'PASSWORD': env("DWH_TEST_PASSWORD"),
+        'HOST': env("DWH_TEST_HOST"),
+        'PORT': env("DWH_TEST_PORT")
     },
     'dwh': {
         'ENGINE': 'django.db.backends.mysql',
-        'USER': os.getenv("DWH_USER"),
-        'PASSWORD': os.getenv("DWH_PASSWORD"),
-        'HOST': os.getenv("DWH_HOST"),
-        'PORT': os.getenv("DWH_PORT")
+        'USER': env("DWH_USER"),
+        'PASSWORD': env("DWH_PASSWORD"),
+        'HOST': env("DWH_HOST"),
+        'PORT': env("DWH_PORT")
     }
 }
 

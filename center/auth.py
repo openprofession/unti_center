@@ -64,7 +64,7 @@ class UNTIBackend(BaseOAuth2):
         'social_core.pipeline.social_auth.social_uid',
         'social_core.pipeline.social_auth.auth_allowed',
         'social_core.pipeline.social_auth.social_user',
-        'app_django.auth.update_user',
+        'center.auth.update_user',
         'social_core.pipeline.user.create_user',
         'social_core.pipeline.social_auth.associate_user',
         'social_core.pipeline.social_auth.load_extra_data',
@@ -116,7 +116,7 @@ class UNTIBackend(BaseOAuth2):
             params={'access_token': access_token},
             headers={'Authorization': 'Bearer {}'.format(access_token)},
         )
-        result['leader_id'] = int(result['leader_id'])
+        result['leader_id'] = result['leader_id']
         result['first_name'] = result.pop('firstname')
         result['last_name'] = result.pop('lastname')
         return result

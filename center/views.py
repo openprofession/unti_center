@@ -11,12 +11,12 @@ from center.utils import daterange
 
 def dashboards(request):
     dashboard_list = Dashboard.objects.filter(active=True, public=True)
-    return render(request, 'dashboard_list.html', {'dashboards': dashboard_list})
+    return render(request, 'public/dashboard_list.html', {'dashboards': dashboard_list})
 
 
 def reports(request):
     report_list = Report.objects.filter(active=True, public=True)
-    return render(request, 'report_list.html', {'reports': report_list})
+    return render(request, 'public/report_list.html', {'reports': report_list})
 
 
 def main(request):
