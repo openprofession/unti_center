@@ -1,0 +1,223 @@
+
+body {
+    background: #e5e5e5;
+    font-family: "IBM Plex Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+header.header {
+    font-size: 60px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #f44336;
+    padding: 30px 0 20px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+@media (max-width: 767.98px) {
+    header.header {
+        font-size: 32px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+    header.header {
+        font-size: 42px;
+    }
+}
+
+@media (min-width: 768px) {
+    header.header {
+        font-size: 60px;
+    }
+}
+
+.menu {
+    background: white;
+    height: 64px;
+}
+
+.menu .container {
+    height: 64px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu .container .logo {
+    height: 50px;
+    width: 90px;
+    background: url("https://2035.university/local/templates/.default/images/logo.png") center center no-repeat;
+    background-size: contain;
+}
+
+.menu-button .menu-toggle-panel {
+    z-index: 1000;
+    width: 275px;
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: absolute;
+    background: white;
+    display: block;
+    top: 0;
+    left: 0;
+    border: 1px solid #DDE1E7;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 15px rgba(147, 149, 154, 0.25);
+}
+
+.menu-button .menu-toggle-panel.hide {
+    display: none;
+}
+
+.menu-button .menu-toggle-panel ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+.menu-button .menu-toggle-panel ul li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-button .menu-toggle-panel ul li p, .menu-button .menu-toggle-panel ul li a {
+    padding: 0;
+    margin: 0;
+}
+
+.menu-button .menu-toggle-panel ul li a {
+    color: #222533;
+    text-transform: uppercase;
+}
+
+.menu-button .menu-toggle-panel ul li a:hover {
+    text-transform: none;
+    text-decoration: none;
+}
+
+.menu-list ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    list-style-type: none;
+}
+
+.menu-list ul li {
+    padding: 12px;
+}
+
+.menu-list ul li a {
+    color: #222533;
+    text-transform: uppercase;
+}
+
+.menu-list ul li a:hover {
+    text-decoration: none;
+}
+
+.menu-list ul li.red {
+    text-transform: none;
+    border: 1px solid #F44336;
+    border-radius: 4px;
+}
+
+.menu-list ul li.red a {
+    text-transform: none;
+    color: #F44336;
+    font-weight: 300;
+}
+
+.block {
+    background: #FFFFFF;
+    border: 1px solid #DDE1E7;
+    box-sizing: border-box;
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    padding: 13px;
+    height: 100%;
+}
+
+.block .img {
+    /*background: #222533;*/
+    width: 110px;
+    height: 100px;
+    display: flex;
+    margin-right: 13px;
+}
+
+.block .img img {
+    height: 100%;
+    margin: auto;
+}
+
+.block .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.block .content header {
+    font-size: 15px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    position: relative;
+    padding-right: 5px;
+}
+
+.block .content header.alpha:after {
+    content: "α";
+    position: absolute;
+    top: -10px;
+    right: -5px;
+    font-size: 20px;
+    text-transform: none;
+    color: #F44336;
+}
+
+.block .content header.beta:after {
+    content: "β";
+    position: absolute;
+    top: -10px;
+    right: -5px;
+    font-size: 20px;
+    text-transform: none;
+    color: #ffe600;
+}
+
+.block .content main {
+    font-size: 13px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+}
+
+.block .content footer {
+    font-size: 13px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    margin-left: auto;
+}
+
+/*# sourceMappingURL=main.css.map */

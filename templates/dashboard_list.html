@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div class="container-fluid menu">
+        <div class="container">
+            <div class="menu-button d-sm-none">
+                <i class="fas fa-bars"></i>
+                <div class="menu-toggle-panel hide">
+                    <i class="fas fa-times"></i>
+                    <ul>
+                        <li><a href="./">Дашборд</a></li>
+                        <li><a href="./">Отчеты</a></li>
+                        <li><a href="./">Авторизоваться</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="logo"></div>
+            <div class="menu-list d-none d-sm-block">
+                <ul>
+                    <li><a href="./">Дашборд</a></li>
+                    <li><a href="./">Отчеты</a></li>
+                    <li class="red"><a href="./">Авторизоваться</a></li>
+                </ul>
+            </div>
+            <div class="menu-profile d-sm-none">
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            ситуационный центр
+        </header>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row" style="">
+            {% for dashboard in dashboards %}
+                <div class="col-lg-4 col-md-6 col-12 col-fix">
+                    <div class="block">
+
+                        <div class="img"><img src="/media/{{ dashboard.cover }}" alt=""></div>
+                        <div class="content">
+                            <header class="{{ dashboard.status }}">{{ dashboard.title }}</header>
+
+                            <main>{{ dashboard.description }}</main>
+                            <footer><i class="fas fa-sync"></i> 10 июля</footer>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}

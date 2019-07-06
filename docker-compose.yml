@@ -1,0 +1,34 @@
+version: '3.7'
+services:
+  django:
+    container_name: django_SC
+    hostname: django_SC
+    restart: unless-stopped
+    build: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "9011:8000"
+
+  redis:
+    container_name: redis_SC
+    image: "redis:alpine"
+
+  celery:
+    container_name: celery_SC
+    build: .
+    command: celery -A cards worker -l info
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+
+  celery-beat:
+    container_name: celerybeat_SC
+    build: .
+    command: celery -A cards beat -l info
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
