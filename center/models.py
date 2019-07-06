@@ -19,12 +19,13 @@ class User(AbstractUser):
     leader_id = models.IntegerField(null=True, blank=True, unique=True)
 
     def __str__(self):
-        return '%s %s' % (self.unti_id, self.get_full_name())
+        return '%s %s' % (self.unti_id, self.get_full_name)
 
     @property
     def fio(self):
         return ' '.join(filter(None, [self.last_name, self.first_name, self.second_name]))
 
+    @property
     def get_full_name(self):
         return ' '.join(filter(None, [self.last_name, self.first_name]))
 

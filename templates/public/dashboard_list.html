@@ -10,7 +10,41 @@
                     <ul>
                         <li><a href="..">Дашборд</a></li>
                         <li><a href="..">Отчеты</a></li>
-                        <li><a href="..">Авторизоваться</a></li>
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.icon %}
+                                <li class="nav-item nav-user-image">
+                                    <img src="{{ request.user.icon.Small }}"/>
+                                </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <span class="navbar-red navbar-text navbar-user">
+                                            {{ request.user.get_full_name }}
+                                        </span>
+                                        {% if request.user.leader_id %}
+                                            <span class="nav-link padding-0">
+                                                <span class="badge badge-leader-id">L{{ request.user.leader_id }}</span>
+                                            </span>
+                                        {% endif %}
+                                    </li>
+                                    <li class="nav-item logout-link">
+                                        <a class="navbar-red nav-link" href="{% url 'logout' %}"
+                                           title="Выйти">
+                                            <i class="fa fa-sign-out"
+                                               title="Выйти"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link navbar-red"
+                                   href="{% url 'social:begin' backend='unti' %}?next={{ request.path }}">
+                                    Войти
+                                </a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -19,7 +53,42 @@
                 <ul>
                     <li><a href="..">Дашборд</a></li>
                     <li><a href="..">Отчеты</a></li>
-                    <li class="red"><a href="..">Авторизоваться</a></li>
+                    {% if request.user.is_authenticated %}
+                        {% comment %} {% if request.user.icon %}
+                                <li class="nav-item nav-user-image">
+                                    <img src="{{ request.user.icon.Small }}"/>
+                                </li>
+                            {% endif %}{% endcomment %}
+
+                        <li>
+                            <span class="">
+                                            {{ request.user.get_full_name }}
+                            </span>
+                        </li>
+                        {% if request.user.leader_id %}
+                            <li>
+                                <span class="">
+                                    <span class="badge badge-leader-id">L{{ request.user.leader_id }}</span>
+                                </span>
+                            </li>
+                        {% endif %}
+
+                        <li class="">
+                            <a class="" href="{% url 'logout' %}?next={{ request.path }}"
+                               title="Выйти">
+                                <i class="fa fa-sign-out"
+                                   title="Выйти"></i>
+                            </a>
+                        </li>
+
+                    {% else %}
+                        <li class="">
+                            <a class="navbar-red"
+                               href="{% url 'social:begin' backend='unti' %}?next={{ request.path }}">
+                                Войти
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="menu-profile d-sm-none">

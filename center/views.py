@@ -4,9 +4,13 @@ from datetime import date
 from django.db import connections
 from django.http import HttpResponse
 from django.shortcuts import render
-
+from django.contrib.auth.views import logout_then_login as base_logout
 from center.models import Dashboard, Report
 from center.utils import daterange
+
+
+def logout(request):
+    return base_logout(request)
 
 
 def dashboards(request):

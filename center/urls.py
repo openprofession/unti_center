@@ -21,6 +21,7 @@ from center import views, settings
 
 urlpatterns = [
                   path('', include('social_django.urls', namespace='social')),
+                  path('logout/', views.logout, name='logout'),
                   path('admin/', admin.site.urls),
                   path('', views.dashboards, name='home'),
                   path('dashboards/', views.dashboards, name='dashboards'),
