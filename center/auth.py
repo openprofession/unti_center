@@ -52,9 +52,9 @@ def update_user(strategy, details, user=None, backend=None, *args, **kwargs):
 class UNTIBackend(BaseOAuth2):
     name = 'unti'
     ID_KEY = 'unti_id'
-    AUTHORIZATION_URL = urljoin(settings.SSO_UNTI_URL, 'oauth2/authorize')
-    ACCESS_TOKEN_URL = urljoin(settings.SSO_UNTI_URL, 'oauth2/access_token')
-
+    AUTHORIZATION_URL = '{}/oauth2/authorize'.format(settings.SSO_UNTI_URL)
+    ACCESS_TOKEN_URL = '{}/oauth2/access_token'.format(settings.SSO_UNTI_URL)
+    USER_DATA_URL = '{url}/oauth2/access_token/{access_token}/'
     DEFAULT_SCOPE = []
     REDIRECT_STATE = False
     ACCESS_TOKEN_METHOD = 'POST'
@@ -90,7 +90,7 @@ class UNTIBackend(BaseOAuth2):
         """Completes loging process, must return user instance"""
         self.strategy.session.setdefault('{}_state'.format(self.name),
                                          self.data.get('state'))
-        next_url = getattr(settings, 'SOCIAL_NEXT_URL', '/')
+        next_url = getattr(settings, 'SOCIAL_NEXT_URL', 'http://dashboard.2035.university/')
         self.strategy.session.setdefault('next', next_url)
         result = super(UNTIBackend, self).auth_complete(*args, **kwargs)
         return result
