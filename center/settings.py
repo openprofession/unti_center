@@ -91,6 +91,7 @@ SSO_UNTI_URL = env("SSO_UNTI_URL")
 SOCIAL_AUTH_UNTI_KEY = env("SOCIAL_AUTH_UNTI_KEY")
 SOCIAL_AUTH_UNTI_SECRET = env("SOCIAL_AUTH_UNTI_SECRET")
 SOCIAL_AUTH_UNTI_REDIRECT_URL = 'http://dashboard.2035.university/complete/unti/'
+
 WSGI_APPLICATION = 'center.wsgi.application'
 
 # Database

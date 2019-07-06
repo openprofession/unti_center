@@ -130,3 +130,5 @@ class UNTIBackend(BaseOAuth2):
         result = self.strategy.authenticate(*args, **kwargs)
         return result
 
+    def get_redirect_uri(self, state=None):
+        return 'http://dashboard.2035.university/complete/unti/'
