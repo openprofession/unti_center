@@ -90,7 +90,7 @@ class UNTIBackend(BaseOAuth2):
         """Completes loging process, must return user instance"""
         self.strategy.session.setdefault('{}_state'.format(self.name),
                                          self.data.get('state'))
-        next_url = getattr(settings, 'SOCIAL_NEXT_URL', 'http://dashboard.2035.university/')
+        next_url = getattr(settings, 'SOCIAL_NEXT_URL', '/')
         self.strategy.session.setdefault('next', next_url)
         result = super(UNTIBackend, self).auth_complete(*args, **kwargs)
         return result
