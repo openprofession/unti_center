@@ -6,7 +6,7 @@
             <div class="menu-button d-sm-none">
                 <i class="fas fa-bars"></i>
                 <div class="menu-toggle-panel hide">
-                    <i class="fas fa-times"></i>
+                    <i class="fa fa-times"></i>
                     <ul>
                         <li><a href="..">Дашборд</a></li>
                         <li><a href="..">Отчеты</a></li>
@@ -38,8 +38,8 @@
                                 </ul>
                             </li>
                         {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link navbar-red"
+                            <li class="red">
+                                <a class=""
                                    href="{% url 'social:begin' backend='unti' %}?next={{ request.path }}">
                                     Войти
                                 </a>
@@ -51,14 +51,10 @@
             <div class="logo"></div>
             <div class="menu-list d-none d-sm-block">
                 <ul>
-                    <li><a href="..">Дашборд</a></li>
-                    <li><a href="..">Отчеты</a></li>
+
                     {% if request.user.is_authenticated %}
-                        {% comment %} {% if request.user.icon %}
-                                <li class="nav-item nav-user-image">
-                                    <img src="{{ request.user.icon.Small }}"/>
-                                </li>
-                            {% endif %}{% endcomment %}
+                        <li><a href="..">Дашборд</a></li>
+                        <li><a href="..">Отчеты</a></li>
 
                         <li>
                             <span class="">
@@ -73,7 +69,7 @@
                             </li>
                         {% endif %}
 
-                        <li class="">
+                        <li class="red">
                             <a class="" href="{% url 'logout' %}?next={{ request.path }}"
                                title="Выйти">
                                 <i class="fa fa-sign-out"
@@ -82,8 +78,8 @@
                         </li>
 
                     {% else %}
-                        <li class="">
-                            <a class="navbar-red"
+                        <li class="red">
+                            <a class=""
                                href="{% url 'social:begin' backend='unti' %}?next={{ request.path }}">
                                 Войти
                             </a>
@@ -91,9 +87,9 @@
                     {% endif %}
                 </ul>
             </div>
-            <div class="menu-profile d-sm-none">
-                <i class="fas fa-user-circle"></i>
-            </div>
+            {% comment %}            <div class="menu-profile d-sm-none">
+                <i class="fa fa-user-circle"></i>
+            </div>{% endcomment %}
         </div>
     </div>
 
@@ -116,7 +112,7 @@
                             <header class="{{ dashboard.status }}">{{ dashboard.title }}</header>
 
                             <main>{{ dashboard.description }}</main>
-                            <footer><i class="fas fa-sync"></i> 10 июля</footer>
+                            <footer><i class="fa fa-sync"></i> 10 июля</footer>
                         </div>
                     </div>
                 </div>
