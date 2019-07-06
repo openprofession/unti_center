@@ -9,7 +9,7 @@ services:
     volumes:
       - .:/code
     ports:
-      - "9011:8000"
+      - "8000:8000"
 
   redis:
     container_name: redis_SC
