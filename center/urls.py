@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from center import views, settings
 
 urlpatterns = [
+                  path('', include('social_django.urls', namespace='social')),
                   path('admin/', admin.site.urls),
                   path('', views.dashboards, name='home'),
                   path('dashboards/', views.dashboards, name='dashboards'),

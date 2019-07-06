@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -63,10 +62,17 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+SSO_UNTI_URL = os.getenv("SSO_UNTI_URL")
+
+SOCIAL_AUTH_UNTI_KEY = os.getenv("SOCIAL_AUTH_UNTI_KEY")
+SOCIAL_AUTH_UNTI_SECRET = os.getenv("SOCIAL_AUTH_UNTI_SECRET")
 
 WSGI_APPLICATION = 'center.wsgi.application'
 
@@ -80,17 +86,17 @@ DATABASES = {
     },
     'dwh-test': {
         'ENGINE': 'django.db.backends.mysql',
-        'USER': 'tsependa',
-        'PASSWORD': 'quiaMaez3aing3ce',
-        'HOST': 'u2035test.ru',
-        'PORT': '3306',
+        'USER': os.getenv("DWH_TEST_USER"),
+        'PASSWORD': os.getenv("DWH_TEST_PASSWORD"),
+        'HOST': os.getenv("DWH_TEST_HOST"),
+        'PORT': os.getenv("DWH_TEST_PORT")
     },
     'dwh': {
         'ENGINE': 'django.db.backends.mysql',
-        'USER': 'observer',
-        'PASSWORD': 'vohvohthit9eeTo2',
-        'HOST': '185.12.29.30',
-        'PORT': '17369',
+        'USER': os.getenv("DWH_USER"),
+        'PASSWORD': os.getenv("DWH_PASSWORD"),
+        'HOST': os.getenv("DWH_HOST"),
+        'PORT': os.getenv("DWH_PORT")
     }
 }
 
@@ -111,6 +117,13 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'center.auth.UNTIBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+ASSISTANT_TAGS_NAME = ['assistant', 'island_assistant']
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
