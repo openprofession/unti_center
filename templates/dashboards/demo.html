@@ -239,7 +239,7 @@
                     <div class="card-body">
                         <div class="card-body-top">
                             <div>
-                                <h6><span></span>{{ auction_total.0.bets_sum }}
+                                <h6><span></span>{{ auction_total.0.bets_sum|default:"0"}}
                                     <small></small>
                                 </h6>
                                 <label>Сумма ставок</label>

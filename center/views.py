@@ -104,7 +104,78 @@ GROUP BY user_auction.eventID
 
 
 def demo_timetable(request):
-    return render(request, "dashboards/demo.html", {})
+    cursor = connections['dwh-test'].cursor()
+    cursor.execute("""SELECT
+  Count(user_info.untiID) AS users,
+  user_info.leaderID,
+  user_info.firstname,
+  user_info.lastname,
+  user_info.middlename,
+  activity.title
+FROM  xle_dev.timetable
+  LEFT OUTER JOIN xle_dev.run
+    ON timetable.runID = run.id
+  LEFT OUTER JOIN  xle_dev.context_run
+    ON timetable.runID = context_run.runID
+  LEFT OUTER JOIN  xle_dev.user_info
+    ON timetable.userID = user_info.userID
+  LEFT OUTER JOIN  xle_dev.activity
+    ON run.activityID = activity.id
+WHERE context_run.contextID = 23
+  GROUP BY activity.id
+ORDER BY USERS desc""")
+    event_enrolls = dictfetchall(cursor)
+    cursor.execute("""SELECT
+      Count(activity.title) AS events,
+      user_info.leaderID,
+      user_info.firstname,
+      user_info.lastname,
+      user_info.middlename
+    FROM xle_dev.timetable
+      LEFT OUTER JOIN xle_dev.run
+        ON timetable.runID = run.id
+      LEFT OUTER JOIN xle_dev.context_run
+        ON timetable.runID = context_run.runID
+      LEFT OUTER JOIN xle_dev.user_info
+        ON timetable.userID = user_info.userID
+      LEFT OUTER JOIN xle_dev.activity
+        ON run.activityID = activity.id
+    WHERE context_run.contextID = 23
+      GROUP BY user_info.untiID
+    ORDER BY events desc""")
+    user_enrolls = dictfetchall(cursor)
+    return render(request, "dashboards/demo_timetable.html",
+                  {'event_enrolls': event_enrolls, 'user_enrolls': user_enrolls})
+
+
+def demo_feedback(request):
+    cursor = connections['dwh-test'].cursor()
+    cursor.execute("""SELECT
+  user_feedback_answer.userID AS userID,
+  user_feedback_answer.eventID AS eventID,
+  AVG(user_feedback_answer.value) AS value_avg,
+  MIN(user_feedback_answer.value) AS value_min,
+  COUNT(user_feedback_answer.value) AS value_count,
+  user_feedback_answer.createDT AS createDT,
+  feedback_question.title AS title,
+  feedback_question.type AS type,
+  event.title AS event_title
+FROM xle_dev.user_feedback_answer
+  LEFT OUTER JOIN xle_dev.feedback_question
+    ON user_feedback_answer.feedbackQuestionID = feedback_question.id
+  LEFT OUTER JOIN xle_dev.event
+    ON user_feedback_answer.eventID = event.id
+  LEFT OUTER JOIN xle_dev.run
+    ON event.runID = run.id
+  LEFT OUTER JOIN xle_dev.context_run
+    ON run.id = context_run.runID
+WHERE xle_dev.feedback_question.type = 'rating'
+     AND context_run.contextID = 23
+GROUP BY event_title""")
+    event_feedback_score = dictfetchall(cursor)
+    return render(request, "dashboards/demo_feedback.html",
+                  {'event_feedback': event_feedback_score})
+
 
 def demo_test(request):
     return render(request, "dashboards/demo_test.html")

@@ -30,6 +30,7 @@ urlpatterns = [
                   path('test_report/', views.run_report, name='test_report'),
                   path('demo/', views.demo, name='demo'),
                   path('demo_timetable/', views.demo_timetable, name='demo_timeteble'),
+                  path('demo_feedback/', views.demo_feedback, name='demo_feedback'),
                   path('demo_test/', views.demo_test, name='demo_test')
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
               static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
