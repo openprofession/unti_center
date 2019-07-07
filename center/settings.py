@@ -98,10 +98,13 @@ WSGI_APPLICATION = 'center.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
+    # 'default': {
+    #    'ENGINE': 'django.db.backends.mysql',
+    #    'USER': env("DB_USER"),
+    #    'PASSWORD': env("DB_PASSWORD"),
+    #    'HOST': env("DB_HOST"),
+    #    'PORT': env("DB_PORT")
+    # },
     'dwh-test': {
         'ENGINE': 'django.db.backends.mysql',
         'USER': env("DWH_TEST_USER"),
@@ -116,6 +119,11 @@ DATABASES = {
         'HOST': env("DWH_HOST"),
         'PORT': env("DWH_PORT")
     }
+}
+
+DATABASES['default'] = {
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 }
 
 # Password validation

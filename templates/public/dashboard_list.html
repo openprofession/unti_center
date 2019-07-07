@@ -40,7 +40,7 @@
                         {% else %}
                             <li class="red">
                                 <a class=""
-                                   href="{% url 'social:begin' backend='unti' %}?next={{ request.path }}">
+                                   href="{% url 'social:begin' backend='unti' %}?next=/">
                                     Войти
                                 </a>
                             </li>
@@ -70,7 +70,7 @@
                         {% endif %}
 
                         <li class="red">
-                            <a class="" href="{% url 'logout' %}?next={{ request.path }}"
+                            <a class="" href="{% url 'logout' %}?next=/"
                                title="Выйти">
                                 <i class="fa fa-sign-out"
                                    title="Выйти"></i>

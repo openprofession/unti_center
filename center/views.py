@@ -10,7 +10,7 @@ from center.utils import daterange
 
 
 def logout(request):
-    return base_logout(request)
+    return base_logout(request, login_url="/")
 
 
 def dashboards(request):
@@ -54,6 +54,60 @@ def attendance_dtrace(request):
         'filter_faculty': filter_faculty,
         'filter_team': filter_team,
     })
+
+
+def demo(request):
+    cursor = connections['dwh-test'].cursor()
+    cursor.execute(
+        """SELECT
+  `xle_dev`.`auction`.`uuid` AS `uuid`,
+  `xle_dev`.`auction`.`title` AS `title`,
+  `xle_dev`.`auction`.`type` AS `type`,
+  `xle_dev`.`auction`.`status` AS `status`,
+  `xle_dev`.`auction`.`startDT` AS `startDT`,
+  `xle_dev`.`auction`.`endDT` AS `endDT`,
+  `xle_dev`.`auction`.`active` AS `active`,
+  SUM(`xle_dev`.`user_auction`.`bet`) AS `bets_sum`,
+  count(`xle_dev`.`user_auction`.`bet`) AS `bets_count`,
+  count(DISTINCT(`xle_dev`.`user_info`.`untiID`)) AS `user_count`
+FROM ((`xle_dev`.`auction`
+  LEFT JOIN `xle_dev`.`user_auction`
+    ON (`xle_dev`.`user_auction`.`auctionID` = `xle_dev`.`auction`.`id`))
+  LEFT JOIN `xle_dev`.`user_info`
+    ON (`xle_dev`.`user_auction`.`userID` = `xle_dev`.`user_info`.`userID`))
+WHERE `xle_dev`.`auction`.`contextID` = 23""")
+    auction_total = dictfetchall(cursor)
+
+    cursor.execute("""SELECT
+  auction.uuid AS uuid,
+  auction.title AS title,
+  auction.type AS type,
+  auction.status AS status,
+  auction.startDT AS startDT,
+  auction.endDT AS endDT,
+  auction.active AS active,
+  SUM(user_auction.bet) AS bets_sum,
+  COUNT(user_auction.bet) AS bets_count,
+  event.title AS event_title
+FROM xle_dev.auction
+  LEFT OUTER JOIN xle_dev.user_auction
+    ON user_auction.auctionID = auction.id
+  LEFT OUTER JOIN xle_dev.user_info
+    ON user_auction.userID = user_info.userID
+  LEFT OUTER JOIN xle_dev.event
+    ON user_auction.eventID = event.id
+WHERE auction.contextID = 23
+GROUP BY user_auction.eventID
+  ORDER BY bets_sum DESC""")
+    auction_events = dictfetchall(cursor)
+    return render(request, "dashboards/demo.html", {'auction_total': auction_total, 'auction_events': auction_events})
+
+
+def demo_timetable(request):
+    return render(request, "dashboards/demo.html", {})
+
+def demo_test(request):
+    return render(request, "dashboards/demo_test.html")
 
 
 def run_report(request):

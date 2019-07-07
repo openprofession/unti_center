@@ -27,7 +27,9 @@ urlpatterns = [
                   path('dashboards/', views.dashboards, name='dashboards'),
                   path('reports/', views.reports, name='reports'),
                   path('attendance/', views.attendance_dtrace, name='attendance'),
-                  path('test_report/', views.run_report, name='test_report')
-
+                  path('test_report/', views.run_report, name='test_report'),
+                  path('demo/', views.demo, name='demo'),
+                  path('demo_timetable/', views.demo_timetable, name='demo_timeteble'),
+                  path('demo_test/', views.demo_test, name='demo_test')
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
               static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
