@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Остров 10-22 demoday</title>
+
+    <!-- vendor css -->
+    <link href="/static/azia/lib/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="/static/azia/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="/static/azia/lib/typicons.font/typicons.css" rel="stylesheet">
+
+    <!-- azia CSS -->
+    <link rel="stylesheet" href="/static/azia/css/azia.css">
+
+</head>
+<body class="az-body az-dashboard-eight">
+
+
+<div class="az-content az-content-dashboard-eight">
+    <div class="container-fluid d-block">
+        {% comment %}        <h2 class="az-content-title tx-24">Аукционы</h2>{% endcomment %}
+        {% comment %}        <p class="mg-b-20 mg-lg-b-25">Your executive or sass dashboard template.</p>{% endcomment %}
+
+        <div class="row row-sm mg-b-20">
+            <div class="col-lg-8">
+                <div class="row row-sm">
+                    <div class="col-lg-6">
+                        <div class="card card-dashboard-twentyfour">
+                            <div class="card-header">
+                                <h6 class="card-title">Аукцион мастер классы</h6>
+                                <span class="text-success">Идет сейчас</span>
+                            </div><!-- card-header -->
+                            <div class="card-body">
+                                <div class="card-body-top">
+                                    <div>
+                                        <h6><span></span>2356
+                                            <small></small>
+                                        </h6>
+                                        <label>Ставок</label>
+                                    </div>
+
+                                    <div>
+                                        <h6><span></span>1200
+                                            <small class="text-black-50">/ 1511</small>
+                                        </h6>
+                                        <label>Участников</label>
+                                    </div>
+                                    <div>
+                                        <h6><span></span>45
+                                            <small class="text-black-50">/ 60</small>
+                                        </h6>
+                                        <label>Мероприятий</label>
+                                    </div>
+                                    <div>
+                                        <h6><span></span>68
+                                            <small class="text-black-50">/ 99</small>
+                                        </h6>
+                                        <label>Комманд</label>
+                                    </div>
+                                </div><!-- card-body-top -->
+
+                                <div class="d-flex justify-content-between mg-b-15">
+                                    <label class="az-content-label">Динамика ставок</label>
+                                    <div class="chart-legend">
+                                        {% comment %}                                        <div><span class="bg-primary"></span> Today</div>
+                                        <div><span class="bg-gray-400"></span> Yesterday</div>{% endcomment %}
+                                    </div><!-- chart-legend -->
+                                </div>
+                                <div class="chart-wrapper">
+                                    <div id="flotBar1" class="flot-chart" style="padding: 0px; position: relative;">
+                                    </div>
+                                </div><!-- chart-wrapper -->
+                            </div><!-- card-body -->
+                        </div><!-- card -->
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="card card-dashboard-twentyfour">
+                            <div class="card-header">
+                                <h6 class="card-title">Аукцион клубы мышления</h6>
+                                <span class="text-danger">Завершен</span>
+                            </div><!-- card-header -->
+                            <div class="card-body">
+                                <div class="card-body-top">
+                                    <div>
+                                        <h6><span></span>3650
+                                            <small></small>
+                                        </h6>
+                                        <label>Ставок</label>
+                                    </div>
+
+                                    <div>
+                                        <h6><span></span>1425
+                                            <small class="text-black-50">/ 1511</small>
+                                        </h6>
+                                        <label>Участников</label>
+                                    </div>
+                                    <div>
+                                        <h6><span></span>25
+                                            <small class="text-black-50">/ 30</small>
+                                        </h6>
+                                        <label>Мероприятий</label>
+                                    </div>
+                                    <div>
+                                        <h6><span></span>85
+                                            <small class="text-black-50">/ 99</small>
+                                        </h6>
+                                        <label>Комманд</label>
+                                    </div>
+                                </div><!-- card-body-top -->
+
+                                <div class="d-flex justify-content-between mg-b-15">
+                                    <label class="az-content-label">Динамика ставок</label>
+                                    <div class="chart-legend">
+                                        {% comment %} <div><span class="bg-primary"></span> Today</div>
+                                        <div><span class="bg-gray-400"></span> Yesterday</div>{% endcomment %}
+                                    </div><!-- chart-legend -->
+                                </div>
+                                <div class="chart-wrapper">
+                                    <div id="flotBar2" class="flot-chart" style="padding: 0px; position: relative;">
+
+                                    </div>
+                                </div><!-- chart-wrapper -->
+                            </div><!-- card-body -->
+                        </div><!-- card -->
+                    </div>
+                </div>
+            </div><!-- col -->
+            <div class="col-lg-4 mg-t-20 mg-lg-t-0">
+                <div class="col-12 mg-b-20">
+                    <div class="card card-dashboard-twentyfour">
+                        <div class="card-header">
+                            <h6 class="card-title tx-14 mg-b-0">Лучшие команд по участию в аукционах</h6>
+                        </div><!-- card-header -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table mg-b-0">
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="az-img-user"><img src="../img/img5.jpg" alt=""></div>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">Socrates Itumay</h6>
+                                            <small class="tx-11 tx-gray-500">Agent ID: 12022</small>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">87/100</h6>
+                                            <small class="tx-11 tx-gray-500">Reached Goal</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="az-img-user"><img src="../img/img5.jpg" alt=""></div>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">Socrates Itumay</h6>
+                                            <small class="tx-11 tx-gray-500">Agent ID: 12022</small>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">87/100</h6>
+                                            <small class="tx-11 tx-gray-500">Reached Goal</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="az-img-user"><img src="../img/img5.jpg" alt=""></div>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">Socrates Itumay</h6>
+                                            <small class="tx-11 tx-gray-500">Agent ID: 12022</small>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">87/100</h6>
+                                            <small class="tx-11 tx-gray-500">Reached Goal</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="az-img-user"><img src="../img/img5.jpg" alt=""></div>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">Socrates Itumay</h6>
+                                            <small class="tx-11 tx-gray-500">Agent ID: 12022</small>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">87/100</h6>
+                                            <small class="tx-11 tx-gray-500">Reached Goal</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="az-img-user"><img src="../img/img16.jpg" alt=""></div>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">Reynante Labares</h6>
+                                            <small class="tx-11 tx-gray-500">Agent ID: 12028</small>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">85/100</h6>
+                                            <small class="tx-11 tx-gray-500">Reached Goal</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="az-img-user"><img src="../img/img17.jpg" alt=""></div>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">Owen Bongcaras</h6>
+                                            <small class="tx-11 tx-gray-500">Agent ID: 11500</small>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">83/100</h6>
+                                            <small class="tx-11 tx-gray-500">Reached Goal</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="az-img-user"><img src="../img/img18.jpg" alt=""></div>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">Mariane Galeon</h6>
+                                            <small class="tx-11 tx-gray-500">Agent ID: 11600</small>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">82/100</h6>
+                                            <small class="tx-11 tx-gray-500">Reached Goal</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="az-img-user"><img src="../img/img19.jpg" alt=""></div>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">Joyce Chua</h6>
+                                            <small class="tx-11 tx-gray-500">Agent ID: 11990</small>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">80/100</h6>
+                                            <small class="tx-11 tx-gray-500">Reached Goal</small>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div><!-- table-responsive -->
+                        </div><!-- card-body -->
+                    </div><!-- card -->
+                </div>
+                <div class="col-12">
+                    <div class="card card-dashboard-sixteen">
+                        <div class="card-header">
+                            <h6 class="card-title tx-14 mg-b-0">Худшие по участию в аукционах</h6>
+                        </div><!-- card-header -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table mg-b-0">
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="az-img-user"><img src="../img/img5.jpg" alt=""></div>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">Socrates Itumay</h6>
+                                            <small class="tx-11 tx-gray-500">Agent ID: 12022</small>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">87/100</h6>
+                                            <small class="tx-11 tx-gray-500">Reached Goal</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="az-img-user"><img src="../img/img5.jpg" alt=""></div>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">Socrates Itumay</h6>
+                                            <small class="tx-11 tx-gray-500">Agent ID: 12022</small>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">87/100</h6>
+                                            <small class="tx-11 tx-gray-500">Reached Goal</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="az-img-user"><img src="../img/img5.jpg" alt=""></div>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">Socrates Itumay</h6>
+                                            <small class="tx-11 tx-gray-500">Agent ID: 12022</small>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">87/100</h6>
+                                            <small class="tx-11 tx-gray-500">Reached Goal</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="az-img-user"><img src="../img/img16.jpg" alt=""></div>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">Reynante Labares</h6>
+                                            <small class="tx-11 tx-gray-500">Agent ID: 12028</small>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">85/100</h6>
+                                            <small class="tx-11 tx-gray-500">Reached Goal</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="az-img-user"><img src="../img/img17.jpg" alt=""></div>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">Owen Bongcaras</h6>
+                                            <small class="tx-11 tx-gray-500">Agent ID: 11500</small>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">83/100</h6>
+                                            <small class="tx-11 tx-gray-500">Reached Goal</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="az-img-user"><img src="../img/img18.jpg" alt=""></div>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">Mariane Galeon</h6>
+                                            <small class="tx-11 tx-gray-500">Agent ID: 11600</small>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">82/100</h6>
+                                            <small class="tx-11 tx-gray-500">Reached Goal</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="az-img-user"><img src="../img/img19.jpg" alt=""></div>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">Joyce Chua</h6>
+                                            <small class="tx-11 tx-gray-500">Agent ID: 11990</small>
+                                        </td>
+                                        <td>
+                                            <h6 class="mg-b-0 tx-inverse">80/100</h6>
+                                            <small class="tx-11 tx-gray-500">Reached Goal</small>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div><!-- table-responsive -->
+                        </div><!-- card-body -->
+                    </div><!-- card -->
+                </div>
+            </div><!-- col -->
+            <div class="col-lg-6 mg-t-20">
+
+            </div><!-- col -->
+            <div class="col-lg-6 mg-t-20">
+
+            </div><!-- col -->
+        </div><!-- row -->
+
+    </div><!-- container -->
+</div><!-- az-content -->
+
+{% comment %}    <div class="az-footer ht-40">
+      <div class="container pd-t-0-f ht-100p">
+        <span>&copy; 2018 Azia Responsive Bootstrap 4 Dashboard Template</span>
+      </div><!-- container -->
+    </div><!-- az-footer -->{% endcomment %}
+
+<script src="/static/azia/lib/jquery/jquery.min.js"></script>
+<script src="/static/azia/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/azia/lib/ionicons/ionicons.js"></script>
+<script src="/static/azia/lib/jquery.flot/jquery.flot.js"></script>
+<script src="/static/azia/lib/jquery.flot/jquery.flot.resize.js"></script>
+<script src="/static/azia/lib/chart.js/Chart.bundle.min.js"></script>
+
+<script src="/static/azia/js/azia.js"></script>
+<script src="/static/azia/js/chart.flot.sampledata.js"></script>
+
+<script>
+    $.plot('#flotBar1', [{
+        data: {{ data_to_graph }},
+        bars: {
+            show: true,
+            lineWidth: 0,
+            fillColor: '#e60007',
+            barWidth: .5,
+            order: 'left'
+        }
+    },], {
+        grid: {
+            borderWidth: 0
+        },
+        yaxis: {
+            min: 0,
+           {% comment %} max: 60,{% endcomment %}
+            tickColor: '#ddd',
+            {% comment %}ticks: [[0, ''], [5, '200'], [10, '400'], [15, '600']],{% endcomment %}
+            font: {
+                color: '#444',
+                size: 10
+            }
+        },
+        xaxis: {
+            mode: 'categories',
+            tickColor: '#eee',
+            {% comment %}ticks: [[0, '3am'], [1, '4am'], [2, '5am'], [3, '6am'], [4, '7am'], [5, '8am'], [6, '9am'], [7, '10am'], [8, '11am'], [9, '12nn'], [10, '1pm'], [11, '2pm'],
+                [12, '3pm'], [13, '4pm'], [14, '5pm']],{% endcomment %}
+            font: {
+                color: '#999',
+                size: 9
+            }
+        }
+    });
+
+     $.plot('#flotBar2', [{
+        data: [[1, 0], [2, 0], [3, 0], [4, 1], [5, 3], [6, 3], [7, 10], [8, 11], [9, 10], [10, 9], [11, 12], [12, 8], [13, 10], [14, 6], [15, 3]],
+        bars: {
+            show: true,
+            lineWidth: 0,
+            fillColor: '#e60007',
+            barWidth: .3,
+            order: 'left'
+        }
+    },], {
+        grid: {
+            borderWidth: 0
+        },
+        yaxis: {
+            min: 0,
+            max: 15,
+            tickColor: '#ddd',
+            ticks: [[0, ''], [5, '100'], [10, '200'], [15, '300']],
+            font: {
+                color: '#444',
+                size: 10
+            }
+        },
+        xaxis: {
+            mode: 'categories',
+            tickColor: '#eee',
+            ticks: [[0, '3am'], [1, '4am'], [2, '5am'], [3, '6am'], [4, '7am'], [5, '8am'], [6, '9am'], [7, '10am'], [8, '11am'], [9, '12nn'], [10, '1pm'], [11, '2pm'],
+                [12, '3pm'], [13, '4pm'], [14, '5pm']],
+            font: {
+                color: '#999',
+                size: 9
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>

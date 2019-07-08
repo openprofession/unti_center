@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Остров 10-22 Светофор</title>
+
+    <!-- vendor css -->
+    <link href="/static/azia/lib/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="/static/azia/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="/static/azia/lib/typicons.font/typicons.css" rel="stylesheet">
+
+    <!-- azia CSS -->
+    <link rel="stylesheet" href="/static/azia/css/azia.css">
+    <link rel="stylesheet" href="/static/azia/css/circle.css">
+
+
+</head>
+<body class="az-body az-content-dashboard-two">
+
+
+<div class="az-content az-content-dashboard-eight">
+    <div class="container-fluid d-block">
+        <div class="row row-sm">
+            <div class="col-lg-6"> {% comment %}Посещамость мероприятий{% endcomment %}
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="az-content-title tx-24 tx-center">Динамика регистраций</h2>
+                    </div>
+                    <div class="col-12">
+                        <div class="card card-dashboard-twentyfour">
+
+                            <div class="card-body">
+                                <div class="card-body-top">
+
+                                    <div> Зарегистрировано
+                                        <h6><span></span>1200
+                                            <small class="text-black-50">/ 1511</small>
+                                        </h6>
+                                    </div>
+
+
+                                </div><!-- card-body-top -->
+
+                                <div class="chart-wrapper">
+                                    <div id="flotBarRegister" class="flot-chart"></div>
+                                </div><!-- chart-wrapper -->
+                            </div><!-- card-body -->
+                        </div>
+                    </div>
+
+
+                </div>
+            </div><!-- col -->
+            <div class="col-lg-6 "> {% comment %}Активность в приложении{% endcomment %}
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="az-content-title tx-24 tx-center">Активность в приложениях</h2>
+                    </div>
+                    <div class="col-4">
+                        <div class="card card-dashboard-twenty" style="min-height: 22.4vh">
+                            <div class="card-body">
+                                <label class="az-content-label tx-13">Личный кабинет</label>
+                                <p>Заходили в личный кабинет</p>
+                                <div class="expansion-value">
+                                    <strong>1200
+                                        <small> / 1500</small>
+                                    </strong>
+                                    <strong>80%</strong>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-orange wd-80p" role="progressbar" aria-valuenow="80"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="expansion-label">
+                                    <span>Сегодня</span>
+
+                                </div>
+                                <div class="expansion-value">
+                                    <strong>1400
+                                        <small> / 1500</small>
+                                    </strong>
+                                    <strong>93%</strong>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success wd-95p" role="progressbar"
+                                         aria-valuenow="70"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="expansion-label">
+                                    <span>Весь период</span>
+
+                                </div>
+                            </div>
+                        </div><!-- card -->
+                    </div>
+                    <div class="col-4">
+                        <div class="card card-dashboard-twenty" style="min-height: 22.4vh">
+                            <div class="card-body">
+                                <label class="az-content-label tx-13">Мобильные приложения</label>
+                                <p>Запущено мобильное приложение</p>
+                                <div class="expansion-value">
+                                    <strong>300
+                                        <small> / 1500</small>
+                                    </strong>
+                                    <strong>20%</strong>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger wd-20p" role="progressbar" aria-valuenow="20"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="expansion-label">
+                                    <span>Сегодня</span>
+
+                                </div>
+                                <div class="expansion-value">
+                                    <strong>1400
+                                        <small> / 1500</small>
+                                    </strong>
+                                    <strong>93%</strong>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success wd-95p" role="progressbar"
+                                         aria-valuenow="70"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="expansion-label">
+                                    <span>Весь период</span>
+
+                                </div>
+                            </div>
+                        </div><!-- card -->
+                    </div>
+                    <div class="col-4">
+                        <div class="card card-dashboard-twenty" style="min-height: 22.4vh">
+                            <div class="card-body">
+                                <label class="az-content-label tx-13">Карта развития</label>
+                                <p>Занимались картой развития</p>
+                                <div class="expansion-value">
+                                    <strong>200
+                                        <small> / 1500</small>
+                                    </strong>
+                                    <strong>13%</strong>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger wd-15p" role="progressbar" aria-valuenow="13"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="expansion-label">
+                                    <span>Сегодня</span>
+
+                                </div>
+                                <div class="expansion-value">
+                                    <strong>750
+                                        <small> / 1500</small>
+                                    </strong>
+                                    <strong>50%</strong>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-orange wd-50p" role="progressbar" aria-valuenow="50"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <div class="expansion-label">
+                                    <span>Весь период</span>
+
+                                </div>
+                            </div>
+                        </div><!-- card -->
+                    </div>
+                </div>
+            </div><!-- col -->
+        </div><!-- row -->
+        <div class="row row-sm">
+            <div class="col-lg-6"> {% comment %}Посещамость мероприятий{% endcomment %}
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="az-content-title tx-24 tx-center">Посещаемость мероприятий</h2>
+                    </div>
+                    <div class="col-4">
+                        <div class="card card-dashboard-five">
+                            <div class="card-header">
+                                <h6 class="card-title">На мероприятиях по расписанию</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="mg-b-10 mg-sm-b-0 mg-sm-r-10">
+                                    <div class="c100 green p71">
+                                        <span>71%</span>
+                                        <div class="slice">
+                                            <div class="bar"></div>
+                                            <div class="fill"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4>1 065
+                                        <small> / 1 500</small>
+                                    </h4>
+                                </div>
+                            </div><!-- card-body -->
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card card-dashboard-five">
+                            <div class="card-header">
+                                <h6 class="card-title">На мероприятиях НЕ по расписанию</h6>
+                                {% comment %}       <span class="card-text">Ходят на свои мероприятия</span>{% endcomment %}
+                            </div>
+                            <div class="card-body">
+                                <div class="mg-b-10 mg-sm-b-0 mg-sm-r-10">
+                                    <div class="c100 p34 orange">
+                                        <span>20%</span>
+                                        <div class="slice">
+                                            <div class="bar"></div>
+                                            <div class="fill"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+
+                                    <h4>300
+                                        <small> / 1 500</small>
+                                    </h4>
+                                </div>
+                            </div><!-- card-body -->
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card card-dashboard-five">
+                            {% comment %}<div class="card-header">
+                                <h6 class="card-title mg-b-10">Ходят на свои мероприятия</h6>
+                            </div><!-- card-header -->{% endcomment %}
+                            <div class="card-header">
+                                <h6 class="card-title">Отсутсвуют на мероприятиях</h6>
+                                {% comment %}       <span class="card-text">Ходят на свои мероприятия</span>{% endcomment %}
+                            </div>
+                            <div class="card-body">
+                                <div class="mg-b-10 mg-sm-b-0 mg-sm-r-10">
+                                    <div class="c100 red p9">
+                                        <span>9%</span>
+                                        <div class="slice">
+                                            <div class="bar"></div>
+                                            <div class="fill"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+
+                                    <h4>135
+                                        <small> / 1 500</small>
+                                    </h4>
+                                </div>
+                            </div><!-- card-body -->
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- col -->
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="az-content-title tx-24 tx-center">Загрузка аудиторий</h2>
+                    </div>
+                    <div class="col-12">
+                        <div class="card" style="min-height: 22.4vh">
+                            <div class="card-body">
+                                <div class="col-12">
+                                    <div id="flotPie" class="wd-100p ht-150"></div>
+                                </div><!-- col -->
+                                {% comment %}  <div class="col-sm-4 col-md-5 mg-t-30 mg-sm-t-0">
+                                    <ul class="list-unstyled">
+                                        <li class="d-flex align-items-center"><span
+                                                class="d-inline-block wd-10 ht-10 bg-purple mg-r-10"></span> Very
+                                            Satisfied (26%)
+                                        </li>
+                                        <li class="d-flex align-items-center mg-t-5"><span
+                                                class="d-inline-block wd-10 ht-10 bg-primary mg-r-10"></span> Satisfied
+                                            (39%)
+                                        </li>
+                                        <li class="d-flex align-items-center mg-t-5"><span
+                                                class="d-inline-block wd-10 ht-10 bg-teal mg-r-10"></span> Not Satisfied
+                                            (20%)
+                                        </li>
+                                        <li class="d-flex align-items-center mg-t-5"><span
+                                                class="d-inline-block wd-10 ht-10 bg-gray-500 mg-r-10"></span> Satisfied
+                                            (15%)
+                                        </li>
+                                    </ul>
+                                </div><!-- col -->{% endcomment %}
+                            </div><!-- card-body -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% comment %}Загрузка аудиторий{% endcomment %}
+
+        </div>
+        <div class="row row-sm">
+            <div class="col-lg-6"> {% comment %}Обратная связь{% endcomment %}
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="az-content-title tx-24 tx-center">Текущий аукцион</h2>
+                    </div>
+                    <div class="col-12">
+                        <div class="card card-dashboard-twentyfour">
+                            <div class="card-header">
+                                <h6 class="card-title">Аукцион на мастер классы</h6>
+                                <span class="text-success">Идет</span>
+                            </div><!-- card-header -->
+                            <div class="card-body">
+                                <div class="card-body-top">
+                                    <div>
+                                        <h6><span></span>3650
+                                            <small></small>
+                                        </h6>
+                                        <label>Ставок</label>
+                                    </div>
+
+                                    <div>
+                                        <h6><span></span>1425
+                                            <small class="text-black-50">/ 1511</small>
+                                        </h6>
+                                        <label>Участников</label>
+                                    </div>
+                                    <div>
+                                        <h6><span></span>25
+                                            <small class="text-black-50">/ 30</small>
+                                        </h6>
+                                        <label>Мероприятий</label>
+                                    </div>
+                                    <div>
+                                        <h6><span></span>85
+                                            <small class="text-black-50">/ 99</small>
+                                        </h6>
+                                        <label>Комманд</label>
+                                    </div>
+                                </div><!-- card-body-top -->
+
+                                <div class="d-flex justify-content-between mg-b-15">
+                                    <label class="az-content-label">Динамика ставок</label>
+                                    <div class="chart-legend">
+
+                                    </div><!-- chart-legend -->
+                                </div>
+                                <div class="chart-wrapper">
+                                    <div id="flotBar2" class="flot-chart" style="padding: 0px; position: relative;">
+
+                                        <canvas class="flot-base" width="779" height="130"
+                                                style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 779px; height: 130px;"></canvas>
+                                        <div class="flot-text"
+                                             style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);">
+                                            <div class="flot-x-axis flot-x1-axis xAxis x1Axis"
+                                                 style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;">
+                                                <div style="position: absolute; max-width: 38px; top: 120px; font: 400 9px/10px Roboto, sans-serif; color: rgb(153, 153, 153); left: 13px; text-align: center;">
+                                                    4am
+                                                </div>
+                                                <div style="position: absolute; max-width: 38px; top: 120px; font: 400 9px/10px Roboto, sans-serif; color: rgb(153, 153, 153); left: 65px; text-align: center;">
+                                                    5am
+                                                </div>
+                                                <div style="position: absolute; max-width: 38px; top: 120px; font: 400 9px/10px Roboto, sans-serif; color: rgb(153, 153, 153); left: 117px; text-align: center;">
+                                                    6am
+                                                </div>
+                                                <div style="position: absolute; max-width: 38px; top: 120px; font: 400 9px/10px Roboto, sans-serif; color: rgb(153, 153, 153); left: 169px; text-align: center;">
+                                                    7am
+                                                </div>
+                                                <div style="position: absolute; max-width: 38px; top: 120px; font: 400 9px/10px Roboto, sans-serif; color: rgb(153, 153, 153); left: 221px; text-align: center;">
+                                                    8am
+                                                </div>
+                                                <div style="position: absolute; max-width: 38px; top: 120px; font: 400 9px/10px Roboto, sans-serif; color: rgb(153, 153, 153); left: 274px; text-align: center;">
+                                                    9am
+                                                </div>
+                                                <div style="position: absolute; max-width: 38px; top: 120px; font: 400 9px/10px Roboto, sans-serif; color: rgb(153, 153, 153); left: 323px; text-align: center;">
+                                                    10am
+                                                </div>
+                                                <div style="position: absolute; max-width: 38px; top: 120px; font: 400 9px/10px Roboto, sans-serif; color: rgb(153, 153, 153); left: 375px; text-align: center;">
+                                                    11am
+                                                </div>
+                                                <div style="position: absolute; max-width: 38px; top: 120px; font: 400 9px/10px Roboto, sans-serif; color: rgb(153, 153, 153); left: 429px; text-align: center;">
+                                                    12nn
+                                                </div>
+                                                <div style="position: absolute; max-width: 38px; top: 120px; font: 400 9px/10px Roboto, sans-serif; color: rgb(153, 153, 153); left: 482px; text-align: center;">
+                                                    1pm
+                                                </div>
+                                                <div style="position: absolute; max-width: 38px; top: 120px; font: 400 9px/10px Roboto, sans-serif; color: rgb(153, 153, 153); left: 534px; text-align: center;">
+                                                    2pm
+                                                </div>
+                                                <div style="position: absolute; max-width: 38px; top: 120px; font: 400 9px/10px Roboto, sans-serif; color: rgb(153, 153, 153); left: 586px; text-align: center;">
+                                                    3pm
+                                                </div>
+                                                <div style="position: absolute; max-width: 38px; top: 120px; font: 400 9px/10px Roboto, sans-serif; color: rgb(153, 153, 153); left: 638px; text-align: center;">
+                                                    4pm
+                                                </div>
+                                                <div style="position: absolute; max-width: 38px; top: 120px; font: 400 9px/10px Roboto, sans-serif; color: rgb(153, 153, 153); left: 690px; text-align: center;">
+                                                    5pm
+                                                </div>
+                                            </div>
+                                            <div class="flot-y-axis flot-y1-axis yAxis y1Axis"
+                                                 style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;">
+                                                <div style="position: absolute; top: 73px; font: 400 10px/12px Roboto, sans-serif; color: rgb(68, 68, 68); left: 0px; text-align: right;">
+                                                    100
+                                                </div>
+                                                <div style="position: absolute; top: 38px; font: 400 10px/12px Roboto, sans-serif; color: rgb(68, 68, 68); left: 0px; text-align: right;">
+                                                    200
+                                                </div>
+                                                <div style="position: absolute; top: 2px; font: 400 10px/12px Roboto, sans-serif; color: rgb(68, 68, 68); left: 0px; text-align: right;">
+                                                    300
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <canvas class="flot-overlay" width="779" height="130"
+                                                style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 779px; height: 130px;"></canvas>
+                                    </div>
+                                </div><!-- chart-wrapper -->
+                            </div><!-- card-body -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-6"></div>
+        </div>
+
+    </div><!-- container -->
+</div><!-- az-content -->
+
+{% comment %}    <div class="az-footer ht-40">
+      <div class="container pd-t-0-f ht-100p">
+        <span>&copy; 2018 Azia Responsive Bootstrap 4 Dashboard Template</span>
+      </div><!-- container -->
+    </div><!-- az-footer -->{% endcomment %}
+
+<script src="/static/azia/lib/jquery/jquery.min.js"></script>
+<script src="/static/azia/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/azia/lib/ionicons/ionicons.js"></script>
+<script src="/static/azia/lib/jquery.flot/jquery.flot.js"></script>
+<script src="/static/azia/lib/jquery.flot/jquery.flot.pie.js"></script>
+<script src="/static/azia/lib/jquery.flot/jquery.flot.resize.js"></script>
+<script src="/static/azia/lib/chart.js/Chart.bundle.min.js"></script>
+
+<script src="/static/azia/js/azia.js"></script>
+<script src="/static/azia/js/chart.peity.js"></script>
+<script src="/static/azia/lib/peity/jquery.peity.min.js"></script>
+<script src="/static/azia/js/chart.flot.sampledata.js"></script>
+<script src="/static/azia/js/easypiechart.min.js"></script>
+
+<script>
+    $(function () {
+        'use strict'
+        $.plot('#flotBarRegister', [{
+            data: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2], [8, 3], [9, 4], [10, 6], [11, 9], [12, 11], [13, 33], [14, 42], [15, 0], [16, 0], [17, 0], [18, 0], [19, 0], [20, 0], [21, 0], [22, 0], [23, 0], [24, 0], [25, 0], [26, 0], [27, 0], [28, 0]],
+            bars: {
+                show: true,
+                lineWidth: 0,
+                fillColor: '#e60007',
+                barWidth: .5,
+                order: 'left'
+            }
+        },], {
+            grid: {
+                borderWidth: 0
+            },
+            yaxis: {
+                min: 0,
+
+                tickColor: '#ddd',
+
+                font: {
+                    color: '#444',
+                    size: 10
+                }
+            },
+            xaxis: {
+                mode: 'categories',
+                tickColor: '#eee',
+
+                font: {
+                    color: '#999',
+                    size: 9
+                }
+            }
+        });
+        $.plot('#flotPie', [
+            {label: 'Низкая загруженность', data: [[1, 5]], color: '#fd7e14'},
+            {label: 'Средняя загруженность', data: [[1, 20]], color: '#3bb001'},
+            {label: 'Высокая загруженность', data: [[1, 4]], color: '#dc3545'},
+        ], {
+            series: {
+                pie: {
+                    show: true,
+                    radius: 1,
+                    innerRadius: 0.5,
+                    label: {
+                        show: true,
+                        radius: 3 / 4,
+                        formatter: labelFormatter
+                    }
+                }
+            },
+            {% comment %}   legend: {show: false}{% endcomment %}
+        });
+        $.plot('#flotBar2', [{
+            data: [[1, 0], [2, 0], [3, 0], [4, 1], [5, 3], [6, 3], [7, 10], [8, 11], [9, 10], [10, 9], [11, 12], [12, 8], [13, 10], [14, 6], [15, 3]],
+            bars: {
+                show: true,
+                lineWidth: 0,
+                fillColor: '#e60007',
+                barWidth: .3,
+                order: 'left'
+            }
+        },], {
+            grid: {
+                borderWidth: 0
+            },
+            yaxis: {
+                min: 0,
+                max: 15,
+                tickColor: '#ddd',
+                ticks: [[0, ''], [5, '100'], [10, '200'], [15, '300']],
+                font: {
+                    color: '#444',
+                    size: 10
+                }
+            },
+            xaxis: {
+                mode: 'categories',
+                tickColor: '#eee',
+                ticks: [[0, '3am'], [1, '4am'], [2, '5am'], [3, '6am'], [4, '7am'], [5, '8am'], [6, '9am'], [7, '10am'], [8, '11am'], [9, '12nn'], [10, '1pm'], [11, '2pm'],
+                    [12, '3pm'], [13, '4pm'], [14, '5pm']],
+                font: {
+                    color: '#999',
+                    size: 9
+                }
+            }
+        });
+
+        function labelFormatter(label, series) {
+            return '<div style="font-size:11px; font-weight:500; text-align:center; padding:2px; color:white;">' + Math.round(series.percent) + '%</div>';
+        }
+    });
+
+</script>
+</body>
+</html>

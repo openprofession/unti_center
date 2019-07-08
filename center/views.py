@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.contrib.auth.views import logout_then_login as base_logout
 from center.models import Dashboard, Report
 from center.utils import daterange
+import pandas as pd
 
 
 def logout(request):
@@ -175,6 +176,51 @@ GROUP BY event_title""")
     event_feedback_score = dictfetchall(cursor)
     return render(request, "dashboards/demo_feedback.html",
                   {'event_feedback': event_feedback_score})
+
+
+def test_auction(request):
+    cursor = connections['dwh-test'].cursor()
+    cursor.execute("""SELECT
+                          auction.uuid AS uuid,
+                          auction.title AS title,
+                          auction.type AS type,
+                          auction.status AS status,
+                          auction.startDT AS startDT,
+                          auction.endDT AS endDT,
+                          CAST(auction.endDT AS date) AS endDate,
+                          auction.active AS active,
+                          user_auction.bet AS bet,
+                          user_auction.priority AS priority,
+                          POW(user_auction.priority, (-1) / 3) AS priority_score,
+                          user_info.untiID AS untiID,
+                          user_info.leaderID AS leaderID,
+                          event.uuid AS event_uuid,
+                          user_auction.createDT AS bet_dt
+                        FROM xle_dev.auction
+                          LEFT OUTER JOIN xle_dev.user_auction
+                            ON user_auction.auctionID = auction.id
+                          LEFT OUTER JOIN xle_dev.user_info
+                            ON user_auction.userID = user_info.userID
+                          LEFT OUTER JOIN xle_dev.event
+                            ON user_auction.eventID = event.id
+                        WHERE auction.contextID = 13 AND user_auction.createDT<'2019-07-02 03:00:00' AND auction.uuid='e12a4d8d-4ef5-4f69-abe6-86cad1609fce'""")
+    # auction = cursor.fetchall()
+    df = pd.DataFrame(dictfetchall(cursor))
+    df["bet_count"] = 0
+    for auction_uuid in df.uuid.unique():
+        df_count = df[df.uuid == auction_uuid].groupby(pd.Grouper(key='bet_dt', freq='60Min')).count().reset_index()
+        df_cumsum = pd.DataFrame({'time': df_count["bet_dt"], 'count': df_count["bet_count"]}).set_index(
+            "time").cumsum().reset_index()
+        df_cumsum["N"] = df_cumsum.index
+        df_cumsum = df_cumsum[["N", "count"]]
+        #df_cumsum["time"] = df_cumsum["time"].astype(str)
+
+        data_to_graph = df_cumsum.values.tolist()
+    return render(request, "dashboards/test_auction.html", {'data_to_graph': data_to_graph})
+
+
+def test_all(request):
+    return render(request, "dashboards/test_all.html")
 
 
 def demo_test(request):
