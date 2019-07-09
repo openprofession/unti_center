@@ -13,7 +13,9 @@
 
     <!-- vendor css -->
 
-<script type="text/javascript" nonce="4679afd622344dddb7d77bdbf97" src="//local.adguard.org?ts=1562631086583&amp;name=Adguard%20Assistant%20Beta&amp;name=AdGuard%20Popup%20Blocker%20%28Beta%29&amp;type=user-script"></script><link href="/static/azia/lib/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <script type="text/javascript" nonce="4679afd622344dddb7d77bdbf97"
+            src="//local.adguard.org?ts=1562631086583&amp;name=Adguard%20Assistant%20Beta&amp;name=AdGuard%20Popup%20Blocker%20%28Beta%29&amp;type=user-script"></script>
+    <link href="/static/azia/lib/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link href="/static/azia/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
     <link href="/static/azia/lib/typicons.font/typicons.css" rel="stylesheet">
 
@@ -29,57 +31,20 @@
 
 
         <div class="row row-sm mg-b-20">
-            <div class="col-4 mg-t-20">
-
-                <div class="card card-dashboard-twentyfour">
-                    <div class="card-header">
-                        <h6 class="card-title">Ставки на аукционе Аукцион 2</h6>
-                        <span>09 Июл</span>
-                    </div><!-- card-header -->
-                    <div class="card-body">
-                        <div class="card-body-top">
-                            <div>
-                                <h6><span></span>0
-                                    <small></small>
-                                </h6>
-                                <label>Сумма ставок</label>
-                            </div>
-                            <div>
-                                <h6><span></span>0
-                                    <small></small>
-                                </h6>
-                                <label> Участников </label>
-                            </div>
-                            <div>
-                                <h6><span></span>0
-                                    <small></small>
-                                </h6>
-                                <label>Ставок</label>
-                            </div>
-                        </div><!-- card-body-top -->
-
-                        <div class="d-flex justify-content-between mg-b-15">
-                            <label class="az-content-label">Ставок в час</label>
-                            <div class="chart-legend">
-                                <div><span class="bg-primary"></span> Сегодня</div>
-                                <div><span class="bg-gray-400"></span> Вчера</div>
-                            </div><!-- chart-legend -->
-                        </div>
-
-                    </div><!-- card-body -->
-                </div>
-            </div>
             <div class="col-8 mg-t-20">
                 <div class="card card-table-two">
-                    <h6 class="card-title">Топ мероприятий </h6>
-                    <span class="d-block mg-b-20">Мероприятия с наибольшим количеством ставок</span>
+                    <h2 class="">Дозапись на Лаборатории</h2>
+                    <span class="d-block mg-b-20">Текущие результаты аукциона и дозаписи на лаборатории</span>
                     <div class="table-responsive">
                         <table class="table table-striped table-dashboard-two mg-b-0">
                             <thead>
                             <tr>
                                 <th class="wd-lg-25p">Мероприятие</th>
-                                <th class="wd-lg-25p tx-right">Количества ставок</th>
-                                <th class="wd-lg-25p tx-right">Сумма ставок</th>
+                                <th class="wd-lg-25p tx-right">Вместимость мероприятия</th>
+                                <th class="wd-lg-25p tx-right">Записано по результатам аукциона</th>
+                                <th class="wd-lg-25p tx-right">Свободно после аукциона</th>
+                                <th class="wd-lg-25p tx-right">Записалсь вручную</th>
+                                <th class="wd-lg-25p tx-right">Сводобно сейчас</th>
 
                             </tr>
                             </thead>
@@ -98,10 +63,37 @@
                     </div><!-- table-responsive -->
                 </div><!-- card-dashboard-five -->
             </div>
+            <div class="col-4 mg-t-20">
+                <div class="card card-table-two">
+                    <h2 class="">Участники без Лабораторий</h2>
+                    <span class="d-block mg-b-20">Список участников не выбравших лабораторию.</span>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-dashboard-two mg-b-0">
+                            <thead>
+                            <tr>
+                                <th class="wd-lg-25p">ФИО</th>
+                                <th class="wd-lg-25p tx-right">Leader ID</th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                <td class="text">None</td>
+                                <td class="tx-medium ">0</td>
+
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div><!-- table-responsive -->
+                </div><!-- card-dashboard-five -->
+            </div>
         </div>
     </div><!-- container -->
 </div><!-- az-content -->
-
 
 
 <script src="/static/azia/lib/jquery/jquery.min.js"></script>

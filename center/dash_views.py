@@ -62,7 +62,7 @@ def dash_auction(request):
 
 
 def dash_add_enroll(request):
-    return render(request, "dashboards/prod/auction.html", {
+    return render(request, "dashboards/prod/add_enroll.html", {
     })
 
 
