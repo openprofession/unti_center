@@ -8,8 +8,8 @@
                 <div class="menu-toggle-panel hide">
                     <i class="fa fa-times"></i>
                     <ul>
-                        <li><a href="..">Дашборд</a></li>
-                        <li><a href="..">Отчеты</a></li>
+                        {% comment %}  <li><a href="..">Дашборд</a></li>
+                        <li><a href="..">Отчеты</a></li>{% endcomment %}
                         {% if request.user.is_authenticated %}
                             {% if request.user.icon %}
                                 <li class="nav-item nav-user-image">
@@ -53,13 +53,11 @@
                 <ul>
 
                     {% if request.user.is_authenticated %}
-                        <li><a href="..">Дашборд</a></li>
-                        <li><a href="..">Отчеты</a></li>
+                        {% comment %}                        <li><a href="..">Дашборд</a></li>
+                        <li><a href="..">Отчеты</a></li>{% endcomment %}
 
                         <li>
-                            <span class="">
-                                            {{ request.user.get_full_name }}
-                            </span>
+                            <span class="">{{ request.user.get_full_name }}</span>
                         </li>
                         {% if request.user.leader_id %}
                             <li>
@@ -109,10 +107,10 @@
 
                         <div class="img"><img src="/media/{{ dashboard.cover }}" alt=""></div>
                         <div class="content">
-                            <header class="{{ dashboard.status }}">{{ dashboard.title }}</header>
+                            <header class="{{ dashboard.status }}"><a href="{{ dashboard.url }}">{{ dashboard.title }}</a></header>
 
                             <main>{{ dashboard.description }}</main>
-                            <footer><i class="fa fa-sync"></i> 10 июля</footer>
+                            <footer><i class="fa fa-sync"></i> 9 июля 2019</footer>
                         </div>
                     </div>
                 </div>
