@@ -34,6 +34,7 @@ urlpatterns = [
                   path('dashboard/auctions', dash_views.dash_auctions, name='prod_auction'),
                   path('dashboard/auction_one', dash_views.dash_auction_one, name='prod_auction_1'),
                   path('dashboard/auction_lab_1', dash_views.dash_auction_labs_1, name='prod_auction_1'),
+path('dashboard/auction_2', dash_views.dash_auction_2, name='prod_auction_1'),
 
                   # TEST BOARDS
                   path('test_report/', views.run_report, name='test_report'),
