@@ -13,7 +13,7 @@ from center.sql import users, auction
 def dash_all(request):
     cursor = connections['dwh'].cursor()
     cursor.execute(users.users_island_tag_count)
-    user_count = cursor.fetchone()[0]
+    user_count = 1541#cursor.fetchone()[0]
     cursor.execute(users.users_active_lk_today)
     users_active_lk_today = cursor.fetchone()[0]
     cursor.execute(users.users_active_lk_all)
@@ -187,7 +187,7 @@ def dash_auction_one(request):
 
 
     cursor.execute(users.users_island_tag_count)
-    all_user_count = cursor.fetchone()[0]
+    all_user_count = 1541#cursor.fetchone()[0]
 
     return render(request, "dashboards/prod/auction_one.html", {
         'event_rating': result_dict,
