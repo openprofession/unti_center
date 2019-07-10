@@ -19,6 +19,7 @@ from django.urls import path, include
 
 from center import views, settings
 from center import dash_views
+from center.dashviews import sports
 
 urlpatterns = [
                   path('', include('social_django.urls', namespace='social')),
@@ -34,7 +35,10 @@ urlpatterns = [
                   path('dashboard/auctions', dash_views.dash_auctions, name='prod_auction'),
                   path('dashboard/auction_one', dash_views.dash_auction_one, name='prod_auction_1'),
                   path('dashboard/auction_lab_1', dash_views.dash_auction_labs_1, name='prod_auction_1'),
-path('dashboard/auction_ms_1', dash_views.dash_auction_2, name='prod_auction_1'),
+                  path('dashboard/auction_ms_1', dash_views.dash_auction_2, name='prod_auction_1'),
+
+                  path('dashboard/sport', sports.dash_sports, name='dash_sports'),
+                  path('dashboard/sport/<str:date>', sports.dash_sports, name='dash_sports'),
 
                   # TEST BOARDS
                   path('test_report/', views.run_report, name='test_report'),

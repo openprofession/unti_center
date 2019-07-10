@@ -8,10 +8,11 @@ from django.shortcuts import render
 from django.utils.html import escape
 from django.views.decorators.cache import cache_page
 
+from center import settings
 from center.sql import users, auction
 
 
-@cache_page(60)
+@cache_page(settings.PAGE_CACHE_TIME)
 def dash_all(request):
     try:
         cursor = connections['dwh'].cursor()
@@ -246,6 +247,9 @@ def dash_auction_labs_1(request):
             result["free_after_auction"][result["free_after_auction"] < 0] = 0
             result["free_now"] = result["sizeMax"] - result["auction_priority"] - result["manual"]
             result["free_now"][result["free_now"] < 0] = 0
+
+            result_sum = result.agg(['sum'])
+            result_sum_dict = result_sum.to_dict('records')
             result = result[result["free_now"] > 0]
             result.sort_values("free_now", ascending=False, inplace=True)
             result_dict = result.to_dict('records')
@@ -274,6 +278,7 @@ def dash_auction_labs_1(request):
 
             df_rating = df_event_count[["untiID"]].reset_index()
             df_rating.sort_values("untiID", ascending=False, inplace=True)
+
             df_rating = df_rating.head(15)
             # рейтинг в виде словаря
             event_rating = df_rating.to_dict('records')
@@ -318,7 +323,7 @@ def dash_auction_labs_1(request):
         'event_list': event_rating, "title": df_auction['title'].iloc[0], "endDT": endDT, "user_count": user_count,
         "events_count": event_count, "bet_count": bet_count,
         "event_unpopular_count": event_unpopular_count, "event_bet_dyn_data": data_to_graph_dyn,
-        'all_user_count': all_user_count
+        'all_user_count': all_user_count, "rating_sum": result_sum_dict
     })
 
 

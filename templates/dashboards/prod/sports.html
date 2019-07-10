@@ -33,7 +33,7 @@
             </a>
 
             <div class="collapse navbar-collapse" id="navbar-top">
-                <div class="text-danger text-center mr-auto tx-36-f">Аукцион лабораторий Острова 10-22</div>
+                <div class="text-danger text-center mr-auto tx-36-f">Запись на спорт Острова 10-22</div>
             </div>
 
         </nav>
@@ -41,11 +41,11 @@
 </header>
 
 <div class="az-content az-content-dashboard-eight  pt-3">
-    <div class="container-fluid d-block">
+    <div class="container d-block">
 
 
         <div class="row row-sm">
-            <div class="col-lg-5">
+            {% comment %}     <div class="col-lg-5">
                 <div class="card card-dashboard-twentyfour mb-2">
                     <div class="card-header">
                         <h6 class="card-title">Аукцион: {{ title }}</h6>
@@ -82,7 +82,7 @@
                             </div>
                         </div><!-- chart-wrapper -->
 
-                         <div class="d-flex justify-content-between mg-b-15">
+                        <div class="d-flex justify-content-between mg-b-15">
                             <label class="az-content-label">Гистограмма ставок</label>
                             <div class="chart-legend">
 
@@ -98,7 +98,6 @@
                 <div class="card card-dashboard-twentyone">
 
 
-
                     <div class="card-body" style="background: white">
                         <h2 class="">Топ мероприятий по популярности</h2>
                         <p>Количество ставок участников на мероприятия</p>
@@ -109,7 +108,8 @@
                                     <span>{{ event.event_title }}</span>
                                     <span class="tx-bold ">{{ event.untiID }} / {{ event.untiID|as_percentage_of:user_count }} </span>
                                     <div class="progress">
-                                        <div class="progress-bar wd-{{ event.untiID|as_percentage_of_round5:user_count }}p bg-success" role="progressbar"
+                                        <div class="progress-bar wd-{{ event.untiID|as_percentage_of_round5:user_count }}p bg-success"
+                                             role="progressbar"
                                              aria-valuenow="15"
                                              aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
@@ -120,7 +120,7 @@
                     </div>
 
                 </div>
-                {% comment %}          <div class="card card-table-two">
+                          <div class="card card-table-two">
                     <h2 class="">Участники без Лабораторий</h2>
                     <span class="d-block mg-b-20">Список участников не выбравших лабораторию.</span>
                     <div class="table-responsive">
@@ -145,36 +145,36 @@
                             </tbody>
                         </table>
                     </div><!-- table-responsive -->
-                </div><!-- card-dashboard-five -->{% endcomment %}
-            </div>
-            <div class="col-lg-7 col-sm-12">
+                </div><!-- card-dashboard-five -->
+            </div>{% endcomment %}
+            <div class="col-lg-12 col-sm-12">
                 <div class="card card-table-two">
-                    <h2 class="">Дозапись на Лаборатории</h2>
-                    <span class="d-block mg-b-20">Текущие результаты аукциона и дозаписи на лаборатории</span>
+                    <h2 class="">Загруженность спортивных мероприятий  <span>{{ date }}</span></h2>
+                    <span class="d-block mg-b-20">Текущие результаты записи на спортивные мероприятия </span>
                     <div class="table-responsive">
                         <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
                             <thead>
                             <tr>
                                 <th class="wd-lg-40p">Мероприятие</th>
                                 <th class="wd-lg-10p tx- tx-right">Сводобно сейчас</th>
+                                <th class="wd-lg-10p tx- tx-right">Записано</th>
                                 <th class="wd-lg-10p tx-right">Вместимость мероприятия</th>
-                                <th class="wd-lg-10p tx-right">Записано по результатам аукциона</th>
-                                <th class="wd-lg-10p tx-right">Записано по заявке</th>
 
 
                             </tr>
                             </thead>
                             <tbody>
-                            {% for event in event_rating %}
-                                <tr>
-                                    <td class="text tx-bold" style="word-wrap: break-word">{{ event.event_title }}</td>
-                                    <td class="text tx-right tx-bold">{{ event.free_now|floatformat:"0" }} мест
-                                        <small>/ {{ event.free_now|as_percentage_of:event.sizeMax }}</small>
-                                    </td>
-                                    <td class="text tx-right">{{ event.sizeMax|floatformat:"0" }}</td>
-                                    <td class="text tx-right">{{ event.auction_priority|floatformat:"0" }}</td>
-                                    <td class="text tx-right">{{ event.manual|floatformat:"0" }}</td>
 
+                            {% for event in result.enrolls_by_event %}
+                                <tr>
+                                    <td class="text tx-bold" style="word-wrap: break-word"><a
+                                            href="https://xle.2035.university/island1022/event/{{ event.event_id }}">{{ event.title }}</a>
+                                    </td>
+                                    <td class="text tx-right tx-bold">{{ event.free }} мест
+                                        <small>/ {{ event.free|as_percentage_of:event.sizeMax }}</small>
+                                    </td>
+                                    <td class="text tx-right">{{ event.userID }}</td>
+                                    <td class="text tx-right">{{ event.sizeMax|floatformat:"0" }}</td>
 
                                 </tr>
                             {% endfor %}
@@ -224,7 +224,7 @@
             }
         },
         xaxis: {
-            show:false,
+            show: false,
             mode: 'categories',
             tickColor: '#eee',
             {% comment %}ticks: [[0, '3am'], [1, '4am'], [2, '5am'], [3, '6am'], [4, '7am'], [5, '8am'], [6, '9am'], [7, '10am'], [8, '11am'], [9, '12nn'], [10, '1pm'], [11, '2pm'],
@@ -260,7 +260,7 @@
             }
         },
         xaxis: {
-            show:true,
+            show: true,
             mode: 'categories',
             tickColor: '#eee',
             {% comment %}ticks: [[0, '3am'], [1, '4am'], [2, '5am'], [3, '6am'], [4, '7am'], [5, '8am'], [6, '9am'], [7, '10am'], [8, '11am'], [9, '12nn'], [10, '1pm'], [11, '2pm'],

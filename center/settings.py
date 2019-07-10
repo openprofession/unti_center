@@ -71,19 +71,19 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
-            ]#,
-            #'builtins': [
+            ]  # ,
+            # 'builtins': [
             #    'center.tags',
-            #]
+            # ]
         },
     },
 ]
 
 CACHES = {
-   'default': {
-      'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-      'LOCATION': './django_cache',
-   }
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': './django_cache',
+    }
 }
 
 AUTH_USER_MODEL = 'center.User'
@@ -130,6 +130,8 @@ DATABASES = {
         'PORT': env("DWH_PORT")
     }
 }
+
+PAGE_CACHE_TIME = env.int("PAGE_CACHE_TIME", 60)
 
 DATABASES['default'] = {
     'ENGINE': 'django.db.backends.sqlite3',
