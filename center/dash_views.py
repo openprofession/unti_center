@@ -7,7 +7,7 @@ from django.shortcuts import render
 # PROD DATA
 from django.utils.html import escape
 
-from center.sql import users
+from center.sql import users, auction
 
 
 def dash_all(request):
@@ -31,9 +31,9 @@ def dash_all(request):
         df_count = df.groupby(pd.Grouper(key='regdt', freq='15Min')).count().reset_index()
         df_cumsum = pd.DataFrame({'time': df_count["regdt"], 'count': df_count["reg_count"]}).set_index(
             "time").cumsum().reset_index()
-        #df_cumsum = df_cumsum[df_cumsum["time"] >= "2019-07-09"]
+        # df_cumsum = df_cumsum[df_cumsum["time"] >= "2019-07-09"]
         # если по оси x не time
-        df_cumsum["time"] = df_cumsum["time"].dt.hour+3
+        df_cumsum["time"] = df_cumsum["time"].dt.hour + 3
         df_cumsum["N"] = df_cumsum.index
         df2 = df_cumsum[["N", 'time']]
         df_cumsum = df_cumsum[["N", "count"]]
@@ -56,17 +56,106 @@ def dash_all(request):
     })
 
 
-def dash_auction(request):
-    return render(request, "dashboards/prod/auction.html", {
+def dash_auctions(request):
+    return render(request, "dashboards/prod/auctions.html", {
     })
 
 
-def dash_add_enroll(request):
-    return render(request, "dashboards/prod/add_enroll.html", {
+def dash_auction_one(request):
+    cursor = connections['dwh'].cursor()
+    cursor.execute(auction.auction_events_1)
+    df = pd.DataFrame(dictfetchall(cursor))
+    if not df.empty:
+        df_info = pd.DataFrame()
+        for event in df.event_uuid.unique():
+            df_event = df[df["event_uuid"] == event]
+            df_info = df_info.append(
+                {'event_uuid': event, 'event_title': df_event.event_title.iloc[0], 'sizeMax': df_event.sizeMax.iloc[0]},
+                ignore_index=True)
+
+        df_user_count = df.pivot_table(index=["event_uuid"], values="userID", columns="type", aggfunc=lambda x: len(x),
+                                       fill_value=0, dropna=False)
+        df_user_count.reset_index(inplace=True)
+        result = df_user_count.set_index("event_uuid").join(df_info.set_index("event_uuid"))
+        result["free_after_auction"] = result["sizeMax"] - result["auction_priority"]
+        result["free_after_auction"][result["free_after_auction"] < 0] = 0
+        result["free_now"] = result["sizeMax"] - result["auction_priority"] - result["manual"]
+        result["free_now"][result["free_now"] < 0] = 0
+        result = result[result["free_now"] > 0]
+        result.sort_values("free_now", ascending=False, inplace=True)
+        result_dict = result.to_dict('records')
+
+    cursor.execute(auction.auction_one_1)
+    df = pd.DataFrame(dictfetchall(cursor))
+    if not df.empty:
+        df["bet_count"] = 0
+        data = {"auctions": []}
+        df = df.groupby("event_uuid").count()
+        df.reset_index(inplace=True)
+        df_count = df[["event_uuid", "bet_count"]]
+        df_count["interval"] = (round((df_count["bet_count"] - 5) / 10) + 1) * 10
+        df_count["interval"] = df_count["interval"].astype(int)
+        df_count["event_count"] = 0
+        df_count = df_count.groupby("interval").count().reset_index()
+        df_count = df_count[["interval", "event_count"]]
+        data_to_graph_hist = df_count.values.tolist()
+
+    cursor.execute(auction.auction_bets_1)
+    df_auction = pd.DataFrame(dictfetchall(cursor))
+    if not df.empty:
+        df_event_count = df_auction.groupby("event_title").nunique()
+        # считаем количество мероприятий, на которые сделали ставки <20% участников
+        # event_unpopular_count = len(df_event_count[df_event_count["untiID"] / user_count < 0.2])
+
+        df_rating = df_event_count[["untiID"]].reset_index()
+        df_rating.sort_values("untiID", ascending=False, inplace=True)
+        df_rating = df_rating.head(5)
+        # рейтинг в виде словаря
+        event_rating = df_rating.to_dict('records')
+
+        df_auction["bet_count"] = 0
+        # считаем число участников, сделавших ставки
+        user_count = df_auction["untiID"].nunique()
+
+        # считаем число мероприятий, участвующих в аукционе. !!! Пока без мероприятий без ставок
+        event_count = df_auction["event_uuid"].nunique()
+
+        # дата окончания аукциона
+        endDT = df_auction["endDT"].iloc[0]
+
+        # считаем количество мероприятий, на которые сделали ставки <20% участников
+        df_event_count = df_auction.groupby("event_uuid").nunique()
+        event_unpopular_count = len(df_event_count[df_event_count["untiID"] / user_count < 0.2])
+
+        # разбиваем временную ось совершения ставок на интервалу по часу и считаем количество сделанных ставок,
+        # в момент времени и накопительно
+        df_count = df_auction.groupby(pd.Grouper(key='bet_dt', freq='60Min')).count().reset_index()
+        df_cumsum = pd.DataFrame({'time': df_count["bet_dt"], 'count': df_count["bet_count"]}).set_index(
+            "time").cumsum().reset_index()
+        df_cumsum["N"] = df_cumsum.index
+        df_cumsum = df_cumsum[["N", "count"]]
+
+        # считаем общее количетсво ставок
+        bet_count = df_cumsum["count"].iloc[-1]
+
+        # готовим данные для построения графика в формате list of lists
+        data_to_graph_dyn = df_cumsum.values.tolist()
+
+
+    cursor.execute(users.users_island_tag_count)
+    all_user_count = cursor.fetchone()[0]
+
+    return render(request, "dashboards/prod/auction_one.html", {
+        'event_rating': result_dict,
+        'event_bet_hist_data': data_to_graph_hist,
+        'event_list': event_rating, "title": df_auction['title'].iloc[0], "endDT": endDT, "user_count": user_count,
+        "events_count": event_count, "bet_count": bet_count,
+        "event_unpopular_count": event_unpopular_count, "event_bet_dyn_data": data_to_graph_dyn, 'all_user_count': all_user_count
     })
 
+    # UTILS
 
-# UTILS
+
 def namedtuplefetchall(cursor):
     "Return all rows from a cursor as a namedtuple"
     desc = cursor.description

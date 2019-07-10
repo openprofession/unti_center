@@ -20,19 +20,35 @@
 
 
 </head>
-<body class="az-body az-content-dashboard-two">
+<body class="az-body az-dashboard-eight">
+<header class="page user-events-page bg-white">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <a href="/" class="user-events__main-logo navbar-brand mr-4">
+                <img src="/static/img/app.png" alt="" style="max-height: 40px">
+            </a>
 
+
+            <div class="collapse navbar-collapse" id="navbar-top">
+                <ul class="navbar-nav mr-auto text-center">
+                    <div class="text-danger text-center mr-auto tx-36-f">Мониторинг процессов Острова 10-22</div>
+                </ul>
+            </div>
+
+        </nav>
+    </div>
+</header>
 
 <div class="az-content az-content-dashboard-eight">
     <div class="container-fluid d-block">
         <div class="row row-sm">
             <div class="col-lg-6"> {% comment %}Посещамость мероприятий{% endcomment %}
                 <div class="row">
-                    <div class="col-12">
-                        <h2 class="az-content-title tx-24 tx-center">Динамика регистраций</h2>
+                    <div class="col-12 mb-2">
+                        <h2 class="az-content-title tx-24 tx-center mb-0">Динамика регистраций</h2>
                     </div>
-                    <div class="col-12">
-                        <div class="card card-dashboard-twentyfour">
+                    <div class="col-12 mb-4">
+                        <div class="card card-dashboard-twentyfour  mb-0">
 
                             <div class="card-body">
                                 <div class="card-body-top">
@@ -58,11 +74,11 @@
             </div><!-- col -->
             <div class="col-lg-6 "> {% comment %}Активность в приложении{% endcomment %}
                 <div class="row">
-                    <div class="col-12">
-                        <h2 class="az-content-title tx-24 tx-center">Активность в приложениях</h2>
+                    <div class="col-12 mb-0">
+                        <h2 class="az-content-title tx-24 tx-center mb-3">Активность в приложениях</h2>
                     </div>
-                    <div class="col-lg-4 col-sm-12">
-                        <div class="card card-dashboard-twenty" style="min-height: 22.4vh">
+                    <div class="col-lg-4 col-sm-12  mb-0">
+                        <div class="card card-dashboard-twenty mb-3" style="min-height: 22.4vh">
                             <div class="card-body">
                                 <label class="az-content-label tx-13">Личный кабинет</label>
                                 <p>Заходили в личный кабинет</p>
@@ -179,10 +195,10 @@
             </div><!-- col -->
         </div><!-- row -->
         <div class="row row-sm">
-            <div class="col-lg-6"> {% comment %}Посещамость мероприятий{% endcomment %}
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="az-content-title tx-24 tx-center">Посещаемость мероприятий</h2>
+            <div class="col-lg-6" style="opacity:.25"> {% comment %}Посещамость мероприятий{% endcomment %}
+                <div class="row ">
+                    <div class="col-12 mb-0">
+                        <h2 class="az-content-title tx-24 tx-center mb-3">Посещаемость мероприятий</h2>
                     </div>
                     <div class="col-lg-4 col-sm-12">
                         <div class="card card-dashboard-five">
@@ -264,9 +280,9 @@
                 </div>
             </div><!-- col -->
             <div class="col-lg-6">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="az-content-title tx-24 tx-center">Загрузка аудиторий</h2>
+                <div class="row " style="opacity:.25">
+                    <div class="col-12 mb-0">
+                        <h2 class="az-content-title tx-24 tx-center mb-3">Загрузка аудиторий</h2>
                     </div>
                     <div class="col-12">
                         <div class="card" style="min-height: 22.4vh">
@@ -305,8 +321,8 @@
         <div class="row row-sm">
             <div class="col-lg-6"> {% comment %}Обратная связь{% endcomment %}
                 <div class="row">
-                    <div class="col-12">
-                        <h2 class="az-content-title tx-24 tx-center">Последний аукцион</h2>
+                    <div class="col-12 mb-0">
+                        <h2 class="az-content-title tx-24 tx-center mb-3">Последний аукцион</h2>
                     </div>
                     <div class="col-12">
                         <div class="card card-dashboard-twentyfour">
@@ -413,7 +429,7 @@
                 min: 0,
                 max: 100,
                 tickColor: '#eee',
-       {% comment %}         ticks: {{ users_registered_data_series}},{% endcomment %}
+                {% comment %}         ticks: {{ users_registered_data_series}},{% endcomment %}
                 font: {
                     color: '#999',
                     size: 9

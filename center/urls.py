@@ -31,8 +31,9 @@ urlpatterns = [
 
                   # PROD BOARDS
                   path('dashboard/all', dash_views.dash_all, name='prod_all'),
-                  path('dashboard/auction', dash_views.dash_auction, name='prod_auction'),
-                  path('dashboard/add_enroll', dash_views.dash_add_enroll, name='add_enroll'),
+                  path('dashboard/auctions', dash_views.dash_auctions, name='prod_auction'),
+                  path('dashboard/auction_one', dash_views.dash_auction_one, name='prod_auction_1'),
+
 
                   # TEST BOARDS
                   path('test_report/', views.run_report, name='test_report'),
