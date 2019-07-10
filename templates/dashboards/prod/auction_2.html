@@ -46,85 +46,75 @@
 
 
         <div class="row row-sm">
-            <div class="col-lg-6">
-                <div class="card card-dashboard-twentyfour mb-2">
-                    <div class="card-header">
-                        <h2 class="">{{ title }}</h2>
-                        <span class="text-success tx-20">Идет</span>
-                    </div><!-- card-header -->
-                    <div class="card-body">
-                        <div class="card-body-top">
-                            <div>
-                                <h6><span></span>{{ bet_count }}
-                                    <small></small>
-                                </h6>
-                                <label>Ставок</label>
+            <div class="col-6 col-lg-6">
+                <div class="row row-sm row--lg">
+                    <div class="col-12 card card-dashboard-twentyfour mb-2">
+                        <div class="card-header">
+                            <h2 class="">{{ title }}</h2>
+                            <span class="text-success tx-20">Идет</span>
+                        </div><!-- card-header -->
+                        <div class="card-body">
+                            <div class="card-body-top">
+                                <div>
+                                    <h6><span></span>{{ bet_count }}
+                                        <small></small>
+                                    </h6>
+                                    <label>Ставок</label>
+                                </div>
+
+                                <div>
+                                    <h6><span></span>{{ user_count }}
+                                        <small class="text-black-50">/ {{ all_user_count }}</small>
+                                    </h6>
+                                    <label>Участников</label>
+                                </div>
+
+
+                            </div><!-- card-body-top -->
+
+                            <div class="d-flex justify-content-between mg-b-15">
+                                <label class="az-content-label">Динамика ставок</label>
+                                <div class="chart-legend">
+
+                                </div><!-- chart-legend -->
                             </div>
+                            <div class="chart-wrapper  mb-2">
+                                <div id="flotBarBets" class="flot-chart">
 
-                            <div>
-                                <h6><span></span>{{ user_count }}
-                                    <small class="text-black-50">/ {{ all_user_count }}</small>
-                                </h6>
-                                <label>Участников</label>
+                                </div>
+                            </div><!-- chart-wrapper -->
+
+                            <div class="d-flex justify-content-between mg-b-15">
+                                <label class="az-content-label">Гистограмма ставок</label>
+                                <div class="chart-legend">
+
+                                </div><!-- chart-legend -->
                             </div>
+                            <div class="chart-wrapper">
+                                <div id="flotBarHist" class="flot-chart">
 
+                                </div>
+                            </div><!-- chart-wrapper -->
+                        </div><!-- card-body -->
+                    </div>
+                    <div class="col-12 card card-dashboard-eight bg-white">
+                        <h2 class="">ТОП ставок на мероприятия</h2>
+                        {% comment %}                    <span class="d-block mg-b-20">Sales performance revenue based by country</span>{% endcomment %}
 
-                        </div><!-- card-body-top -->
+                        <div class="list-group">
+                            {% for bet in top_bets %}
+                                <div class="list-group-item">
 
-                        <div class="d-flex justify-content-between mg-b-15">
-                            <label class="az-content-label">Динамика ставок</label>
-                            <div class="chart-legend">
+                                    <p>{{ bet.event_title }}</p>
+                                    <span>{{ bet.bet }}</span>
+                                </div><!-- list-group-item -->
+                            {% endfor %}
 
-                            </div><!-- chart-legend -->
-                        </div>
-                        <div class="chart-wrapper  mb-2">
-                            <div id="flotBarBets" class="flot-chart">
-
-                            </div>
-                        </div><!-- chart-wrapper -->
-
-                        <div class="d-flex justify-content-between mg-b-15">
-                            <label class="az-content-label">Гистограмма ставок</label>
-                            <div class="chart-legend">
-
-                            </div><!-- chart-legend -->
-                        </div>
-                        <div class="chart-wrapper">
-                            <div id="flotBarHist" class="flot-chart">
-
-                            </div>
-                        </div><!-- chart-wrapper -->
-                    </div><!-- card-body -->
+                        </div><!-- list-group -->
+                    </div>
                 </div>
-
-                {% comment %}          <div class="card card-table-two">
-                    <h2 class="">Участники без Лабораторий</h2>
-                    <span class="d-block mg-b-20">Список участников не выбравших лабораторию.</span>
-                    <div class="table-responsive">
-                        <table class="table table-striped table-dashboard-two mg-b-0">
-                            <thead>
-                            <tr>
-                                <th class="wd-lg-25p">ФИО</th>
-                                <th class="wd-lg-25p tx-right">Leader ID</th>
-
-
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            <tr>
-                                <td class="text">None</td>
-                                <td class="tx-medium ">0</td>
-
-                            </tr>
-
-
-                            </tbody>
-                        </table>
-                    </div><!-- table-responsive -->
-                </div><!-- card-dashboard-five -->{% endcomment %}
             </div>
-            <div class="col-lg-6">
+            <div class="col-6 col-lg-6">
                 <div class="card card-dashboard-twentyone">
 
 
@@ -151,6 +141,7 @@
 
                 </div>
             </div>
+
             {% comment %}        <div class="col-lg-7 col-sm-12">
                 <div class="card card-table-two">
                     <h2 class="">Дозапись на Лаборатории</h2>
@@ -231,6 +222,7 @@
             show: false,
             mode: 'categories',
             tickColor: '#eee',
+            tickLength: 0,
             {% comment %}ticks: [[0, '3am'], [1, '4am'], [2, '5am'], [3, '6am'], [4, '7am'], [5, '8am'], [6, '9am'], [7, '10am'], [8, '11am'], [9, '12nn'], [10, '1pm'], [11, '2pm'],
                 [12, '3pm'], [13, '4pm'], [14, '5pm']],{% endcomment %}
             font: {
@@ -246,8 +238,10 @@
             show: true,
             lineWidth: 0,
             fillColor: '#e60007',
-            barWidth: 5,
-            order: 'left'
+            align: "center",
+            barWidth: 3,
+            {% comment %}           order: 'left'{% endcomment %}
+            {% comment %}   order: 'left'{% endcomment %}
         }
     },], {
         grid: {
@@ -255,6 +249,7 @@
         },
         yaxis: {
             min: 0,
+
             {% comment %} max: 60,{% endcomment %}
             tickColor: '#ddd',
             {% comment %}ticks: [[0, ''], [5, '200'], [10, '400'], [15, '600']],{% endcomment %}
@@ -264,9 +259,11 @@
             }
         },
         xaxis: {
+            title: 'adasd',
             show: true,
             mode: 'categories',
             tickColor: '#eee',
+            tickLength: 0,
             {% comment %}ticks: [[0, '3am'], [1, '4am'], [2, '5am'], [3, '6am'], [4, '7am'], [5, '8am'], [6, '9am'], [7, '10am'], [8, '11am'], [9, '12nn'], [10, '1pm'], [11, '2pm'],
                 [12, '3pm'], [13, '4pm'], [14, '5pm']],{% endcomment %}
             font: {
