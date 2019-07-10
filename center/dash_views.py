@@ -1,7 +1,7 @@
 from collections import namedtuple
 
 import pandas as pd
-from django.db import connections, OperationalError
+from django.db import connections, OperationalError, ProgrammingError
 from django.shortcuts import render
 
 # PROD DATA
@@ -90,6 +90,10 @@ def dash_all(request):
     except OperationalError:
         print('Operational fail')
         return render(request, "fail.html")
+    except ProgrammingError:
+        print('Operational fail')
+        return render(request, "fail.html")
+
 
     return render(request, "dashboards/prod/all.html", {
         'user_count': user_count,
