@@ -10,7 +10,7 @@ from django.views.decorators.cache import cache_page
 
 from center.sql import users, auction
 
-
+@cache_page(60)
 def dash_all(request):
     cursor = connections['dwh'].cursor()
     cursor.execute(users.users_island_tag_count)
@@ -105,7 +105,7 @@ def dash_auctions(request):
     return render(request, "dashboards/prod/auctions.html", {
     })
 
-
+@cache_page(60)
 def dash_auction_one(request):
     cursor = connections['dwh'].cursor()
     cursor.execute(auction.auction_events_1)
@@ -199,7 +199,7 @@ def dash_auction_one(request):
     })
 
     # UTILS
-
+@cache_page(60)
 def dash_auction_labs_1(request):
     cursor = connections['dwh'].cursor()
     cursor.execute(auction.auction_events_1)
