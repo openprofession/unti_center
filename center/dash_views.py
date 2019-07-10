@@ -89,6 +89,7 @@ def dash_all(request):
             data_to_graph_dyn = df_cumsum.values.tolist()
     except OperationalError:
         print('Operational fail')
+        return render(request, "fail.html")
 
     return render(request, "dashboards/prod/all.html", {
         'user_count': user_count,
