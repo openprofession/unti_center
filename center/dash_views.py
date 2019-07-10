@@ -49,6 +49,12 @@ def dash_all(request):
 
         cursor.execute(auction.auction_bets_1)
         df_auction = pd.DataFrame(dictfetchall(cursor))
+        register_count = 0
+        data_to_graph_series = []
+        endDT = 0
+        bet_count = 0
+        data_to_graph_dyn = []
+        auction_user_count = 0
         if not df.empty:
             df_event_count = df_auction.groupby("event_title").nunique()
             # считаем количество мероприятий, на которые сделали ставки <20% участников
