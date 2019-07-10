@@ -6,6 +6,7 @@ from django.shortcuts import render
 
 # PROD DATA
 from django.utils.html import escape
+from django.views.decorators.cache import cache_page
 
 from center.sql import users, auction
 
@@ -292,6 +293,7 @@ def dash_auction_labs_1(request):
     })
 
 
+@cache_page(60)
 def dash_auction_2(request):
     cursor = connections['dwh'].cursor()
     # cursor.execute(auction.auction_events_2)

@@ -79,6 +79,13 @@ TEMPLATES = [
     },
 ]
 
+CACHES = {
+   'default': {
+      'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+      'LOCATION': './django_cache',
+   }
+}
+
 AUTH_USER_MODEL = 'center.User'
 # USER_FIELDS = (
 #    'email',
