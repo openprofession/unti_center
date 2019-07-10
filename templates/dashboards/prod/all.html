@@ -45,7 +45,7 @@
             <div class="col-lg-6"> {% comment %}Посещамость мероприятий{% endcomment %}
                 <div class="row">
                     <div class="col-12 mb-2">
-                        <h2 class="az-content-title tx-24 tx-center mb-0">Динамика регистраций</h2>
+                        <h2 class="az-content-title tx-24 tx-center mb-0">Динамика регистрации участников</h2>
                     </div>
                     <div class="col-12 mb-4">
                         <div class="card card-dashboard-twentyfour  mb-0">
@@ -279,6 +279,142 @@
 
                 </div>
             </div><!-- col -->
+            <div class="col-lg-6" style="opacity:.25"> {% comment %}Посещамость мероприятий{% endcomment %}
+                <div class="row ">
+                    <div class="col-12 mb-0">
+                        <h2 class="az-content-title tx-24 tx-center mb-3">Обратная связь</h2>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="card card-dashboard-five">
+                            <div class="card-header">
+                                <h6 class="card-title">Оставлено оценок по спорту</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="mg-b-10 mg-sm-b-0 mg-sm-r-10">
+                                    <div class="c100 green p71">
+                                        <span>71%</span>
+                                        <div class="slice">
+                                            <div class="bar"></div>
+                                            <div class="fill"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4>1 065
+                                        <small> / {{ user_count }}</small>
+                                    </h4>
+                                </div>
+                            </div><!-- card-body -->
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="card card-dashboard-five">
+                            <div class="card-header">
+                                <h6 class="card-title">Оставлено оценок по лабораториям</h6>
+                                {% comment %}       <span class="card-text">Ходят на свои мероприятия</span>{% endcomment %}
+                            </div>
+                            <div class="card-body">
+                                <div class="mg-b-10 mg-sm-b-0 mg-sm-r-10">
+                                    <div class="c100 p34 orange">
+                                        <span>20%</span>
+                                        <div class="slice">
+                                            <div class="bar"></div>
+                                            <div class="fill"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+
+                                    <h4>300
+                                        <small> / {{ user_count }}</small>
+                                    </h4>
+                                </div>
+                            </div><!-- card-body -->
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="card card-dashboard-five">
+                            {% comment %}<div class="card-header">
+                                <h6 class="card-title mg-b-10">Ходят на свои мероприятия</h6>
+                            </div><!-- card-header -->{% endcomment %}
+                            <div class="card-header">
+                                <h6 class="card-title">Оставлено оценок по мастер классам</h6>
+                                {% comment %}       <span class="card-text">Ходят на свои мероприятия</span>{% endcomment %}
+                            </div>
+                            <div class="card-body">
+                                <div class="mg-b-10 mg-sm-b-0 mg-sm-r-10">
+                                    <div class="c100 red p9">
+                                        <span>9%</span>
+                                        <div class="slice">
+                                            <div class="bar"></div>
+                                            <div class="fill"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+
+                                    <h4>135
+                                        <small> / {{ user_count }}</small>
+                                    </h4>
+                                </div>
+                            </div><!-- card-body -->
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- col -->
+
+            {% comment %}Загрузка аудиторий{% endcomment %}
+
+        </div>
+        <div class="row row-sm">
+            <div class="col-lg-6"> {% comment %}Обратная связь{% endcomment %}
+                <div class="row">
+                    <div class="col-12 mb-0">
+                        <h2 class="az-content-title tx-24 tx-center mb-3">Последний аукцион</h2>
+                    </div>
+                    <div class="col-12">
+                        <div class="card card-dashboard-twentyfour">
+                            <div class="card-header">
+                                <h6 class="card-title">Аукцион: {{ title }}</h6>
+                                <span class="text-danger">Завершен</span>
+                            </div><!-- card-header -->
+                            <div class="card-body">
+                                <div class="card-body-top">
+                                    <div>
+                                        <h6><span></span>{{ bet_count }}
+                                            <small></small>
+                                        </h6>
+                                        <label>Ставок</label>
+                                    </div>
+
+                                    <div>
+                                        <h6><span></span>{{ auction_user_count }}
+                                            <small class="text-black-50">/ {{ user_count }}</small>
+                                        </h6>
+                                        <label>Участников</label>
+                                    </div>
+
+
+                                </div><!-- card-body-top -->
+
+                                <div class="d-flex justify-content-between mg-b-15">
+                                    <label class="az-content-label">Динамика ставок</label>
+                                    <div class="chart-legend">
+
+                                    </div><!-- chart-legend -->
+                                </div>
+                                <div class="chart-wrapper">
+                                    <div id="flotBarAuction" class="flot-chart">
+
+                                    </div>
+                                </div><!-- chart-wrapper -->
+                            </div><!-- card-body -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
             <div class="col-lg-6">
                 <div class="row " style="opacity:.25">
                     <div class="col-12 mb-0">
@@ -315,63 +451,6 @@
                     </div>
                 </div>
             </div>
-            {% comment %}Загрузка аудиторий{% endcomment %}
-
-        </div>
-        <div class="row row-sm">
-            <div class="col-lg-6"> {% comment %}Обратная связь{% endcomment %}
-                <div class="row">
-                    <div class="col-12 mb-0">
-                        <h2 class="az-content-title tx-24 tx-center mb-3">Последний аукцион</h2>
-                    </div>
-                    <div class="col-12">
-                        <div class="card card-dashboard-twentyfour">
-                            <div class="card-header">
-                                <h6 class="card-title">Аукцион на мастер классы</h6>
-                                <span class="text-danger">Завершен</span>
-                            </div><!-- card-header -->
-                            <div class="card-body">
-                                <div class="card-body-top">
-                                    <div>
-                                        <h6><span></span>3650
-                                            <small></small>
-                                        </h6>
-                                        <label>Ставок</label>
-                                    </div>
-
-                                    <div>
-                                        <h6><span></span>1425
-                                            <small class="text-black-50">/ {{ user_count }}</small>
-                                        </h6>
-                                        <label>Участников</label>
-                                    </div>
-                                    <div>
-                                        <h6><span></span>25
-                                            <small class="text-black-50">/ 30</small>
-                                        </h6>
-                                        <label>Мероприятий</label>
-                                    </div>
-
-                                </div><!-- card-body-top -->
-
-                                <div class="d-flex justify-content-between mg-b-15">
-                                    <label class="az-content-label">Динамика ставок</label>
-                                    <div class="chart-legend">
-
-                                    </div><!-- chart-legend -->
-                                </div>
-                                <div class="chart-wrapper">
-                                    <div id="flotBarAuction" class="flot-chart">
-
-                                    </div>
-                                </div><!-- chart-wrapper -->
-                            </div><!-- card-body -->
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-6"></div>
         </div>
 
     </div><!-- container -->
@@ -456,7 +535,7 @@
             {% comment %}   legend: {show: false}{% endcomment %}
         });
         $.plot('#flotBarAuction', [{
-            data: [[1, 0], [2, 0], [3, 0], [4, 1], [5, 3], [6, 3], [7, 10], [8, 11], [9, 10], [10, 9], [11, 12], [12, 8], [13, 10], [14, 6], [15, 3]],
+            data: {{ event_bet_dyn_data }},
             bars: {
                 show: true,
                 lineWidth: 0,
@@ -470,9 +549,9 @@
             },
             yaxis: {
                 min: 0,
-                max: 15,
+                {% comment %}  max: 15,{% endcomment %}
                 tickColor: '#ddd',
-                ticks: [[0, ''], [5, '100'], [10, '200'], [15, '300']],
+                {% comment %}              ticks: [[0, ''], [5, '100'], [10, '200'], [15, '300']],{% endcomment %}
                 font: {
                     color: '#444',
                     size: 10
@@ -481,8 +560,8 @@
             xaxis: {
                 mode: 'categories',
                 tickColor: '#eee',
-                ticks: [[0, '3am'], [1, '4am'], [2, '5am'], [3, '6am'], [4, '7am'], [5, '8am'], [6, '9am'], [7, '10am'], [8, '11am'], [9, '12nn'], [10, '1pm'], [11, '2pm'],
-                    [12, '3pm'], [13, '4pm'], [14, '5pm']],
+                {% comment %}                ticks: [[0, '3am'], [1, '4am'], [2, '5am'], [3, '6am'], [4, '7am'], [5, '8am'], [6, '9am'], [7, '10am'], [8, '11am'], [9, '12nn'], [10, '1pm'], [11, '2pm'],
+                                    [12, '3pm'], [13, '4pm'], [14, '5pm']],{% endcomment %}
                 font: {
                     color: '#999',
                     size: 9
@@ -493,6 +572,42 @@
         function labelFormatter(label, series) {
             return '<div style="font-size:11px; font-weight:500; text-align:center; padding:2px; color:white;">' + Math.round(series.percent) + '%</div>';
         }
+
+        $.plot('#flotBarBets', [{
+            data: {{ event_bet_dyn_data }},
+            bars: {
+                show: true,
+                lineWidth: 0,
+                fillColor: '#e60007',
+                barWidth: .5,
+                order: 'left'
+            }
+        },], {
+            grid: {
+                borderWidth: 0
+            },
+            yaxis: {
+                min: 0,
+                {% comment %} max: 60,{% endcomment %}
+                tickColor: '#ddd',
+                {% comment %}ticks: [[0, ''], [5, '200'], [10, '400'], [15, '600']],{% endcomment %}
+                font: {
+                    color: '#444',
+                    size: 10
+                }
+            },
+            xaxis: {
+                show: false,
+                mode: 'categories',
+                tickColor: '#eee',
+                {% comment %}ticks: [[0, '3am'], [1, '4am'], [2, '5am'], [3, '6am'], [4, '7am'], [5, '8am'], [6, '9am'], [7, '10am'], [8, '11am'], [9, '12nn'], [10, '1pm'], [11, '2pm'],
+                    [12, '3pm'], [13, '4pm'], [14, '5pm']],{% endcomment %}
+                font: {
+                    color: '#999',
+                    size: 9
+                }
+            }
+        });
     });
 
 </script>

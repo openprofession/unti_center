@@ -23,7 +23,7 @@ def dash_all(request):
     cursor.execute(users.users_active_mob_all)
     users_active_mob_all = cursor.fetchone()[0]
     cursor.execute(users.users_registered)
-    # registr = cursor.fetchall()
+
     df = pd.DataFrame(dictfetchall(cursor))
     data_to_graph = []
     if not df.empty:
@@ -44,6 +44,47 @@ def dash_all(request):
         data_to_graph_series = df2.values.tolist()
         print(data_to_graph_series)
 
+    cursor.execute(auction.auction_bets_1)
+    df_auction = pd.DataFrame(dictfetchall(cursor))
+    if not df.empty:
+        df_event_count = df_auction.groupby("event_title").nunique()
+        # считаем количество мероприятий, на которые сделали ставки <20% участников
+        # event_unpopular_count = len(df_event_count[df_event_count["untiID"] / user_count < 0.2])
+
+        df_rating = df_event_count[["untiID"]].reset_index()
+        df_rating.sort_values("untiID", ascending=False, inplace=True)
+        df_rating = df_rating.head(5)
+        # рейтинг в виде словаря
+        event_rating = df_rating.to_dict('records')
+
+        df_auction["bet_count"] = 0
+        # считаем число участников, сделавших ставки
+        auction_user_count = df_auction["untiID"].nunique()
+
+        # считаем число мероприятий, участвующих в аукционе. !!! Пока без мероприятий без ставок
+        event_count = df_auction["event_uuid"].nunique()
+
+        # дата окончания аукциона
+        endDT = df_auction["endDT"].iloc[0]
+
+        # считаем количество мероприятий, на которые сделали ставки <20% участников
+        df_event_count = df_auction.groupby("event_uuid").nunique()
+        event_unpopular_count = len(df_event_count[df_event_count["untiID"] / auction_user_count < 0.2])
+
+        # разбиваем временную ось совершения ставок на интервалу по часу и считаем количество сделанных ставок,
+        # в момент времени и накопительно
+        df_count = df_auction.groupby(pd.Grouper(key='bet_dt', freq='60Min')).count().reset_index()
+        df_cumsum = pd.DataFrame({'time': df_count["bet_dt"], 'count': df_count["bet_count"]}).set_index(
+            "time").cumsum().reset_index()
+        df_cumsum["N"] = df_cumsum.index
+        df_cumsum = df_cumsum[["N", "count"]]
+
+        # считаем общее количетсво ставок
+        bet_count = df_cumsum["count"].iloc[-1]
+
+        # готовим данные для построения графика в формате list of lists
+        data_to_graph_dyn = df_cumsum.values.tolist()
+
     return render(request, "dashboards/prod/all.html", {
         'user_count': user_count,
         'users_active_lk_today': users_active_lk_today,
@@ -53,6 +94,9 @@ def dash_all(request):
         'users_registered_count': register_count,
         'users_registered_data': data_to_graph,
         'users_registered_data_series': data_to_graph_series,
+        "title": df_auction['title'].iloc[0], "endDT": endDT,
+        "bet_count": bet_count, "event_bet_dyn_data": data_to_graph_dyn,
+        'auction_user_count': auction_user_count
     })
 
 
