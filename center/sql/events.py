@@ -75,7 +75,8 @@ SELECT
   event.id AS event_id,
   timetable.createDT,
   activity.sizeMin,
-  activity.sizeMax
+  activity.sizeMax,
+  place.title AS place_title
 FROM xle.timetable
   LEFT OUTER JOIN xle.event
     ON timetable.runID = event.runID
@@ -83,6 +84,8 @@ FROM xle.timetable
     ON event.runID = run.id
   LEFT OUTER JOIN xle.activity
     ON run.activityID = activity.id
+  LEFT OUTER JOIN xle.place
+    ON event.placeID = place.id
 WHERE event.id IN (SELECT
     event.id
   FROM xle.event
@@ -99,7 +102,7 @@ WHERE event.id IN (SELECT
     LEFT OUTER JOIN xle.type
       ON activity_type.typeID = type.id
   WHERE context_run.contextID = 30
-  AND type.title IN ('Мастер-класс','Клуб мышления') 
+  AND type.title IN ('Мастер-класс', 'Клуб мышления')
   AND date(timeslot.endDT) = '2019-07-11'
- GROUP BY event.id)
+  GROUP BY event.id)
 """

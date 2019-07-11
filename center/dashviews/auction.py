@@ -23,7 +23,7 @@ def dash_auction_result(request, date='2019-07-11'):
             enrolls_df['auction_priority'] = pd.np.where(enrolls_df['type'] == 'auction_priority', 1, 0)
             enrolls_event_df = enrolls_df.groupby('event_id').agg(
                 {'userID': 'count', 'sizeMin': 'first', 'sizeMax': 'first', 'event_id': 'first', 'title': 'first',
-                 'auction_bet': 'sum', 'manual': 'sum'})
+                 'auction_bet': 'sum', 'manual': 'sum', 'place_title': 'first'})
             enrolls_event_df['free'] = enrolls_event_df.eval('sizeMax-userID')
             enrolls_event_df = enrolls_event_df.sort_values(by='free', ascending=False)
 

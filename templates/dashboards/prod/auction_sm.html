@@ -45,6 +45,47 @@
 
 
         <div class="row row-sm">
+                    <div class="col-lg-6 col-sm-12">
+                <div class="card card-table-two">
+                    <h2 class="">Загруженность мероприятий <span>{{ date }}</span></h2>
+                    <span class="d-block mg-b-20">Текущие результаты записи на мероприятия </span>
+                    <div class="table-responsive">
+                        <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
+                            <thead>
+                            <tr>
+                                <th class="wd-lg-40p">Мероприятие</th>
+                                <th class="wd-lg-10p">Место</th>
+                                <th class="wd-lg-10p tx- tx-right">Сводобно сейчас</th>
+                                <th class="wd-lg-10p tx- tx-right">По аукциону</th>
+                                <th class="wd-lg-10p tx- tx-right">Дозапись</th>
+                                <th class="wd-lg-10p tx-right">Вместимость мероприятия</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for event in result.enrolls_by_event %}
+                                <tr>
+                                    <td class="text tx-bold" style="word-wrap: break-word"><a
+                                            href="https://xle.2035.university/island1022/event/{{ event.event_id }}">{{ event.title }}</a>
+                                    </td>
+                                    <td class="text tx-right">{{ event.place_title }}</td>
+                                    <td class="text tx-right tx-bold">{{ event.free }} мест
+                                        <small>/ {{ event.free|as_percentage_of:event.sizeMax }}</small>
+                                    </td>
+                                    <td class="text tx-right">{{ event.auction_bet }}</td>
+                                    <td class="text tx-right">{{ event.manual }}</td>
+
+                                    <td class="text tx-right">{{ event.sizeMax|floatformat:"0" }}</td>
+
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div><!-- table-responsive -->
+                </div><!-- card-dashboard-five -->
+            </div>
             <div class="col-lg-6 col-sm-12">
                 {% comment %}<div class="card card-dashboard-twentyfour mb-2">
                     <div class="card-header">
@@ -147,45 +188,7 @@
                     </div><!-- table-responsive -->
                 </div><!-- card-dashboard-five -->{% endcomment %}
             </div>
-            <div class="col-lg-6 col-sm-12">
-                <div class="card card-table-two">
-                    <h2 class="">Загруженность мероприятий <span>{{ date }}</span></h2>
-                    <span class="d-block mg-b-20">Текущие результаты записи на мероприятия </span>
-                    <div class="table-responsive">
-                        <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
-                            <thead>
-                            <tr>
-                                <th class="wd-lg-40p">Мероприятие</th>
-                                <th class="wd-lg-15p tx- tx-right">Сводобно сейчас</th>
-                                <th class="wd-lg-10p tx- tx-right">По аукциону</th>
-                                <th class="wd-lg-10p tx- tx-right">Дозапись</th>
-                                <th class="wd-lg-10p tx-right">Вместимость мероприятия</th>
 
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            {% for event in result.enrolls_by_event %}
-                                <tr>
-                                    <td class="text tx-bold" style="word-wrap: break-word"><a
-                                            href="https://xle.2035.university/island1022/event/{{ event.event_id }}">{{ event.title }}</a>
-                                    </td>
-                                    <td class="text tx-right tx-bold">{{ event.free }} мест
-                                        <small>/ {{ event.free|as_percentage_of:event.sizeMax }}</small>
-                                    </td>
-                                    <td class="text tx-right">{{ event.auction_bet }}</td>
-                                    <td class="text tx-right">{{ event.manual }}</td>
-
-                                    <td class="text tx-right">{{ event.sizeMax|floatformat:"0" }}</td>
-
-                                </tr>
-                            {% endfor %}
-
-                            </tbody>
-                        </table>
-                    </div><!-- table-responsive -->
-                </div><!-- card-dashboard-five -->
-            </div>
 
         </div>
     </div><!-- container -->
