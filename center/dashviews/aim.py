@@ -19,11 +19,12 @@ def dash_aim(request):
     aims_df = aims_df.join(teams_df, lsuffix='leaderID', rsuffix='leaderID')
     result = {}
     if not aims_df.empty:
-        print(aims_df)
+        aims_day_df = aims_df.groupby('rating').count().reset_index()
+
+        print(aims_day_df.to_dict('record'))
 
     # except OperationalError:
     #    print('Operational fail')
     #    return render(request, "fail.html")
-
 
     return render(request, "dashboards/prod/aims.html", {'result': result})

@@ -9,11 +9,11 @@ from center.dash_views import dictfetchall
 from center.sql import users, auction, redcards, events
 
 
-@cache_page(60)
-def dash_auction_result(request, date='2019-07-11'):
+# @cache_page(60)
+def dash_auction_result(request, auction_id=12, date=(datetime.now() + timedelta(hours=3)).date()):
     try:
         cursor = connections['dwh'].cursor()
-        cursor.execute(events.enrolls_auction_2)
+        cursor.execute(events.enrolls_auction_2, [date])
         enrolls_df = pd.DataFrame(dictfetchall(cursor))
         result = {}
         if not enrolls_df.empty:
@@ -31,6 +31,10 @@ def dash_auction_result(request, date='2019-07-11'):
             enrolls_event_top_df = enrolls_event_df.sort_values(by='userID', ascending=False)
             result['enrolls_by_event_top'] = enrolls_event_top_df.to_dict('records')
             result['user_count'] = enrolls_df['userID'].nunique()
+            result['user_count_bet'] = enrolls_df['auction_bet'].sum()
+            result['user_count_manual'] = enrolls_df['manual'].sum()
+
+
 
     except OperationalError as e:
         print(e)

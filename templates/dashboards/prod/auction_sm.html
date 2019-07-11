@@ -45,7 +45,7 @@
 
 
         <div class="row row-sm">
-                    <div class="col-lg-6 col-sm-12">
+            <div class="col-lg-6 col-sm-12">
                 <div class="card card-table-two">
                     <h2 class="">Загруженность мероприятий <span>{{ date }}</span></h2>
                     <span class="d-block mg-b-20">Текущие результаты записи на мероприятия </span>
@@ -56,14 +56,25 @@
                                 <th class="wd-lg-40p">Мероприятие</th>
                                 <th class="wd-lg-10p">Место</th>
                                 <th class="wd-lg-10p tx-right">Сводобно сейчас</th>
-                                <th class="wd-lg-10p tx-right">По аукциону</th>
-                                <th class="wd-lg-10p tx-right">Дозапись</th>
+                                <th class="wd-lg-10p tx-right">По аукциону </th>
+                                <th class="wd-lg-10p tx-right">Дозапись </th>
                                 <th class="wd-lg-10p tx-right">Вместимость мероприятия</th>
 
                             </tr>
                             </thead>
                             <tbody>
+                            <tr>
+                                <td class="text tx-bold" style="word-wrap: break-word">Все </a>
+                                </td>
+                                <td class="text tx-right"></td>
+                                <td class="text tx-right">
+                                </td>
+                                <td class="text tx-right  tx-bold">{{ result.user_count_bet }}</td>
+                                <td class="text tx-right  tx-bold">{{ result.user_count_manual }}</td>
 
+                                <td class="text tx-right  tx-bold"></td>
+
+                            </tr>
                             {% for event in result.enrolls_by_event %}
                                 <tr>
                                     <td class="text tx-bold" style="word-wrap: break-word"><a

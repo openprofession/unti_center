@@ -42,7 +42,7 @@ urlpatterns = [
                   path('dashboard/sport/<str:date>', sports.dash_sports, name='dash_sports'),
                   path('dashboard/redcards', redcards.dash_redcards, name='dash_redcards'),
                   path('dashboard/auction_result', auction.dash_auction_result, name='dash_auction_result'),
-                  path('dashboard/auction_result/<str:auction_id>', auction.dash_auction_result, name='dash_auction_result_by_id'),
+                  path('dashboard/auction_result/<str:date>', auction.dash_auction_result, name='dash_auction_result_by_id'),
                   path('dashboard/aim', aim.dash_aim, name='dash_aim'),
 
                   # TEST BOARDS

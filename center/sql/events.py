@@ -103,6 +103,6 @@ WHERE event.id IN (SELECT
       ON activity_type.typeID = type.id
   WHERE context_run.contextID = 30
   AND type.title IN ('Мастер-класс', 'Клуб мышления')
-  AND date(timeslot.endDT) = '2019-07-11'
+  AND date(timeslot.endDT) = %s
   GROUP BY event.id)
 """
