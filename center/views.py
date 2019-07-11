@@ -15,7 +15,7 @@ def logout(request):
 
 
 def dashboards(request):
-    dashboard_list = Dashboard.objects.filter(active=True, public=True)
+    dashboard_list = Dashboard.objects.filter(active=True, public=True).order_by('-priority')
     return render(request, 'public/dashboard_list.html', {'dashboards': dashboard_list})
 
 
