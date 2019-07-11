@@ -9,7 +9,7 @@ from center.dash_views import dictfetchall
 from center.sql import users, auction, redcards, events
 
 
-# @cache_page(settings.PAGE_CACHE_TIME)
+@cache_page(60)
 def dash_auction_result(request, date='2019-07-11'):
     try:
         cursor = connections['dwh'].cursor()
