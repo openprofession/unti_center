@@ -34,7 +34,7 @@
             </a>
 
             <div class="collapse navbar-collapse" id="navbar-top">
-                <div class="text-danger text-center mr-auto tx-36-f">{{ title }}</div>
+                <div class="text-danger text-center mr-auto tx-36-f">Красные карточки</div>
             </div>
 
         </nav>
@@ -50,56 +50,69 @@
                 <div class="row row-sm row--lg">
                     <div class="col-12 card card-dashboard-twentyfour mb-2">
                         <div class="card-header">
-                            <h2 class="">{{ title }}</h2>
-                            <span class="text-success tx-20">Идет</span>
+                            <h2 class="">Выданные карточки </h2>
+                            <span class="tx-20">Сегодня</span>
                         </div><!-- card-header -->
                         <div class="card-body">
-                            <div class="card-body-top">
+
+                            {% comment %}<div class="card-body-top">
                                 <div>
-                                    <h6><span></span>{{ bet_count }}
+                                    <img src="/static/img/cards_red.svg">
+                                    <h6><span></span>{{ result.count_red_public }}
                                         <small></small>
                                     </h6>
-                                    <label>Ставок</label>
+                           <label>Карточка</label>
                                 </div>
 
                                 <div>
-                                    <h6><span></span>{{ user_count }}
-                                        <small class="text-black-50">/ {{ all_user_count }}</small>
+                                    <img src="/static/img/card_yellow.svg">
+                                    <h6><span></span>{{ result.count_yellow }}
+                                        <small class=""></small>
                                     </h6>
-                                    <label>Участников</label>
+                              <label>Участников</label>
+                                </div>
+                                 <div>
+                                    <img src="/static/img/card_green.svg">
+                                    <h6><span></span>{{ result.count_green_public }}
+                                        <small></small>
+                                    </h6>
+                                 <label>Карточка</label>
                                 </div>
 
 
-                            </div><!-- card-body-top -->
+                            </div><!-- card-body-top -->{% endcomment %}
+                            <div class="row row-sm">
+                                <div class="col-4">
+                                    <div class="card card-body card-dashboard-fifteen">
+                                        <h1>{{ result.count_red_public }}</h1>
+                                        <label class="tx-danger">Красных карточек</label>
+                                        <span>За пропуски мероприятий и наружения порядка.</span>
 
-                            <div class="d-flex justify-content-between mg-b-15">
-                                <label class="az-content-label">Динамика ставок</label>
-                                <div class="chart-legend">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="card card-body card-dashboard-fifteen">
+                                        <h1>{{ result.count_yellow }}</h1>
+                                        <label class="tx-orange">Жёлтых карточек</label>
+                                        <span>Предупреждения за несущественные нарушения</span>
 
-                                </div><!-- chart-legend -->
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="card card-body card-dashboard-fifteen">
+                                        <h1>{{ result.count_green }}</h1>
+                                        <label class="tx-success">Зеленых карточек</label>
+                                        <span>Поощрения за дострижения</span>
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="chart-wrapper  mb-2">
-                                <div id="flotBarBets" class="flot-chart">
 
-                                </div>
-                            </div><!-- chart-wrapper -->
-
-                            <div class="d-flex justify-content-between mg-b-15">
-                                <label class="az-content-label">Гистограмма ставок</label>
-                                <div class="chart-legend">
-
-                                </div><!-- chart-legend -->
-                            </div>
-                            <div class="chart-wrapper">
-                                <div id="flotBarHist" class="flot-chart">
-
-                                </div>
-                            </div><!-- chart-wrapper -->
                         </div><!-- card-body -->
                     </div>
-                    <div class="col-12 card card-dashboard-eight bg-white">
+                   {% comment %} <div class="col-12 card card-dashboard-eight bg-white">
                         <h2 class="">ТОП ставок на мероприятия</h2>
-                        {% comment %}                    <span class="d-block mg-b-20">Sales performance revenue based by country</span>{% endcomment %}
+                                            <span class="d-block mg-b-20">Sales performance revenue based by country</span>
 
                         <div class="list-group">
                             {% for bet in top_bets %}
@@ -111,38 +124,109 @@
                             {% endfor %}
 
                         </div><!-- list-group -->
-                    </div>
+                    </div>{% endcomment %}
                 </div>
             </div>
             <div class="col-6 col-lg-6">
-                <div class="card card-dashboard-twentyone">
-
-
-                    <div class="card-body" style="background: white">
-                        <h2 class="">Топ мероприятий по популярности</h2>
-                        <p>Количество ставок участников на мероприятия</p>
-
-                        <div class="list-group">
-                            {% for event in event_list %}
-                                <div class="list-group-item">
-                                    <span>{{ event.event_title }}</span>
-                                    <span class="tx-bold ">{{ event.untiID }} / {{ event.untiID|as_percentage_of:user_count }} </span>
-                                    <div class="progress">
-                                        <div class="progress-bar wd-{{ event.untiID|as_percentage_of_round5:user_count }}p bg-success"
-                                             role="progressbar"
-                                             aria-valuenow="15"
-                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div><!-- list-group-item -->
-                            {% endfor %}
-
-                        </div><!-- list-group -->
+                <div class="col-12 card card-dashboard-twentyfour">
+                    <div class="card-header">
+                        <h2 class="">Выданные карточки </h2>
+                        <span class="tx-20">Весь период</span>
                     </div>
 
-                </div>
-            </div>
+                    <div class="card-body">
 
-            {% comment %}        <div class="col-lg-7 col-sm-12">
+                        {% comment %}<div class="card-body-top">
+                                <div>
+                                    <img src="/static/img/cards_red.svg">
+                                    <h6><span></span>{{ result.count_red_public }}
+                                        <small></small>
+                                    </h6>
+                           <label>Карточка</label>
+                                </div>
+
+                                <div>
+                                    <img src="/static/img/card_yellow.svg">
+                                    <h6><span></span>{{ result.count_yellow }}
+                                        <small class=""></small>
+                                    </h6>
+                              <label>Участников</label>
+                                </div>
+                                 <div>
+                                    <img src="/static/img/card_green.svg">
+                                    <h6><span></span>{{ result.count_green_public }}
+                                        <small></small>
+                                    </h6>
+                                 <label>Карточка</label>
+                                </div>
+
+
+                            </div><!-- card-body-top -->{% endcomment %}
+                        <div class="row row-sm">
+                            <div class="col-4">
+                                <div class="card card-body card-dashboard-fifteen">
+                                    <h1>{{ result.count_red_public }}</h1>
+                                    <label class="tx-danger">Красных карточек</label>
+                                    <span>За пропуски мероприятий и наружения порядка.</span>
+
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="card card-body card-dashboard-fifteen">
+                                    <h1>{{ result.count_yellow }}</h1>
+                                    <label class="tx-orange">Жёлтых карточек</label>
+                                    <span>Предупреждения за несущественные нарушения</span>
+
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="card card-body card-dashboard-fifteen">
+                                    <h1>{{ result.count_green }}</h1>
+                                    <label class="tx-success">Зеленых карточек</label>
+                                    <span>Поощрения за дострижения</span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- card-body -->
+                    {% comment %} <h2 class="">Топ мероприятий по популярности</h2>
+                        <p>Количество ставок участников на мероприятия</p>
+{% endcomment %}
+                    <div class="table-responsive">
+                        <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
+                            <thead>
+                            <tr>
+                                <th class="wd-lg-40p">Команда</th>
+                                <th class="wd-lg-10p tx- tx-right">Красные</th>
+                                <th class="wd-lg-10p tx- tx-right">Желтые</th>
+                                <th class="wd-lg-10p tx-right">Зеленые</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for team in  result.rating %}
+                                <tr>
+                                    <td class="text tx-bold"
+                                        style="word-wrap: break-word">{{ team.team_title }}</td>
+                                    <td class="text tx-right tx-bold tx-danger">{{ team.red }}</td>
+                                    <td class="text tx-right">{{ team.yellow }}</td>
+                                    <td class="text tx-right">{{ team.green }}</td>
+
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div><!-- table-responsive -->
+
+                </div>
+
+            </div>
+        </div>
+
+        {% comment %}        <div class="col-lg-7 col-sm-12">
                 <div class="card card-table-two">
                     <h2 class="">Дозапись на Лаборатории</h2>
                     <span class="d-block mg-b-20">Текущие результаты аукциона и дозаписи на лаборатории</span>
@@ -180,8 +264,8 @@
                 </div><!-- card-dashboard-five -->
             </div>{% endcomment %}
 
-        </div>
-    </div><!-- container -->
+    </div>
+</div><!-- container -->
 </div><!-- az-content -->
 
 

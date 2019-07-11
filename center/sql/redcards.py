@@ -14,6 +14,6 @@ FROM redcards.red_cards_status st
     ON card.uuid = st.card_id
     AND st.change_dt = (SELECT
         MAX(st2.change_dt) AS expr1
-      FROM red_cards_status st2
+      FROM redcards.red_cards_status st2
       WHERE st2.card_id = st.card_id)
 WHERE st.is_public = 1"""
