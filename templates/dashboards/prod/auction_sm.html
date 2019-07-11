@@ -45,7 +45,7 @@
 
 
         <div class="row row-sm">
-                 <div class="col-lg-6 col-sm-12">
+            <div class="col-lg-6 col-sm-12">
                 {% comment %}<div class="card card-dashboard-twentyfour mb-2">
                     <div class="card-header">
                         <h6 class="card-title">Аукцион: {{ title }}</h6>
@@ -120,7 +120,7 @@
                     </div>
 
                 </div>
-               {% comment %}           <div class="card card-table-two">
+                {% comment %}           <div class="card card-table-two">
                     <h2 class="">Участники без Лабораторий</h2>
                     <span class="d-block mg-b-20">Список участников не выбравших лабораторию.</span>
                     <div class="table-responsive">
@@ -149,7 +149,7 @@
             </div>
             <div class="col-lg-6 col-sm-12">
                 <div class="card card-table-two">
-                    <h2 class="">Загруженность спортивных мероприятий  <span>{{ date }}</span></h2>
+                    <h2 class="">Загруженность спортивных мероприятий <span>{{ date }}</span></h2>
                     <span class="d-block mg-b-20">Текущие результаты записи на спортивные мероприятия </span>
                     <div class="table-responsive">
                         <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
@@ -158,7 +158,7 @@
                                 <th class="wd-lg-40p">Мероприятие</th>
                                 <th class="wd-lg-15p tx- tx-right">Сводобно сейчас</th>
                                 <th class="wd-lg-10p tx- tx-right">По аукциону</th>
-                                <th class="wd-lg-10p tx- tx-right">Дозаписано по аукциону</th>
+                                <th class="wd-lg-10p tx- tx-right">Дозапись</th>
                                 <th class="wd-lg-10p tx-right">Вместимость мероприятия</th>
 
                             </tr>
@@ -173,7 +173,7 @@
                                     <td class="text tx-right tx-bold">{{ event.free }} мест
                                         <small>/ {{ event.free|as_percentage_of:event.sizeMax }}</small>
                                     </td>
-                                            <td class="text tx-right">{{ event.auction_bet }}</td>
+                                    <td class="text tx-right">{{ event.auction_bet }}</td>
                                     <td class="text tx-right">{{ event.manual }}</td>
 
                                     <td class="text tx-right">{{ event.sizeMax|floatformat:"0" }}</td>
