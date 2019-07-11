@@ -46,183 +46,149 @@
 
 
         <div class="row row-sm">
-            <div class="col-6 col-lg-6">
-                <div class="row row-sm row--lg">
+            <div class="col-sm-12 col-lg-6">
+                <div class="row row-sm row-lg">
                     <div class="col-12 card card-dashboard-twentyfour mb-2">
                         <div class="card-header">
                             <h2 class="">Выданные карточки </h2>
-                            <span class="tx-20">Сегодня</span>
+                            <span class="tx-20"></span>
                         </div><!-- card-header -->
                         <div class="card-body">
-
-                            {% comment %}<div class="card-body-top">
-                                <div>
-                                    <img src="/static/img/cards_red.svg">
-                                    <h6><span></span>{{ result.count_red_public }}
-                                        <small></small>
-                                    </h6>
-                           <label>Карточка</label>
-                                </div>
-
-                                <div>
-                                    <img src="/static/img/card_yellow.svg">
-                                    <h6><span></span>{{ result.count_yellow }}
-                                        <small class=""></small>
-                                    </h6>
-                              <label>Участников</label>
-                                </div>
-                                 <div>
-                                    <img src="/static/img/card_green.svg">
-                                    <h6><span></span>{{ result.count_green_public }}
-                                        <small></small>
-                                    </h6>
-                                 <label>Карточка</label>
-                                </div>
-
-
-                            </div><!-- card-body-top -->{% endcomment %}
                             <div class="row row-sm">
-                                <div class="col-4">
-                                    <div class="card card-body card-dashboard-fifteen">
-                                        <h1>{{ result.count_red_public }}</h1>
+                                <div class="col-4 d-flex">
+                                    <div class="card card-body card-dashboard-fifteen flex-fill">
+                                        <div class="row ml-0"><h1>{{ result.count_red_public }}</h1> <img
+                                                src="/static/img/cards_red.svg" class="az-img-user"></div>
                                         <label class="tx-danger">Красных карточек</label>
-                                        <span>За пропуски мероприятий и наружения порядка.</span>
+                                        <span>За пропуски мероприятий и нарушения порядка.</span>
 
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <div class="card card-body card-dashboard-fifteen">
-                                        <h1>{{ result.count_yellow }}</h1>
-                                        <label class="tx-orange">Жёлтых карточек</label>
+                                <div class="col-4 d-flex">
+                                    <div class="card card-body card-dashboard-fifteen flex-fill">
+                                        <div class="row ml-0"><h1>{{ result.count_yellow }}</h1> <img
+                                                src="/static/img/card_yellow.svg" class="az-img-user"></div>
+                                        <label class="" style="color: #fdd714">Жёлтых карточек</label>
                                         <span>Предупреждения за несущественные нарушения</span>
 
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <div class="card card-body card-dashboard-fifteen">
-                                        <h1>{{ result.count_green }}</h1>
+                                <div class="col-4 d-flex">
+                                    <div class="card card-body card-dashboard-fifteen flex-fill">
+                                        <div class="row ml-0"><h1>{{ result.count_green }}</h1> <img
+                                                src="/static/img/card_green.svg" class="az-img-user"></div>
                                         <label class="tx-success">Зеленых карточек</label>
-                                        <span>Поощрения за дострижения</span>
+                                        <span>Поощрения за достижения</span>
 
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row row-sm">
+                                <div class="col-12">
+                                    <h5 class=" mt-4 ml-2">Статусы красных карточек</h5>
+
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+
+                                                <th class="wd-45p">Статус</th>
+                                                <th>Карточек</th>
+                                                <th>Описание</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+
+                                                <td><strong>Опубликованы</strong></td>
+                                                <td><strong>{{ result.count_red_published }}</strong>
+                                                    ( {{ result.count_red_published|as_percentage_of:result.count_red_public }}
+                                                    )
+                                                </td>
+                                                <td>Могут быть оспорены</td>
+
+                                            </tr>
+                                            <tr>
+
+                                                <td><strong>Оспорены</strong></td>
+                                                <td><strong>{{ result.count_red_consideration }}</strong>
+                                                    ( {{ result.count_red_consideration |as_percentage_of:result.count_red_public }}
+                                                    )
+                                                </td>
+                                                <td>На рассмотрении модераторами</td>
+
+                                            </tr>
+                                            <tr>
+
+                                                <td><strong>Выданы</strong></td>
+                                                <td><strong>{{ result.count_red_issued }}</strong>
+                                                    ( {{ result.count_red_issued |as_percentage_of:result.count_red_public }}
+                                                    )
+                                                </td>
+                                                <td>Финальный статус. Нельзя оспорить.</td>
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div><!-- table-responsive -->
                                 </div>
                             </div>
 
                         </div><!-- card-body -->
                     </div>
-                   {% comment %} <div class="col-12 card card-dashboard-eight bg-white">
-                        <h2 class="">ТОП ставок на мероприятия</h2>
-                                            <span class="d-block mg-b-20">Sales performance revenue based by country</span>
-
-                        <div class="list-group">
-                            {% for bet in top_bets %}
-                                <div class="list-group-item">
-
-                                    <p>{{ bet.event_title }}</p>
-                                    <span>{{ bet.bet }}</span>
-                                </div><!-- list-group-item -->
-                            {% endfor %}
-
-                        </div><!-- list-group -->
-                    </div>{% endcomment %}
-                </div>
-            </div>
-            <div class="col-6 col-lg-6">
-                <div class="col-12 card card-dashboard-twentyfour">
-                    <div class="card-header">
-                        <h2 class="">Выданные карточки </h2>
-                        <span class="tx-20">Весь период</span>
-                    </div>
-
-                    <div class="card-body">
-
-                        {% comment %}<div class="card-body-top">
-                                <div>
-                                    <img src="/static/img/cards_red.svg">
-                                    <h6><span></span>{{ result.count_red_public }}
-                                        <small></small>
-                                    </h6>
-                           <label>Карточка</label>
-                                </div>
-
-                                <div>
-                                    <img src="/static/img/card_yellow.svg">
-                                    <h6><span></span>{{ result.count_yellow }}
-                                        <small class=""></small>
-                                    </h6>
-                              <label>Участников</label>
-                                </div>
-                                 <div>
-                                    <img src="/static/img/card_green.svg">
-                                    <h6><span></span>{{ result.count_green_public }}
-                                        <small></small>
-                                    </h6>
-                                 <label>Карточка</label>
-                                </div>
-
-
-                            </div><!-- card-body-top -->{% endcomment %}
-                        <div class="row row-sm">
-                            <div class="col-4">
-                                <div class="card card-body card-dashboard-fifteen">
-                                    <h1>{{ result.count_red_public }}</h1>
-                                    <label class="tx-danger">Красных карточек</label>
-                                    <span>За пропуски мероприятий и наружения порядка.</span>
-
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="card card-body card-dashboard-fifteen">
-                                    <h1>{{ result.count_yellow }}</h1>
-                                    <label class="tx-orange">Жёлтых карточек</label>
-                                    <span>Предупреждения за несущественные нарушения</span>
-
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="card card-body card-dashboard-fifteen">
-                                    <h1>{{ result.count_green }}</h1>
-                                    <label class="tx-success">Зеленых карточек</label>
-                                    <span>Поощрения за дострижения</span>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div><!-- card-body -->
-                    {% comment %} <h2 class="">Топ мероприятий по популярности</h2>
-                        <p>Количество ставок участников на мероприятия</p>
-{% endcomment %}
-                    <div class="table-responsive">
-                        <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
-                            <thead>
-                            <tr>
-                                <th class="wd-lg-40p">Команда</th>
-                                <th class="wd-lg-10p tx- tx-right">Красные</th>
-                                <th class="wd-lg-10p tx- tx-right">Желтые</th>
-                                <th class="wd-lg-10p tx-right">Зеленые</th>
-
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            {% for team in  result.rating %}
+                    <div class="col-12 card card-dashboard-twentyfour mb-2">
+                        <div class="card-header">
+                            <h2 class="">Рейтинг команд</h2>
+                            <span class="tx-20"></span>
+                        </div><!-- card-header -->
+                        <div class="table-responsive">
+                            <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
+                                <thead>
                                 <tr>
-                                    <td class="text tx-bold"
-                                        style="word-wrap: break-word">{{ team.team_title }}</td>
-                                    <td class="text tx-right tx-bold tx-danger">{{ team.red }}</td>
-                                    <td class="text tx-right">{{ team.yellow }}</td>
-                                    <td class="text tx-right">{{ team.green }}</td>
+                                    <th class="wd-lg-40p">Команда</th>
+                                    <th class="wd-lg-10p tx- tx-right">Красные</th>
+                                    <th class="wd-lg-10p tx- tx-right">Желтые</th>
+                                    <th class="wd-lg-10p tx-right">Зеленые</th>
 
                                 </tr>
-                            {% endfor %}
+                                </thead>
+                                <tbody>
 
-                            </tbody>
-                        </table>
-                    </div><!-- table-responsive -->
+                                {% for team in  result.rating %}
+                                    <tr>
+                                        <td class="text tx-bold"
+                                            style="word-wrap: break-word">{{ team.team_title }}</td>
+                                        <td class="text tx-right tx-bold tx-danger">{{ team.red }}</td>
+                                        <td class="text tx-right">{{ team.yellow }}</td>
+                                        <td class="text tx-right">{{ team.green }}</td>
+
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div><!-- table-responsive -->
+                    </div>
 
                 </div>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+                <div class="col-12 card card-dashboard-twentyfour mb-2">
+                    <div class="card-header">
+                        <h2 class="">Динамика карточек на острове </h2>
+                        <span class="tx-20"></span>
+                    </div><!-- card-header -->
+                    <div class="card-body">
+                        <div class="flot-chart-wrapper">
+                            <div id="flotChart" class="flot-chart" style="height: 300px">
 
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
 
@@ -270,15 +236,56 @@
 
 
 <script src="/static/azia/lib/jquery/jquery.min.js"></script>
-{% comment %}<script src="/static/azia/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/azia/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/static/azia/lib/ionicons/ionicons.js"></script>
 <script src="/static/azia/lib/jquery.flot/jquery.flot.js"></script>
 <script src="/static/azia/lib/jquery.flot/jquery.flot.resize.js"></script>
 <script src="/static/azia/lib/chart.js/Chart.bundle.min.js"></script>
 
 <script src="/static/azia/js/azia.js"></script>
-<script src="/static/azia/js/chart.flot.sampledata.js"></script>{% endcomment %}
-
+<script src="/static/azia/js/chart.flot.sampledata.js"></script>
+<script>
+    var plot = $.plot('#flotChart', [
+        {
+            data: [[0, 0], [1, 239]],
+            color: '#ff331d',
+            lines: {
+                fillColor: {colors: [{opacity: 0}, {opacity: 0.2}]}
+            }
+        },
+        {
+            data: [[0, 0], [1, 50]],
+            color: '#34d032',
+            lines: {
+                fillColor: {colors: [{opacity: 0}, {opacity: 0.2}]}
+            }
+        }], {
+        series: {
+            shadowSize: 0,
+            lines: {
+                show: true,
+                lineWidth: 2,
+                fill: true
+            }
+        },
+        grid: {
+            borderWidth: 0,
+            labelMargin: 8
+        },
+        yaxis: {
+            show: true,
+            min: 0,
+            {% comment %}   ticks: [[0, '20K'], [20, '20K'], [40, '40K'], [60, '60K'], [80, '80K']],{% endcomment %}
+            tickColor: '#eee'
+        },
+        xaxis: {
+            show: true,
+            max: 12,
+            color: '#fff',
+            ticks: [[0, '10 июля'], [2, '12 июля'], [4, '14 июля'], [6, '16 июля'], [8, '18 июля'], [10, '20 июля'], [12, '22 июля'],],
+        }
+    });
+</script>
 
 </body>
 </html>

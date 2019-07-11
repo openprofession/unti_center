@@ -10,7 +10,7 @@ from center.sql import users, auction, redcards, events
 
 
 @cache_page(60)
-def dash_auction_result(request, date='2019-07-11'):
+def dash_auction_result(request, auction_id='11'):
     try:
         cursor = connections['dwh'].cursor()
         cursor.execute(events.enrolls_auction_2)
