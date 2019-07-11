@@ -41,9 +41,6 @@ def dash_redcards(request):
             result['yellow_cards_data'] = cards_data_df[["N", "yellow"]].values.tolist()
             result['green_cards_data'] = cards_data_df[["N", "green"]].values.tolist()
 
-            print(result['red_cards_data'])
-            print(result['green_cards_data'])
-
     except OperationalError:
         print('Operational fail')
         return render(request, "fail.html")
