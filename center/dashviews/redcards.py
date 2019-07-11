@@ -33,7 +33,10 @@ def dash_redcards(request):
             cards_df['green'] = pd.np.where(cards_df['type'] == 'green', 1, 0)
             result['rating'] = cards_df.groupby('team_title').agg({'red': 'sum', 'yellow': 'sum', 'green': 'sum', 'team_title': 'first'}). \
                 sort_values(by='red', ascending=False).to_dict('record')
+            result['red_ticks'] = cards_df.groupby(pd.Grouper(key='change_dt', freq='60Min')).count().reset_index()
+            cards_data_df = cards_df.groupby(pd.Grouper(key='change_dt', freq='60Min')).count().reset_index()
 
+            print(cards_data_df.to_dict('records'))
 
     except OperationalError:
         print('Operational fail')

@@ -5,6 +5,7 @@ all_public_cards = """SELECT
   card.source,
   card.leader_id,
   card.incident_dt,
+  card.create_dt
   st.change_dt,
   st.system,
   st.name AS status,
