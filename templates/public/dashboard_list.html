@@ -101,21 +101,23 @@
 {% block content %}
     <div class="container">
         <div class="row" style="">
-            {% for dashboard in dashboards %}
-                <div class="col-lg-4 col-md-6 col-12 col-fix">
-                    <div class="block">
+            {% if request.user.is_authenticated %}
+                {% for dashboard in dashboards %}
+                    <div class="col-lg-4 col-md-6 col-12 col-fix">
+                        <div class="block">
 
-                        <div class="img"><img src="/media/{{ dashboard.cover }}" alt=""></div>
-                        <div class="content">
-                            <header class="{{ dashboard.status }}"><a href="{{ dashboard.url }}">{{ dashboard.title }}</a></header>
+                            <div class="img"><img src="/media/{{ dashboard.cover }}" alt=""></div>
+                            <div class="content">
+                                <header class="{{ dashboard.status }}"><a
+                                        href="{{ dashboard.url }}">{{ dashboard.title }}</a></header>
 
-                            <main>{{ dashboard.description }}</main>
-                            <footer><i class="fa fa-sync"></i> 11 июля 2019</footer>
+                                <main>{{ dashboard.description }}</main>
+                                <footer><i class="fa fa-sync"></i> 11 июля 2019</footer>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
 {% endblock %}

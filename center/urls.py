@@ -19,7 +19,7 @@ from django.urls import path, include
 
 from center import views, settings
 from center import dash_views
-from center.dashviews import sports, redcards, auction
+from center.dashviews import sports, redcards, auction, aim
 
 urlpatterns = [
                   path('', include('social_django.urls', namespace='social')),
@@ -43,6 +43,7 @@ urlpatterns = [
                   path('dashboard/redcards', redcards.dash_redcards, name='dash_redcards'),
                   path('dashboard/auction_result', auction.dash_auction_result, name='dash_auction_result'),
                   path('dashboard/auction_result/<str:auction_id>', auction.dash_auction_result, name='dash_auction_result_by_id'),
+                  path('dashboard/aim', aim.dash_aim, name='dash_aim'),
 
                   # TEST BOARDS
                   path('test_report/', views.run_report, name='test_report'),

@@ -13,7 +13,7 @@
     <meta name="description" content="Аукционт Остров 10-22">
 
 
-    <title>{{ title }}</title>
+    <title>Цели</title>
 
     <!-- vendor css -->
     <link href="/static/azia/lib/fontawesome-free/css/all.min.css" rel="stylesheet">
@@ -34,7 +34,7 @@
             </a>
 
             <div class="collapse navbar-collapse" id="navbar-top">
-                <div class="text-danger text-center mr-auto tx-36-f">Красные карточки</div>
+                <div class="text-danger text-center mr-auto tx-36-f">Цели</div>
             </div>
 
         </nav>
@@ -44,7 +44,7 @@
 <div class="az-content az-content-dashboard-eight  pt-3">
     <div class="container-fluid d-block">
         <div class="row row-sm">
-            <div class="col-sm-12 col-lg-6">
+            {% comment %}         <div class="col-sm-12 col-lg-6">
                 <div class="row row-sm row-lg">
                     <div class="col-12 card card-dashboard-twentyfour mb-2">
                         <div class="card-header">
@@ -162,7 +162,7 @@
                         <span class="tx-20"></span>
                     </div><!-- card-header -->
                     <div class="table-responsive">
-                        <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
+                        <table class="table table-striped table-dashboard-two mg-b-0">
                             <thead>
                             <tr>
                                 <th class="wd-lg-40p">Команда</th>
@@ -179,8 +179,8 @@
                                     <td class="text tx-bold"
                                         style="word-wrap: break-word">{{ team.team_title }}</td>
                                     <td class="text tx-right tx-bold tx-danger">{{ team.red }}</td>
-                                    <td class="text tx-right tx-bold tx-orange" >{{ team.yellow }}</td>
-                                    <td class="text tx-right tx-bold tx-success" >{{ team.green }}</td>
+                                    <td class="text tx-right tx-bold tx-orange">{{ team.yellow }}</td>
+                                    <td class="text tx-right tx-bold tx-success">{{ team.green }}</td>
 
                                 </tr>
                             {% endfor %}
@@ -189,11 +189,11 @@
                         </table>
                     </div><!-- table-responsive -->
                 </div>
-            </div>
-        </div>
+            </div>{% endcomment %}
 
-    </div>
-</div><!-- container -->
+
+        </div>
+    </div><!-- container -->
 </div><!-- az-content -->
 
 
