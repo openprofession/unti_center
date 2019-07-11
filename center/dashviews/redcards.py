@@ -33,10 +33,16 @@ def dash_redcards(request):
             cards_df['green'] = pd.np.where(cards_df['type'] == 'green', 1, 0)
             result['rating'] = cards_df.groupby('team_title').agg({'red': 'sum', 'yellow': 'sum', 'green': 'sum', 'team_title': 'first'}). \
                 sort_values(by='red', ascending=False).to_dict('record')
-            result['red_ticks'] = cards_df.groupby(pd.Grouper(key='change_dt', freq='60Min')).count().reset_index()
-            cards_data_df = cards_df.groupby(pd.Grouper(key='change_dt', freq='60Min')).count().reset_index()
+            cards_data_df = cards_df
+            cards_data_df.loc[-1, 'change_dt'] = pd.Timestamp('2019-07-10 00:00')
+            cards_data_df = cards_data_df.groupby(pd.Grouper(key='change_dt', freq='H')).agg({'red': 'sum', 'yellow': 'sum', 'green': 'sum'}).cumsum().reset_index()
+            cards_data_df["N"] = cards_data_df.index
+            result['red_cards_data'] = cards_data_df[["N", "red"]].values.tolist()
+            result['yellow_cards_data'] = cards_data_df[["N", "yellow"]].values.tolist()
+            result['green_cards_data'] = cards_data_df[["N", "green"]].values.tolist()
 
-            print(cards_data_df.to_dict('records'))
+            print(result['red_cards_data'])
+            print(result['green_cards_data'])
 
     except OperationalError:
         print('Operational fail')
