@@ -10,7 +10,7 @@ from center.sql import users, auction, redcards, events
 
 
 # @cache_page(settings.PAGE_CACHE_TIME)
-def dash_sports(request, date=(datetime.now() + timedelta(days=1)).date()):
+def dash_sports(request, date=(datetime.now() + timedelta(hours=3)).date()):
     try:
         cursor = connections['dwh'].cursor()
         cursor.execute(events.events_enroll_by_date_type, [192, date])

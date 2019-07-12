@@ -7,3 +7,4 @@ pillow==6.1.0
 celery==4.3.0
 redis==3.2.1
 pandas==0.24.2
+gunicorn==19.9.0

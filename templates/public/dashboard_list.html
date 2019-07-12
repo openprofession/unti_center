@@ -8,8 +8,7 @@
                 <div class="menu-toggle-panel hide">
                     <i class="fa fa-times"></i>
                     <ul>
-                        {% comment %}  <li><a href="..">Дашборд</a></li>
-                        <li><a href="..">Отчеты</a></li>{% endcomment %}
+
                         {% if request.user.is_authenticated %}
                             {% if request.user.icon %}
                                 <li class="nav-item nav-user-image">
@@ -53,8 +52,8 @@
                 <ul>
 
                     {% if request.user.is_authenticated %}
-                        {% comment %}                        <li><a href="..">Дашборд</a></li>
-                        <li><a href="..">Отчеты</a></li>{% endcomment %}
+
+                        <li><a href="..">Отчеты</a></li>
 
                         <li>
                             <span class="">{{ request.user.get_full_name }}</span>
