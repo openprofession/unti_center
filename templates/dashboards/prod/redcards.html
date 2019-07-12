@@ -109,12 +109,31 @@
                                             </tr>
                                             <tr>
 
-                                                <td><strong>Оспорены</strong></td>
+                                                <td><strong>Оспариваются</strong></td>
                                                 <td><strong>{{ result.count_red_consideration }}</strong>
                                                     ( {{ result.count_red_consideration |as_percentage_of:result.count_red_public }}
                                                     )
                                                 </td>
                                                 <td>На рассмотрении модераторами</td>
+
+                                            </tr>
+                                             <tr>
+
+                                                <td><strong>Аппеляция принята</strong></td>
+                                                <td class="tx-gray-500"><strong>{{ result.count_red_eliminated }}</strong>
+                                                    ( {{ result.count_red_eliminated |as_percentage_of:result.count_red_public }}
+                                                    )
+                                                </td>
+                                                <td>Карточка погашена</td>
+
+                                            </tr>
+                                              <tr>
+
+                                                <td><strong>Аппеляция отклонена</strong></td>
+                                                <td><strong>0</strong>
+                                                    ( 0% )
+                                                </td>
+                                                <td>Карточка публикуется</td>
 
                                             </tr>
                                             <tr>

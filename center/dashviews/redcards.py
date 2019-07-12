@@ -14,15 +14,18 @@ def dash_redcards(request):
     try:
         cursor = connections['dwh'].cursor()
         cursor.execute(redcards.all_public_cards)
-        cards_df = pd.DataFrame(dictfetchall(cursor))
+        cards_load_df = pd.DataFrame(dictfetchall(cursor))
         cursor.execute(teams.user_teams)
         teams_df = pd.DataFrame(dictfetchall(cursor))
-        cards_df = cards_df.join(teams_df, lsuffix='leader_id', rsuffix='leaderID')
+        cards_df = pd.merge(cards_load_df, teams_df,  left_on='leader_id', right_on='leaderID', how='outer')
+        print(cards_df.to_csv())
         result = {}
         if not cards_df.empty:
             result['count_red_issued'] = cards_df[(cards_df.type == 'red') & (cards_df.status == 'issued')]['uuid'].nunique()
             result['count_red_published'] = cards_df[(cards_df.type == 'red') & (cards_df.status == 'published')]['uuid'].nunique()
             result['count_red_consideration'] = cards_df[(cards_df.type == 'red') & (cards_df.status == 'consideration')]['uuid'].nunique()
+            result['count_red_eliminated'] = cards_df[(cards_df.type == 'red') & (cards_df.status == 'eliminated')]['uuid'].nunique()
+
             result['count_red_public'] = \
                 cards_df[(cards_df.type == 'red') & ((cards_df.status == 'issued') | (cards_df.status == 'published') | (cards_df.status == 'consideration'))]['uuid'].nunique()
             result['count_red_initiated'] = cards_df[(cards_df.type == 'red') & (cards_df.status == 'initiated')]['uuid'].nunique()

@@ -17,6 +17,6 @@ FROM people.user_info
     ON user_info.userID = user_tag.userID
   INNER JOIN people.tag
     ON user_tag.tagID = tag.id
-WHERE tag.title = '1022-verified-participant-final'
+
 AND context_team.contextID = 24
 GROUP BY untiID"""
