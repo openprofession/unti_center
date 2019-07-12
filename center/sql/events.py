@@ -60,6 +60,7 @@ WHERE event.id IN (SELECT
     LEFT OUTER JOIN xle.type
       ON activity_type.typeID = type.id
   WHERE (context_run.contextID = 30
+  AND event.isDeleted <> 1
   AND type.id = %s
   AND date(timeslot.endDT) = %s)
   GROUP BY event.id)
