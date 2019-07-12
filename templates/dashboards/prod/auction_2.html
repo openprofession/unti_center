@@ -1,5 +1,5 @@
 {% load tags %}
-
+{% load tz %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -51,7 +51,12 @@
                     <div class="col-12 card card-dashboard-twentyfour mb-2">
                         <div class="card-header">
                             <h2 class="">{{ title }}</h2>
-                            <span class="text-success tx-20">Идет</span>
+
+                            {% if end|utc < now|utc %}
+                                <span class="text-success tx-20">Идет</span>
+                            {% else %}
+                                <span class="text-danger tx-20">Завершен</span>
+                            {% endif %}
                         </div><!-- card-header -->
                         <div class="card-body">
                             <div class="card-body-top">
@@ -219,12 +224,11 @@
             }
         },
         xaxis: {
-            show: false,
+            show: true,
             mode: 'categories',
             tickColor: '#eee',
             tickLength: 0,
-            {% comment %}ticks: [[0, '3am'], [1, '4am'], [2, '5am'], [3, '6am'], [4, '7am'], [5, '8am'], [6, '9am'], [7, '10am'], [8, '11am'], [9, '12nn'], [10, '1pm'], [11, '2pm'],
-                [12, '3pm'], [13, '4pm'], [14, '5pm']],{% endcomment %}
+            ticks: {{ event_bet_dyn_ticks |safe }},
             font: {
                 color: '#999',
                 size: 9
@@ -252,16 +256,16 @@
 
             {% comment %} max: 60,{% endcomment %}
             tickColor: '#ddd',
-            {% comment %}ticks: [[0, ''], [5, '200'], [10, '400'], [15, '600']],{% endcomment %}
+            ticks: [[0, ''], [5, '200'], [10, '400'], [15, '600']],
             font: {
                 color: '#444',
                 size: 10
             }
         },
         xaxis: {
-            title: 'adasd',
+
             show: true,
-            mode: 'categories',
+        {% comment %}    mode: 'categories',{% endcomment %}
             tickColor: '#eee',
             tickLength: 0,
             {% comment %}ticks: [[0, '3am'], [1, '4am'], [2, '5am'], [3, '6am'], [4, '7am'], [5, '8am'], [6, '9am'], [7, '10am'], [8, '11am'], [9, '12nn'], [10, '1pm'], [11, '2pm'],

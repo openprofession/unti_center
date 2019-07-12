@@ -500,17 +500,23 @@ def dash_auction_3(request):
 
             # разбиваем временную ось совершения ставок на интервалу по часу и считаем количество сделанных ставок,
             # в момент времени и накопительно
+            df_auction.loc[1, 'bet_dt'] = df_auction['startDT'].iloc[0]
+            df_auction.loc[-1, 'bet_dt'] = df_auction['endDT'].iloc[0]
             df_count = df_auction.groupby(pd.Grouper(key='bet_dt', freq='5Min')).count().reset_index()
             df_cumsum = pd.DataFrame({'time': df_count["bet_dt"], 'count': df_count["bet_count"]}).set_index(
                 "time").cumsum().reset_index()
             df_cumsum["N"] = df_cumsum.index
-            df_cumsum = df_cumsum[["N", "count"]]
+            df_cumsum["time"] = df_cumsum["time"].dt.hour + 3
+            df_cumsum_series = df_cumsum[["N", "count"]]
+            df_cumsum_ticks = df_cumsum[["N", "time"]].iloc[::12, :]
 
             # считаем общее количетсво ставок
-            bet_count = df_cumsum["count"].iloc[-1]
+            bet_count = df_cumsum_series["count"].iloc[-1]
 
             # готовим данные для построения графика в формате list of lists
-            data_to_graph_dyn = df_cumsum.values.tolist()
+            data_to_graph_dyn = df_cumsum_series.values.tolist()
+            data_to_graph_ticks = df_cumsum_ticks.values.tolist()
+            print(data_to_graph_ticks)
             df_top_bets = df_auction.sort_values(by='bet', ascending=False).head(10)
 
         cursor.execute(users.users_island_tag_count)
@@ -524,7 +530,7 @@ def dash_auction_3(request):
         'event_bet_hist_data': data_to_graph_hist,
         'event_list': event_rating, "title": df_auction['title'].iloc[0], "endDT": endDT, "user_count": user_count,
         "events_count": event_count, "bet_count": bet_count,
-        "event_unpopular_count": event_unpopular_count, "event_bet_dyn_data": data_to_graph_dyn,
+        "event_unpopular_count": event_unpopular_count, "event_bet_dyn_data": data_to_graph_dyn, "event_bet_dyn_ticks": data_to_graph_ticks,
         'all_user_count': all_user_count, 'top_bets': df_top_bets.to_dict('records')
     })
 

@@ -34,8 +34,6 @@ def dash_auction_result(request, auction_id=12, date=(datetime.now() + timedelta
             result['user_count_bet'] = enrolls_df['auction_bet'].sum()
             result['user_count_manual'] = enrolls_df['manual'].sum()
 
-
-
     except OperationalError as e:
         print(e)
         return render(request, "fail.html")

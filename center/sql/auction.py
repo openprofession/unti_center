@@ -59,7 +59,6 @@ auction_one_by_id = """SELECT
                           auction.status AS status,
                           auction.startDT AS startDT,
                           auction.endDT AS endDT,
-                          CAST(auction.endDT AS date) AS endDate,
                           auction.active AS active,
                           user_auction.bet AS bet,
                           user_auction.priority AS priority,
