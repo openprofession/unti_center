@@ -53,7 +53,7 @@
 
                     {% if request.user.is_authenticated %}
 
-                        <li><a href="..">Отчеты</a></li>
+                      {% comment %}  <li><a href="..">Отчеты</a></li>{% endcomment %}
 
                         <li>
                             <span class="">{{ request.user.get_full_name }}</span>
