@@ -10,6 +10,7 @@ from center.sql import users, auction, redcards, teams
 
 @cache_page(settings.PAGE_CACHE_TIME)
 def dash_redcards(request):
+    return render(request, "fail.html")
     try:
         cursor = connections['dwh'].cursor()
         cursor.execute(redcards.all_public_cards)
