@@ -121,7 +121,7 @@ def dash_auctions(request):
     })
 
 
-@cache_page(60)
+@cache_page(settings.PAGE_CACHE_TIME)
 def dash_auction_one(request):
     try:
         cursor = connections['dwh'].cursor()
@@ -223,7 +223,7 @@ def dash_auction_one(request):
     # UTILS
 
 
-@cache_page(60)
+@cache_page(settings.PAGE_CACHE_TIME)
 def dash_auction_labs_1(request):
     try:
         cursor = connections['dwh'].cursor()
@@ -327,7 +327,7 @@ def dash_auction_labs_1(request):
     })
 
 
-# @cache_page(60)
+@cache_page(settings.PAGE_CACHE_TIME)
 def dash_auction_2(request):
     try:
         cursor = connections['dwh'].cursor()
@@ -428,7 +428,7 @@ def dash_auction_2(request):
     # UTILS
 
 
-# @cache_page(60)
+@cache_page(settings.PAGE_CACHE_TIME)
 def dash_auction_3(request):
     auction_id = 12
     try:
