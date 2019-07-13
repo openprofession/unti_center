@@ -219,30 +219,6 @@ auction_bets_by_date = """SELECT
                           auction.active AS active,
                           user_auction.bet AS bet,
                           user_auction.priority AS priority,
-                          user_info.untiID AS untiID,
-                          user_info.leaderID AS leaderID,
-                          event.uuid AS event_uuid,
-                          event.title AS event_title,
-                          user_auction.createDT AS bet_dt
-                        FROM xle.auction
-                          LEFT OUTER JOIN xle.user_auction
-                            ON user_auction.auctionID = auction.id
-                          LEFT OUTER JOIN xle.user_info
-                            ON user_auction.userID = user_info.userID
-                          LEFT OUTER JOIN xle.event
-                            ON user_auction.eventID = event.id
-                        WHERE date(auction.startDt) = %s"""
-
-auction_bets_by_date = """SELECT
-                          auction.uuid AS uuid,
-                          auction.title AS title,
-                          auction.type AS type,
-                          auction.status AS status,
-                          auction.startDT AS startDT,
-                          auction.endDT AS endDT,
-                          auction.active AS active,
-                          user_auction.bet AS bet,
-                          user_auction.priority AS priority,
                           POW(user_auction.priority, (-1) / 3) AS priority_score,
                           user_info.untiID AS untiID,
                           user_info.leaderID AS leaderID,
