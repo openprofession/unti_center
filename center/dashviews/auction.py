@@ -98,7 +98,7 @@ def dash_auction_progress(request, date=None):
             # разбиваем временную ось совершения ставок на интервалу по часу и считаем количество сделанных ставок,
             # в момент времени и накопительно
             df_auction.loc[1, 'bet_dt'] = df_auction['startDT'].iloc[0]
-            df_auction.loc[-1, 'bet_dt'] = df_auction['endDT'].iloc[0]
+            #df_auction.loc[-1, 'bet_dt'] = df_auction['endDT'].iloc[0]
             df_count = df_auction.groupby(pd.Grouper(key='bet_dt', freq='5Min')).count().reset_index()
             df_cumsum = pd.DataFrame({'time': df_count["bet_dt"], 'count': df_count["bet_count"]}).set_index("time").cumsum().reset_index()
             df_cumsum["N"] = df_cumsum.index
