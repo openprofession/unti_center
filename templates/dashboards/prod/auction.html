@@ -34,7 +34,7 @@
             </a>
 
             <div class="collapse navbar-collapse" id="navbar-top">
-                <div class="text-danger text-center mr-auto tx-36-f">{{ title }}</div>
+                <div class="text-danger text-center mr-auto tx-36-f">{{ result.title }}</div>
             </div>
 
         </nav>
@@ -50,7 +50,7 @@
                 <div class="row row-sm row--lg">
                     <div class="col-12 card card-dashboard-twentyfour mb-2">
                         <div class="card-header">
-                            <h2 class="">{{ title }}</h2>
+                            <h2 class="">{{ result.title }}</h2>
 
                            {% comment %} {% if end|utc < now|utc %}
                                 <span class="text-success tx-20">Идет</span>
@@ -61,15 +61,15 @@
                         <div class="card-body">
                             <div class="card-body-top">
                                 <div>
-                                    <h6><span></span>{{ bet_count }}
+                                    <h6><span></span>{{ result.bet_count }}
                                         <small></small>
                                     </h6>
                                     <label>Ставок</label>
                                 </div>
 
                                 <div>
-                                    <h6><span></span>{{ user_count }}
-                                        <small class="text-black-50">/ {{ all_user_count }}</small>
+                                    <h6><span></span>{{ result.user_count }}
+                                        <small class="text-black-50">/ {{ result.all_user_count }}</small>
                                     </h6>
                                     <label>Участников</label>
                                 </div>
@@ -107,7 +107,7 @@
                         {% comment %}                    <span class="d-block mg-b-20">Sales performance revenue based by country</span>{% endcomment %}
 
                         <div class="list-group">
-                            {% for bet in top_bets %}
+                            {% for bet in result.top_bets %}
                                 <div class="list-group-item">
 
                                     <p>{{ bet.event_title }}</p>
@@ -128,12 +128,12 @@
                         <p>Количество ставок участников на мероприятия</p>
 
                         <div class="list-group">
-                            {% for event in event_list %}
+                            {% for event in result.event_list %}
                                 <div class="list-group-item">
                                     <span>{{ event.event_title }}</span>
-                                    <span class="tx-bold ">{{ event.untiID }} / {{ event.untiID|as_percentage_of:user_count }} </span>
+                                    <span class="tx-bold ">{{ event.untiID }} / {{ event.untiID|as_percentage_of:result.user_count }} </span>
                                     <div class="progress">
-                                        <div class="progress-bar wd-{{ event.untiID|as_percentage_of_round5:user_count }}p bg-success"
+                                        <div class="progress-bar wd-{{ event.untiID|as_percentage_of_round5:result.user_count }}p bg-success"
                                              role="progressbar"
                                              aria-valuenow="15"
                                              aria-valuemin="0" aria-valuemax="100"></div>
@@ -201,7 +201,7 @@
 <script src="/static/azia/js/chart.flot.sampledata.js"></script>
 <script>
     $.plot('#flotBarBets', [{
-        data: {{ event_bet_dyn_data }},
+        data: {{ result.event_bet_dyn_data }},
         bars: {
             show: true,
             lineWidth: 0,
@@ -228,7 +228,7 @@
             mode: 'categories',
             tickColor: '#eee',
             tickLength: 0,
-            ticks: {{ event_bet_dyn_ticks |safe }},
+            ticks: {{ result.event_bet_dyn_ticks |safe }},
             font: {
                 color: '#999',
                 size: 9
@@ -237,7 +237,7 @@
     });
 
     $.plot('#flotBarHist', [{
-        data: {{ event_bet_hist_data }},
+        data: {{ result.event_bet_hist_data }},
         bars: {
             show: true,
             lineWidth: 0,
