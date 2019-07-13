@@ -32,7 +32,7 @@ def dash_redcards(request):
             result['count_yellow'] = cards_df[(cards_df.type == 'yellow')]['uuid'].nunique()
             result['count_green'] = cards_df[(cards_df.type == 'green')]['uuid'].nunique()
             result['cards'] = cards_df.to_dict('record')
-            cards_df['red'] = pd.np.where((cards_df['type'] == 'red') & (cards_df['status'] != 'eliminated'), 1, 0)
+            cards_df['red'] = pd.np.where((cards_df['type'] == 'red') & (cards_df['status'] != 'eliminated') & (cards_df['status'] != 'initiated'), 1, 0)
             cards_df['yellow'] = pd.np.where(cards_df['type'] == 'yellow', 1, 0)
             cards_df['green'] = pd.np.where(cards_df['type'] == 'green', 1, 0)
             personal_ratinf_df = cards_df.groupby('leaderID').agg(
