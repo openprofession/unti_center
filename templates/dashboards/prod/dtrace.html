@@ -44,13 +44,110 @@
 <div class="az-content az-content-dashboard-eight  pt-3">
     <div class="container-fluid d-block">
         <div class="row row-sm">
+            {% comment %}            <div class="col-sm-12 col-lg-4">
+                <div class="card card-dashboard-fourteen">
+                    <label class="az-content-label">Ticket Sales <span>(This Month)</span></label>
+                    <div class="card-body">
+                        <div class="sparkline-wrapper"><span id="sparkline"><canvas width="415" height="100"
+                                                                                    style="display: inline-block; width: 415px; height: 100px; vertical-align: top;"></canvas></span>
+                        </div>
+                    </div>
+                    <div class="card-footer row no-gutters">
+                        <div class="col-4">
+                            <h6>9,800</h6>
+                            <label>Tickets For Sale</label>
+                        </div><!-- col -->
+                        <div class="col-4">
+                            <h6>7,258</h6>
+                            <label>Tickets Sold</label>
+                        </div><!-- col -->
+                        <div class="col-4">
+                            <h6>2,542</h6>
+                            <label>Tickets Unsold</label>
+                        </div><!-- col -->
+                    </div><!-- card-footer -->
+                </div>
+            </div>
             <div class="col-sm-12 col-lg-4">
+                <div class="card card-dashboard-nine">
+                    <div class="card-header">
+                        <h6 class="az-content-label">Estimated Unique Impressions</h6>
+                        <h1 class="card-title">321,212</h1>
+                        <small class="az-content-text">The estimated number of unique people that see the ad over the
+                            past 30 days.
+                        </small>
+                    </div><!-- card-header -->
+                    <div class="bar-chart">
+                        <canvas id="chartBar1"></canvas>
+                    </div>
+                </div>
 
+            </div>{% endcomment %}
+            <div class="col-sm-12 col-lg-4">
+                <div class="card card-dashboard-twelve mg-b-20">
+                    <div class="card-header">
+                        <h6 class="card-title">Записи на мероприятия <span>(All Events)</span></h6>
+                        <div class="sales-overview">
+                            {% comment %} <div class="media">
+                                <div class="media-icon bg-purple"><i class="typcn typcn-ticket"></i></div>
+                                <div class="media-body">
+                                    <label>Tickets Sold</label>
+                                    <h4>3,375</h4>
+                                    <span><strong>10.5%</strong> of 20,000 Total</span>
+                                </div><!-- media-body -->
+                            </div><!-- media -->{% endcomment %}
+
+
+                        </div>
+
+                    </div><!-- card-header -->
+                    <div class="card-body">
+                        {% comment %}                      <div class="chart-legend">
+
+                                                <div><span class="bg-indigo"></span> Tickets Sold</div>
+                            <div><span class="bg-teal"></span> Tickets Available</div>
+                        </div><!-- chart-legend -->{% endcomment %}
+                        <div class="chart-wrapper">
+                            <div id="flotChart" class="flot-chart">
+
+                            </div>
+                        </div><!-- chart-wrapper -->
+                    </div><!-- card-body -->
+                </div>
             </div>
-            <div class="col-sm-12 col-lg-6">
+            <div class="col-sm-12 col-lg-4">
+                <div class="card card-dashboard-twelve mg-b-20">
+                    <div class="card-header">
+                        <h6 class="card-title">Рефлексия<span>(All Events)</span></h6>
+                        <div class="sales-overview">
+                            {% comment %} <div class="media">
+                                <div class="media-icon bg-purple"><i class="typcn typcn-ticket"></i></div>
+                                <div class="media-body">
+                                    <label>Tickets Sold</label>
+                                    <h4>3,375</h4>
+                                    <span><strong>10.5%</strong> of 20,000 Total</span>
+                                </div><!-- media-body -->
+                            </div><!-- media -->{% endcomment %}
 
 
+                        </div>
+
+                    </div><!-- card-header -->
+                    <div class="card-body">
+                        {% comment %}                      <div class="chart-legend">
+
+                                                <div><span class="bg-indigo"></span> Tickets Sold</div>
+                            <div><span class="bg-teal"></span> Tickets Available</div>
+                        </div><!-- chart-legend -->{% endcomment %}
+                        <div class="chart-wrapper">
+                            <div id="flotChart" class="flot-chart">
+
+                            </div>
+                        </div><!-- chart-wrapper -->
+                    </div><!-- card-body -->
+                </div>
             </div>
+
         </div>
 
 
@@ -66,8 +163,132 @@
 <script src="/static/azia/lib/chart.js/Chart.bundle.min.js"></script>
 
 <script src="/static/azia/js/azia.js"></script>
-{% comment %}<script src="/static/azia/js/chart.flot.sampledata.js"></script>{% endcomment %}
+<script src="/static/azia/lib/jquery-sparkline/jquery.sparkline.min.js"></script>
+<script src="/static/azia/js/chart.flot.sampledata.js"></script>
 
+<script>
+    {% comment %}    $('#sparkline').sparkline({{ result.event_day_enroll_data }}, {
+            type: 'bar',
+            height: 100,
+            barWidth: 7,
+            barColor: '#e9ecef',
+            barSpacing: 5,
+            chartRangeMin: 0,
+            chartRangeMax: 15,
+            disableTooltips: true,
+            disableHighlight: true
+        });{% endcomment %}
 
+    {% comment %} $('#sparkline').sparkline([1, 2, 4, 4, 7, 5, 9, 10, 6, 4, 4, 7, 5, 9, 10, 5, 9, 10, 6, 4, 4, 7, 5, 9, 10, 9, 10, 6, 4, 4, 7, 5, 6, 4, 3, 4], {
+         composite: true,
+         type: 'bar',
+         barWidth: 7,
+         barSpacing: 5,
+         height: 100,
+         barColor: '#6f42c1',
+         chartRangeMin: 0,
+         chartRangeMax: 15,
+         disableTooltips: true,
+         disableHighlight: true
+     });{% endcomment %}
+    {% comment %}   var ctx1 = document.getElementById('chartBar1').getContext('2d');
+       new Chart(ctx1, {
+           type: 'bar',
+           data: {
+               labels: ['09/07', '10/07', '11/07', '12/07', '13/07', '14/07', '15/07', '16/07', '17/07', '18/07', '19/07', '20/07', '21/07', '22/07'],
+               datasets: [{
+                   data: {{ result.event_day_enroll_data }},
+                   backgroundColor: '#d0121f'
+               },  {
+                   data: [22, 30, 25, 30, 20, 25],
+                   backgroundColor: '#cad0e8'
+               }]
+           },
+           options: {
+               maintainAspectRatio: false,
+                responsive: true,
+               legend: {
+                   display: false,
+                   labels: {
+                       display: false
+                   }
+               },
+               scales: {
+                   yAxes: [{
+                       display: false,
+                       ticks: {
+                           beginAtZero: true,
+                           fontSize: 10,
+                                 max: 60,
+                           padding: 0
+                       }
+                   }],
+                   xAxes: [{
+                       gridLines: {
+                           display: true,
+                           borderDash: [10, 4],
+                           color: '#ced4da',
+                           drawBorder: false
+                       },
+                       barPercentage: 0.6,
+                       ticks: {
+                           beginAtZero: true,
+                           fontSize: 11,
+                           fontFamily: 'Arial'
+                       }
+                   }]
+               }
+           }
+       });
+   {% endcomment %}
+    $.plot('#flotChart', [{
+        data: {{ result.event_day_enroll_data |safe}},
+        color: '#f20031',
+    },], {
+        series: {
+            shadowSize: 0,
+            lines: {
+                show: true,
+                lineWidth: 2,
+                fill: true,
+                fillColor: {colors: [{opacity: 0}, {opacity: 0.2}]}
+            }
+        },
+
+        grid: {
+            borderWidth: 0,
+            borderColor: '#969dab',
+            labelMargin: 5,
+            markings: [{
+                xaxis: {from: 0, to: 1},
+                color: '#f7f7f7'
+            }]
+            ,
+        },
+        yaxis: {
+            show: true,
+            color: '#ced4da',
+            tickLength: 5,
+            min: 0,
+            {% comment %} max: 110,{% endcomment %}
+            font: {
+                size: 11,
+                color: '#969dab'
+            },
+            {% comment %}            tickFormatter: function formatter(val, axis) {
+                            return val + 'k';
+                        }{% endcomment %}
+        },
+        xaxis: {
+            show: true,
+            position: 'bottom',
+            color: 'rgba(0,0,0,0.1)',
+            tickFormatter: function formatter(val, axis) {
+                return val + 9 + '/07';
+            },
+        },
+    });
+
+</script>
 </body>
 </html>

@@ -38,7 +38,9 @@ def dash_dtrace(request):
         result = {}
         print(all_events_df.columns)
 
-        event_day_df = all_events_df.groupby(pd.Grouper(key='startDT', freq='D')).agg({'enrolls_count': 'sum', 'dtrace_user_count': 'sum', 'avg_score': 'mean'})
+        event_day_df = all_events_df.groupby(pd.Grouper(key='endDT', freq='D')).agg({'enrolls_count': 'sum', 'dtrace_user_count': 'sum', 'avg_score': 'mean'}).reset_index()
+        event_day_df["N"] = event_day_df.index
+        result['event_day_enroll_data'] = event_day_df[["N", "enrolls_count"]].values.tolist()
         print(event_day_df)
 
         # event_drace_day = all_events_df.groupby(pd.Grouper(key='startDT', freq='D')).agg({'enrolls_count': 'sum'})
