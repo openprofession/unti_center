@@ -1,9 +1,9 @@
 all_public_cards = """SELECT
+  card.leader_id as leaderID,
   card.uuid,
   card.reason,
   card.type,
   card.source,
-  card.leader_id,
   card.incident_dt,
   st.change_dt,
   st.system,

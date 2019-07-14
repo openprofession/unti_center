@@ -170,7 +170,7 @@
                         </div>
 
                     </div>
-                 {% comment %}   <div class="col-12 card card-dashboard-twentyfour mb-2">
+                    {% comment %}        <div class="col-12 card card-dashboard-twentyfour mb-2">
                         <div class="card-header">
                             <h2 class="">АнтиРейтинг Участников</h2>
                             <span class="tx-20"></span>
@@ -180,8 +180,8 @@
                                 <thead>
                                 <tr>
                                     <th class="wd-lg-10p tx-right">Рейтинг</th>
-                                    <th class="wd-lg-50p tx-left">Участник</th>
-                                    <th class="wd-lg-50p tx-left">Команда</th>
+                                    <th class="wd-lg-20p tx-left">Участник</th>
+                                    <th class="wd-lg-20p tx-left">Команда</th>
                                     <th class="wd-lg-10p tx-right">Очки</th>
                                     <th class="wd-lg-10p tx-right">Красные</th>
                                     <th class="wd-lg-10p tx-right">Желтые</th>
@@ -225,10 +225,12 @@
                             <tr>
                                 <th class="wd-lg-10p tx-right">Рейтинг</th>
                                 <th class="wd-lg-70p tx-left">Команда</th>
+
                                 <th class="wd-lg-10p tx-right">Очки</th>
                                 <th class="wd-lg-10p tx-right">Красные</th>
                                 <th class="wd-lg-10p tx-right">Желтые</th>
                                 <th class="wd-lg-10p tx-right">Зеленые</th>
+                                <th class="wd-lg-5p tx-right">Участников</th>
 
                             </tr>
                             </thead>
@@ -238,11 +240,13 @@
                                 <tr>
                                     <td class="text tx-right tx-bold tx-">#{{ team.N }}</td>
                                     <td class="text tx-bold"
-                                        style="word-wrap: break-word">{{ team.team_title }}</td>
-                                    <td class="text tx-right tx-bold">{{ team.score }}</td>
+                                        style="word-wrap: break-word"> {{ team.team_title }}   </td>
+                                    <td class="text tx-right tx-bold tx-15">{{ team.score }}</td>
                                     <td class="text tx-right tx-bold tx-danger">{{ team.red }}</td>
                                     <td class="text tx-right tx-bold tx-orange">{{ team.yellow }}</td>
                                     <td class="text tx-right tx-bold tx-success">{{ team.green }}</td>
+                                    <td class="text tx-right tx-bold">{{ team.leaderID }} <i class="fa fa-users tx-right"
+                                                                         aria-hidden="true"></i></td>
 
                                 </tr>
                             {% endfor %}

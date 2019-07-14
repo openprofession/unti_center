@@ -66,7 +66,6 @@ WHERE event.id IN (SELECT
   GROUP BY event.id)
 """
 
-
 enrolls_auction_2 = """
 SELECT
   timetable.userID,
@@ -106,4 +105,73 @@ WHERE event.id IN (SELECT
   AND type.title IN ('Мастер-класс', 'Клуб мышления')
   AND date(timeslot.endDT) = %s
   GROUP BY event.id)
+"""
+
+event_department_all = """
+SELECT
+  event.uuid AS event_uuid,
+  type.title AS type_title,
+  activity.title AS event_title,
+  department.title AS dep_title,
+  timeslot.startDT,
+  timeslot.endDT
+FROM labs.event
+  LEFT OUTER JOIN labs.run
+    ON event.runID = run.id
+  LEFT OUTER JOIN labs.activity
+    ON run.activityID = activity.id
+  LEFT OUTER JOIN labs.activity_department ad
+    ON ad.activityID = activity.id
+  LEFT OUTER JOIN labs.context_activity
+    ON context_activity.activityID = activity.id
+  LEFT OUTER JOIN labs.context
+    ON context_activity.contextID = context.id
+  LEFT OUTER JOIN labs.activity_type
+    ON activity_type.activityID = activity.id
+  LEFT OUTER JOIN labs.type
+    ON activity_type.typeID = type.id
+  LEFT OUTER JOIN labs.department
+    ON ad.departmentID = department.id
+  LEFT OUTER JOIN labs.timeslot
+    ON event.timeslotID = timeslot.id
+WHERE context.uuid = '9443f94b-b29f-47b4-bcc8-66a59120f61c'
+AND event.isDeleted = 0
+"""
+
+event_enrolls_all = """
+SELECT
+  user_info.untiID,
+  user_info.leaderID,
+  event.uuid AS event_uuid,
+  event.title AS event_title,
+  timetable.checkin
+FROM timetable
+  LEFT OUTER JOIN user_info
+    ON timetable.userID = user_info.userID
+  LEFT OUTER JOIN event
+    ON timetable.runID = event.runID
+  LEFT OUTER JOIN context_run
+    ON timetable.runID = context_run.runID
+  LEFT OUTER JOIN context
+    ON context_run.contextID = context.id
+WHERE context.uuid = '9443f94b-b29f-47b4-bcc8-66a59120f61c'
+"""
+
+
+event_enrolls_all_aggr = """
+SELECT
+  event.uuid AS event_uuid,
+  COUNT(user_info.untiID) AS enrolls_count,
+  event.title AS event_title
+FROM xle.timetable
+  LEFT OUTER JOIN xle.user_info
+    ON timetable.userID = user_info.userID
+  LEFT OUTER JOIN xle.event
+    ON timetable.runID = event.runID
+  LEFT OUTER JOIN xle.context_run
+    ON timetable.runID = context_run.runID
+  LEFT OUTER JOIN xle.context
+    ON context_run.contextID = context.id
+WHERE context.uuid = '9443f94b-b29f-47b4-bcc8-66a59120f61c'
+GROUP BY event.uuid
 """
