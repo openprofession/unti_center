@@ -3,7 +3,7 @@
 {% block header %}
     <div class="container-fluid menu">
         <div class="container">
-            <div class="menu-button d-sm-none">
+           {% comment %} <div class="menu-button d-sm-none">
                 <i class="fas fa-bars"></i>
                 <div class="menu-toggle-panel hide">
                     <i class="fa fa-times"></i>
@@ -46,9 +46,9 @@
                         {% endif %}
                     </ul>
                 </div>
-            </div>
+            </div>{% endcomment %}
             <div class="logo"></div>
-            <div class="menu-list d-none d-sm-block">
+            <div class="menu-list  d-sm-block">
                 <ul>
 
                     {% if request.user.is_authenticated %}
