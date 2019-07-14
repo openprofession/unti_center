@@ -53,6 +53,7 @@ urlpatterns = [
                   path('dashboard/feedback', RedirectView.as_view(
                       url='https://app.powerbi.com/view?r=eyJrIjoiOGQyNmU5MGEtNmVmMC00OTRlLWIzZDAtYWI4ZjYzZDcxODcxIiwidCI6ImIzMzQ2YTIwLTU1YzUtNGU0Yy04ZGM0LTBmMThjNjU0MTE3MSIsImMiOjl9',
                       permanent=False), name='feedback_ext'),
+                  path('dashboard/event_feedback', dash_views.event_feedback, name='feedback_iframe'),
 
                   # TEST BOARDS
                   path('test_report/', views.run_report, name='test_report'),

@@ -640,6 +640,9 @@ def dash_auction_4(request):
         'all_user_count': all_user_count, 'top_bets': df_top_bets.to_dict('records')
     })
 
+def event_feedback(request):
+    return render(request, "dashboards/prod/feedback_i.html")
+
 def namedtuplefetchall(cursor):
     "Return all rows from a cursor as a namedtuple"
     desc = cursor.description
