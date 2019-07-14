@@ -34,7 +34,14 @@ def dash_dtrace(request):
         cursor.execute(dtrace.event_material_aggr)
         event_dtrace = pd.DataFrame(dictfetchall(cursor))
         all_events_df = all_events_df.merge(event_dtrace, on='event_uuid', how='left')
+
         result = {}
+        print(all_events_df.columns)
+
+        event_day_df = all_events_df.groupby(pd.Grouper(key='startDT', freq='D')).agg({'enrolls_count': 'sum', 'dtrace_user_count': 'sum', 'avg_score': 'mean'})
+        print(event_day_df)
+
+        # event_drace_day = all_events_df.groupby(pd.Grouper(key='startDT', freq='D')).agg({'enrolls_count': 'sum'})
 
         print(all_events_df.shape)
 

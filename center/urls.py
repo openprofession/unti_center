@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 
 from center import views, settings
 from center import dash_views
@@ -48,6 +49,10 @@ urlpatterns = [
                   path('dashboard/auction_result/<str:date>', auction.dash_auction_result, name='dash_auction_result_by_id'),
                   path('dashboard/aim', aim.dash_aim, name='dash_aim'),
                   path('dashboard/dtrace', dtrace.dash_dtrace, name='dash_trace'),
+
+                  path('dashboard/feedback', RedirectView.as_view(
+                      url='https://app.powerbi.com/view?r=eyJrIjoiOGQyNmU5MGEtNmVmMC00OTRlLWIzZDAtYWI4ZjYzZDcxODcxIiwidCI6ImIzMzQ2YTIwLTU1YzUtNGU0Yy04ZGM0LTBmMThjNjU0MTE3MSIsImMiOjl9',
+                      permanent=False), name='feedback_ext'),
 
                   # TEST BOARDS
                   path('test_report/', views.run_report, name='test_report'),
