@@ -1,5 +1,6 @@
 {% load tags %}
 {% load humanize %}
+{% load tz %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -53,7 +54,7 @@
                                 <div class="media-icon bg-purple"><i class="typcn typcn-ticket"></i></div>
                                 <div class="media-body">
                                     {% comment %}           <label>Tickets Sold</label>{% endcomment %}
-                                    <h4> {{ result.event_day_bets_last |intcomma }}</h4>
+                                    <h4> {{ result.event_day_bets_last |stringformat:".0f" }}</h4>
                                     {% comment %}           <span><strong>10.5%</strong> of 20,000 Total</span>{% endcomment %}
                                 </div><!-- media-body -->
                             </div><!-- media -->
@@ -85,7 +86,7 @@
                                 <div class="media-icon bg-purple"><i class="typcn typcn-ticket"></i></div>
                                 <div class="media-body">
                                     {% comment %}            <label>Tickets Sold</label>{% endcomment %}
-                                    <h4> {{ result.event_day_enroll_last |intcomma }}</h4>
+                                    <h4> {{ result.event_day_enroll_last |stringformat:".0f" }}</h4>
                                     {% comment %}      <span><strong>10.5%</strong> of 20,000 Total</span>{% endcomment %}
                                 </div><!-- media-body -->
                             </div><!-- media -->
@@ -117,7 +118,7 @@
                                 <div class="media-icon bg-purple"><i class="typcn typcn-ticket"></i></div>
                                 <div class="media-body">
                                     {% comment %}           <label>Tickets Sold</label>{% endcomment %}
-                                    <h4> {{ result.event_day_feedback_last |intcomma }}</h4>
+                                    <h4> {{ result.event_day_feedback_last |stringformat:".0f" }}</h4>
                                     {% comment %}             <span><strong>10.5%</strong> of 20,000 Total</span>{% endcomment %}
                                 </div><!-- media-body -->
                             </div>
@@ -154,12 +155,12 @@
                 <div class="card card-dashboard-twelve mg-b-20">
                     <div class="card-header">
                         <h6 class="card-title">Цифровой след <span>  </span></h6>
-                             <div class="sales-overview">
+                        <div class="sales-overview">
                             <div class="media">
                                 <div class="media-icon bg-purple"><i class="typcn typcn-ticket"></i></div>
                                 <div class="media-body">
                                     {% comment %}           <label>Tickets Sold</label>{% endcomment %}
-                                    <h4> {{ result.event_day_dtrace_last |intcomma }}</h4>
+                                    <h4> {{ result.event_day_dtrace_last |stringformat:".0f" }}</h4>
                                     {% comment %}             <span><strong>10.5%</strong> of 20,000 Total</span>{% endcomment %}
                                 </div><!-- media-body -->
                             </div>
@@ -265,6 +266,63 @@
                 </div>{% endcomment %}
             </div>
 
+            <div class="col-sm-12 col-lg-12">
+                <div class="col-12 card card-dashboard-twentyfour mb-2">
+                    <div class="card-header">
+                        <h2 class="">Мероприятия</h2>
+                        <span class="tx-20"></span>
+                    </div><!-- card-header -->
+                    <div class="table-responsive">
+                        <table class="table ">
+                            <thead>
+                            <tr>
+
+                                <th class="wd-lg-30p tx-left">Название</th>
+                                <th class="wd-lg-20p tx-left">Факультет</th>
+                                <th class="wd-lg-10p tx-right">Начало</th>
+                                <th class="wd-lg-10p tx-right">Окончание</th>
+                                <th class="wd-lg-10p tx-right">Ставок</th>
+                                <th class="wd-lg-10p tx-right">Записей</th>
+                                <th class="wd-lg-10p tx-right">Рефлексий</th>
+                                <th class="wd-lg-10p tx-right">Рефлексий, %</th>
+                                <th class="wd-lg-10p tx-right">Цифрового следа</th>
+                                <th class="wd-lg-10p tx-right">Цифрового следа, %</th>
+                                <th class="wd-lg-10p tx-right">Средняя оценка</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for event in result.event_rating %}
+                                <tr>
+                                    <td class="text tx-lext tx-bold"
+                                        style="word-wrap: break-word">{{ event.event_title }}</td>
+                                    <td class="text">
+                                        {% if  event.dep_title != None %}{{ event.dep_title }} {% endif %}</td>
+                                    <td class="text tx-right">{{ event.startDT }}  </td>
+                                    <td class="text tx-right">{{ event.endDT }}  </td>
+                                    <td class="text tx-right tx-bold">{{ event.bets|stringformat:".0f" }}  </td>
+                                    <td class="text tx-right tx-bold">{{ event.enrolls_count|stringformat:".0f" }}</td>
+                                    <td class="text tx-right tx-bold">{% if  event.feedback_users_count > 0 %}
+                                        {{ event.feedback_users_count|stringformat:".0f" }}{% endif %}</td>
+                                    <td class="text tx-right tx-bold">{{ event.feedback_users_count|as_percentage_of:event.enrolls_count }}</td>
+                                    <td class="text tx-right tx-bold">{% if  event.dtrace_user_count > 0 %}
+                                        {{ event.dtrace_user_count|stringformat:".0f" }}{% endif %}</td>
+                                    <td class="text tx-right tx-bold">{{ event.dtrace_user_count|as_percentage_of:event.enrolls_count }}</td>
+                                    <td class="text tx-right tx-bold">{% if  event.avg_score > 0 %}
+                                        {{ event.avg_score|stringformat:".2f" }}{% endif %}</td>
+
+                                </tr>
+
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                    </div><!-- table-responsive -->
+                </div>
+            </div>
+
         </div>
 
 
@@ -280,8 +338,13 @@
 <script src="/static/azia/lib/chart.js/Chart.bundle.min.js"></script>
 
 <script src="/static/azia/js/azia.js"></script>
-<script src="/static/azia/lib/jquery-sparkline/jquery.sparkline.min.js"></script>
 <script src="/static/azia/js/chart.flot.sampledata.js"></script>
+
+<script src="/static/azia/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/static/azia/lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
+<script src="/static/azia/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/static/azia/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
+
 
 <script>
     {% comment %}    $('#sparkline').sparkline({{ result.event_day_enroll_data }}, {

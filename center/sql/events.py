@@ -136,6 +136,7 @@ FROM labs.event
     ON event.timeslotID = timeslot.id
 WHERE context.uuid = '9443f94b-b29f-47b4-bcc8-66a59120f61c'
 AND event.isDeleted = 0
+AND timeslot.endDT < '2019-07-16'
 """
 
 event_enrolls_all = """
@@ -161,8 +162,7 @@ WHERE context.uuid = '9443f94b-b29f-47b4-bcc8-66a59120f61c'
 event_enrolls_all_aggr = """
 SELECT
   event.uuid AS event_uuid,
-  COUNT(user_info.untiID) AS enrolls_count,
-  event.title AS event_title
+  COUNT(user_info.untiID) AS enrolls_count
 FROM xle.timetable
   LEFT OUTER JOIN xle.user_info
     ON timetable.userID = user_info.userID

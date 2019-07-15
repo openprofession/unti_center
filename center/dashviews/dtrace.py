@@ -1,6 +1,7 @@
 import pandas as pd
 from django.db import connections, OperationalError
 from django.shortcuts import render
+from django.utils.timezone import now
 from django.views.decorators.cache import cache_page
 
 from center import settings
@@ -47,16 +48,20 @@ def dash_dtrace(request):
             {'enrolls_count': 'sum', 'dtrace_user_count': 'sum', 'avg_score': 'mean', 'feedback_users_count': 'sum', 'bets': 'sum'}).cumsum().reset_index()
         event_day_df["N"] = event_day_df.index
         result['event_day_enroll_data'] = event_day_df[["N", "enrolls_count"]].values.tolist()
-        result['event_day_enroll_last'] =  event_day_df['enrolls_count'].iloc[-1]
+        result['event_day_enroll_last'] = event_day_df['enrolls_count'].iloc[-1]
         result['event_day_dtrace_data'] = event_day_df[["N", "dtrace_user_count"]].values.tolist()
         result['event_day_dtrace_last'] = event_day_df['dtrace_user_count'].iloc[-1]
         result['event_day_feedback_data'] = event_day_df[["N", "feedback_users_count"]].values.tolist()
         result['event_day_feedback_last'] = event_day_df['feedback_users_count'].iloc[-1]
         result['event_day_bets_data'] = event_day_df[["N", "bets"]].values.tolist()
         result['event_day_bets_last'] = event_day_df['bets'].iloc[-1]
-        print(event_day_df)
 
-        # event_drace_day = all_events_df.groupby(pd.Grouper(key='startDT', freq='D')).agg({'enrolls_count': 'sum'})
+        event_rating_df = all_events_df.groupby('event_uuid').agg(
+            {'event_title': 'first', 'dep_title': 'first', 'startDT': 'first', 'endDT': 'first', 'enrolls_count': 'sum', 'dtrace_user_count': 'sum', 'avg_score': 'mean',
+             'feedback_users_count': 'sum',
+             'bets': 'sum'}).reset_index()
+
+        result['event_rating'] = event_rating_df.to_dict('record')
 
         print(all_events_df.shape)
 
