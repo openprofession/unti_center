@@ -10,7 +10,7 @@ from center.sql import users, auction, redcards, events
 
 
 @cache_page(60)
-def dash_auction_result(request, auction_id=12, date=(datetime.now() + timedelta(hours=3)).date()):
+def dash_auction_result(request, auction_id=None, date=(datetime.now() + timedelta(hours=3)).date()):
     try:
         cursor = connections['dwh'].cursor()
         cursor.execute(events.enrolls_auction_2, [date])
