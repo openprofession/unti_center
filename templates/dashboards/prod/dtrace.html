@@ -1,5 +1,5 @@
 {% load tags %}
-
+{% load humanize %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -44,58 +44,51 @@
 <div class="az-content az-content-dashboard-eight  pt-3">
     <div class="container-fluid d-block">
         <div class="row row-sm">
-            {% comment %}            <div class="col-sm-12 col-lg-4">
-                <div class="card card-dashboard-fourteen">
-                    <label class="az-content-label">Ticket Sales <span>(This Month)</span></label>
-                    <div class="card-body">
-                        <div class="sparkline-wrapper"><span id="sparkline"><canvas width="415" height="100"
-                                                                                    style="display: inline-block; width: 415px; height: 100px; vertical-align: top;"></canvas></span>
-                        </div>
-                    </div>
-                    <div class="card-footer row no-gutters">
-                        <div class="col-4">
-                            <h6>9,800</h6>
-                            <label>Tickets For Sale</label>
-                        </div><!-- col -->
-                        <div class="col-4">
-                            <h6>7,258</h6>
-                            <label>Tickets Sold</label>
-                        </div><!-- col -->
-                        <div class="col-4">
-                            <h6>2,542</h6>
-                            <label>Tickets Unsold</label>
-                        </div><!-- col -->
-                    </div><!-- card-footer -->
-                </div>
-            </div>
-            <div class="col-sm-12 col-lg-4">
-                <div class="card card-dashboard-nine">
-                    <div class="card-header">
-                        <h6 class="az-content-label">Estimated Unique Impressions</h6>
-                        <h1 class="card-title">321,212</h1>
-                        <small class="az-content-text">The estimated number of unique people that see the ad over the
-                            past 30 days.
-                        </small>
-                    </div><!-- card-header -->
-                    <div class="bar-chart">
-                        <canvas id="chartBar1"></canvas>
-                    </div>
-                </div>
-
-            </div>{% endcomment %}
-            <div class="col-sm-12 col-lg-4">
+            <div class="col-sm-12 col-lg-3">
                 <div class="card card-dashboard-twelve mg-b-20">
                     <div class="card-header">
-                        <h6 class="card-title">Записи на мероприятия <span>(All Events)</span></h6>
+                        <h6 class="card-title">Ставки на аукционе <span></span></h6>
                         <div class="sales-overview">
-                            {% comment %} <div class="media">
+                            <div class="media">
                                 <div class="media-icon bg-purple"><i class="typcn typcn-ticket"></i></div>
                                 <div class="media-body">
-                                    <label>Tickets Sold</label>
-                                    <h4>3,375</h4>
-                                    <span><strong>10.5%</strong> of 20,000 Total</span>
+                                    {% comment %}           <label>Tickets Sold</label>{% endcomment %}
+                                    <h4> {{ result.event_day_bets_last |intcomma }}</h4>
+                                    {% comment %}           <span><strong>10.5%</strong> of 20,000 Total</span>{% endcomment %}
                                 </div><!-- media-body -->
-                            </div><!-- media -->{% endcomment %}
+                            </div><!-- media -->
+
+
+                        </div>
+
+                    </div><!-- card-header -->
+                    <div class="card-body">
+                        {% comment %}                      <div class="chart-legend">
+
+                                                <div><span class="bg-indigo"></span> Tickets Sold</div>
+                            <div><span class="bg-teal"></span> Tickets Available</div>
+                        </div><!-- chart-legend -->{% endcomment %}
+                        <div class="chart-wrapper">
+                            <div id="betChart" class="flot-chart">
+
+                            </div>
+                        </div><!-- chart-wrapper -->
+                    </div><!-- card-body -->
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-3">
+                <div class="card card-dashboard-twelve mg-b-20">
+                    <div class="card-header">
+                        <h6 class="card-title">Записи на мероприятия <span></span></h6>
+                        <div class="sales-overview">
+                            <div class="media">
+                                <div class="media-icon bg-purple"><i class="typcn typcn-ticket"></i></div>
+                                <div class="media-body">
+                                    {% comment %}            <label>Tickets Sold</label>{% endcomment %}
+                                    <h4> {{ result.event_day_enroll_last |intcomma }}</h4>
+                                    {% comment %}      <span><strong>10.5%</strong> of 20,000 Total</span>{% endcomment %}
+                                </div><!-- media-body -->
+                            </div><!-- media -->
 
 
                         </div>
@@ -115,19 +108,28 @@
                     </div><!-- card-body -->
                 </div>
             </div>
-            <div class="col-sm-12 col-lg-4">
+            <div class="col-sm-12 col-lg-3">
                 <div class="card card-dashboard-twelve mg-b-20">
                     <div class="card-header">
-                        <h6 class="card-title">Рефлексия<span>(All Events)</span></h6>
+                        <h6 class="card-title">Рефлексия<span></span></h6>
                         <div class="sales-overview">
-                            {% comment %} <div class="media">
+                            <div class="media">
                                 <div class="media-icon bg-purple"><i class="typcn typcn-ticket"></i></div>
                                 <div class="media-body">
-                                    <label>Tickets Sold</label>
-                                    <h4>3,375</h4>
-                                    <span><strong>10.5%</strong> of 20,000 Total</span>
+                                    {% comment %}           <label>Tickets Sold</label>{% endcomment %}
+                                    <h4> {{ result.event_day_feedback_last |intcomma }}</h4>
+                                    {% comment %}             <span><strong>10.5%</strong> of 20,000 Total</span>{% endcomment %}
                                 </div><!-- media-body -->
-                            </div><!-- media -->{% endcomment %}
+                            </div>
+                            <div class="media">
+
+                                <div class="media-icon bg-purple"><i class="typcn typcn-ticket"></i></div>
+                                <div class="media-body">
+                                    {% comment %}           <label>Tickets Sold</label>{% endcomment %}
+                                    <h4> {{ result.event_day_feedback_last |as_percentage_of:result.event_day_enroll_last }}</h4>
+                                    {% comment %}             <span><strong>10.5%</strong> of 20,000 Total</span>{% endcomment %}
+                                </div><!-- media-body -->
+                            </div>
 
 
                         </div>
@@ -140,12 +142,127 @@
                             <div><span class="bg-teal"></span> Tickets Available</div>
                         </div><!-- chart-legend -->{% endcomment %}
                         <div class="chart-wrapper">
-                            <div id="flotChart" class="flot-chart">
+                            <div id="feedbackChart" class="flot-chart">
 
                             </div>
                         </div><!-- chart-wrapper -->
                     </div><!-- card-body -->
                 </div>
+
+            </div>
+            <div class="col-sm-12 col-lg-3">
+                <div class="card card-dashboard-twelve mg-b-20">
+                    <div class="card-header">
+                        <h6 class="card-title">Цифровой след <span>  </span></h6>
+                             <div class="sales-overview">
+                            <div class="media">
+                                <div class="media-icon bg-purple"><i class="typcn typcn-ticket"></i></div>
+                                <div class="media-body">
+                                    {% comment %}           <label>Tickets Sold</label>{% endcomment %}
+                                    <h4> {{ result.event_day_dtrace_last |intcomma }}</h4>
+                                    {% comment %}             <span><strong>10.5%</strong> of 20,000 Total</span>{% endcomment %}
+                                </div><!-- media-body -->
+                            </div>
+                            <div class="media">
+
+                                <div class="media-icon bg-purple"><i class="typcn typcn-ticket"></i></div>
+                                <div class="media-body">
+                                    {% comment %}           <label>Tickets Sold</label>{% endcomment %}
+                                    <h4> {{ result.event_day_dtrace_last |as_percentage_of:result.event_day_enroll_last }}</h4>
+                                    {% comment %}             <span><strong>10.5%</strong> of 20,000 Total</span>{% endcomment %}
+                                </div><!-- media-body -->
+                            </div>
+
+
+                        </div>
+
+                    </div><!-- card-header -->
+                    <div class="card-body">
+                        {% comment %}                      <div class="chart-legend">
+
+                                                <div><span class="bg-indigo"></span> Tickets Sold</div>
+                            <div><span class="bg-teal"></span> Tickets Available</div>
+                        </div><!-- chart-legend -->{% endcomment %}
+                        <div class="chart-wrapper">
+                            <div id="traceChart" class="flot-chart">
+
+                            </div>
+                        </div><!-- chart-wrapper -->
+                    </div><!-- card-body -->
+                </div>
+
+                {% comment %}                <div class="col-12 card card-dashboard-twentyfour mb-2">
+                    <div class="card-header">
+                        <h2 class="">Динамика выдачи карточек на острове </h2>
+                        <span class="tx-20"></span>
+                    </div><!-- card-header -->
+                    <div class="card-body">
+                        <div class="flot-chart-wrapper">
+                            <div id="flotChart" class="flot-chart"
+                                 style="height: 35vh; padding: 0px; position: relative;">
+
+                                <canvas class="flot-base"
+                                        style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 331px; height: 288.047px;"
+                                        width="331" height="288"></canvas>
+                                <div class="flot-text"
+                                     style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);">
+                                    <div class="flot-x-axis flot-x1-axis xAxis x1Axis"
+                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;">
+                                        <div class="flot-tick-label tickLabel"
+                                             style="position: absolute; max-width: 125px; top: 271px; left: 12px; text-align: center;">
+                                            10 июля
+                                        </div>
+                                        <div class="flot-tick-label tickLabel"
+                                             style="position: absolute; max-width: 125px; top: 271px; left: 58px; text-align: center;">
+                                            12 июля
+                                        </div>
+                                        <div class="flot-tick-label tickLabel"
+                                             style="position: absolute; max-width: 125px; top: 271px; left: 103px; text-align: center;">
+                                            14 июля
+                                        </div>
+                                        <div class="flot-tick-label tickLabel"
+                                             style="position: absolute; max-width: 125px; top: 271px; left: 149px; text-align: center;">
+                                            16 июля
+                                        </div>
+                                        <div class="flot-tick-label tickLabel"
+                                             style="position: absolute; max-width: 125px; top: 271px; left: 194px; text-align: center;">
+                                            18 июля
+                                        </div>
+                                        <div class="flot-tick-label tickLabel"
+                                             style="position: absolute; max-width: 125px; top: 271px; left: 240px; text-align: center;">
+                                            20 июля
+                                        </div>
+                                        <div class="flot-tick-label tickLabel"
+                                             style="position: absolute; max-width: 125px; top: 271px; left: 285px; text-align: center;">
+                                            22 июля
+                                        </div>
+                                    </div>
+                                    <div class="flot-y-axis flot-y1-axis yAxis y1Axis"
+                                         style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;">
+                                        <div class="flot-tick-label tickLabel"
+                                             style="position: absolute; top: 1px; left: 0px; text-align: right;">2000
+                                        </div>
+                                        <div class="flot-tick-label tickLabel"
+                                             style="position: absolute; top: 255px; left: 20px; text-align: right;">0
+                                        </div>
+                                        <div class="flot-tick-label tickLabel"
+                                             style="position: absolute; top: 191px; left: 7px; text-align: right;">500
+                                        </div>
+                                        <div class="flot-tick-label tickLabel"
+                                             style="position: absolute; top: 128px; left: 0px; text-align: right;">1000
+                                        </div>
+                                        <div class="flot-tick-label tickLabel"
+                                             style="position: absolute; top: 64px; left: 0px; text-align: right;">1500
+                                        </div>
+                                    </div>
+                                </div>
+                                <canvas class="flot-overlay" width="331" height="288"
+                                        style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 331px; height: 288.047px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>{% endcomment %}
             </div>
 
         </div>
@@ -241,6 +358,55 @@
            }
        });
    {% endcomment %}
+
+    $.plot('#betChart', [{
+        data: {{ result.event_day_bets_data |safe}},
+        color: '#f20031',
+    },], {
+        series: {
+            shadowSize: 0,
+            lines: {
+                show: true,
+                lineWidth: 2,
+                fill: true,
+                fillColor: {colors: [{opacity: 0}, {opacity: 0.2}]}
+            }
+        },
+
+        grid: {
+            borderWidth: 0,
+            borderColor: '#969dab',
+            labelMargin: 5,
+            markings: [{
+                xaxis: {from: 0, to: 1},
+                color: '#f7f7f7'
+            }]
+            ,
+        },
+        yaxis: {
+            show: true,
+            color: '#ced4da',
+            tickLength: 5,
+            min: 0,
+            {% comment %} max: 110,{% endcomment %}
+            font: {
+                size: 11,
+                color: '#969dab'
+            },
+            tickFormatter: function formatter(val, axis) {
+                return +"   " + val / 1000 + 'k';
+            }
+        },
+        xaxis: {
+            show: true,
+            position: 'bottom',
+            color: 'rgba(0,0,0,0.1)',
+            tickFormatter: function formatter(val, axis) {
+                return val + 9 + '.07';
+            },
+        },
+    });
+
     $.plot('#flotChart', [{
         data: {{ result.event_day_enroll_data |safe}},
         color: '#f20031',
@@ -275,16 +441,112 @@
                 size: 11,
                 color: '#969dab'
             },
-            {% comment %}            tickFormatter: function formatter(val, axis) {
-                            return val + 'k';
-                        }{% endcomment %}
+            tickFormatter: function formatter(val, axis) {
+                return +"   " + val / 1000 + 'k';
+            }
         },
         xaxis: {
             show: true,
             position: 'bottom',
             color: 'rgba(0,0,0,0.1)',
             tickFormatter: function formatter(val, axis) {
-                return val + 9 + '/07';
+                return val + 9 + '.07';
+            },
+        },
+    });
+
+    $.plot('#traceChart', [{
+        data: {{ result.event_day_dtrace_data |safe}},
+        color: '#f20031',
+    },], {
+        series: {
+            shadowSize: 0,
+            lines: {
+                show: true,
+                lineWidth: 2,
+                fill: true,
+                fillColor: {colors: [{opacity: 0}, {opacity: 0.2}]}
+            }
+        },
+
+        grid: {
+            borderWidth: 0,
+            borderColor: '#969dab',
+            labelMargin: 5,
+            markings: [{
+                xaxis: {from: 0, to: 1},
+                color: '#f7f7f7'
+            }]
+            ,
+        },
+        yaxis: {
+            show: true,
+            color: '#ced4da',
+            tickLength: 5,
+            min: 0,
+            {% comment %} max: 110,{% endcomment %}
+            font: {
+                size: 11,
+                color: '#969dab'
+            },
+            tickFormatter: function formatter(val, axis) {
+                return +"   " + val / 1000 + 'k';
+            }
+        },
+        xaxis: {
+            show: true,
+            position: 'bottom',
+            color: 'rgba(0,0,0,0.1)',
+            tickFormatter: function formatter(val, axis) {
+                return val + 9 + '.07';
+            },
+        },
+    });
+
+    $.plot('#feedbackChart', [{
+        data: {{ result.event_day_feedback_data |safe}},
+        color: '#f20031',
+    },], {
+        series: {
+            shadowSize: 0,
+            lines: {
+                show: true,
+                lineWidth: 2,
+                fill: true,
+                fillColor: {colors: [{opacity: 0}, {opacity: 0.2}]}
+            }
+        },
+
+        grid: {
+            borderWidth: 0,
+            borderColor: '#969dab',
+            labelMargin: 5,
+            markings: [{
+                xaxis: {from: 0, to: 1},
+                color: '#f7f7f7'
+            }]
+            ,
+        },
+        yaxis: {
+            show: true,
+            color: '#ced4da',
+            tickLength: 5,
+            min: 0,
+            {% comment %} max: 110,{% endcomment %}
+            font: {
+                size: 11,
+                color: '#969dab'
+            },
+            tickFormatter: function formatter(val, axis) {
+                return +"   " + val / 1000 + 'k';
+            }
+        },
+        xaxis: {
+            show: true,
+            position: 'bottom',
+            color: 'rgba(0,0,0,0.1)',
+            tickFormatter: function formatter(val, axis) {
+                return val + 9 + '.07';
             },
         },
     });

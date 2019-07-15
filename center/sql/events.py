@@ -175,3 +175,5 @@ FROM xle.timetable
 WHERE context.uuid = '9443f94b-b29f-47b4-bcc8-66a59120f61c'
 GROUP BY event.uuid
 """
+
+

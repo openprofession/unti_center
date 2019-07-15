@@ -95,7 +95,6 @@ auction_events_1 = """SELECT
                                 WHERE auction_timeslot.auctionID = 1
                                 AND event.uuid <> '8c8beb4b-46cd-4d1f-a51d-ee83213a8198'"""
 
-
 auction_events_2 = """SELECT
                                   timetable.userID,
                                   timetable.type,
@@ -182,7 +181,6 @@ auction_bets_2 = """SELECT
                             ON user_auction.eventID = event.id
                         WHERE auction.ID = 11"""
 
-
 auction_bets_by_id = """SELECT
                           auction.uuid AS uuid,
                           auction.title AS title,
@@ -207,7 +205,6 @@ auction_bets_by_id = """SELECT
                           LEFT OUTER JOIN xle.event
                             ON user_auction.eventID = event.id
                         WHERE auction.ID = %s """
-
 
 auction_bets_by_date = """SELECT
                           auction.uuid AS uuid,
@@ -242,3 +239,17 @@ ORDER BY auction.endDT DESC
 LIMIT 1
 """
 
+auction_bets_all = """
+SELECT
+  event.uuid as event_uuid,
+  COUNT(user_auction.bet) AS bets,
+  COUNT(user_auction.priority) AS priorities,
+  COUNT(user_auction.bet) + COUNT(user_auction.priority) AS bets_count,
+  user_auction.createDT AS bet_dt
+FROM xle.user_auction
+  LEFT OUTER JOIN xle.event
+    ON user_auction.eventID = event.id
+  LEFT OUTER JOIN xle.timeslot
+    ON event.timeslotID = timeslot.id
+GROUP BY event.uuid
+"""

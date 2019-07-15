@@ -35,12 +35,25 @@ def dash_dtrace(request):
         event_dtrace = pd.DataFrame(dictfetchall(cursor))
         all_events_df = all_events_df.merge(event_dtrace, on='event_uuid', how='left')
 
+        # Все ставки на аукционе
+        cursor.execute(auction.auction_bets_all)
+        event_bet_df = pd.DataFrame(dictfetchall(cursor))
+        all_events_df = all_events_df.merge(event_bet_df, on='event_uuid', how='left')
+
         result = {}
         print(all_events_df.columns)
 
-        event_day_df = all_events_df.groupby(pd.Grouper(key='endDT', freq='D')).agg({'enrolls_count': 'sum', 'dtrace_user_count': 'sum', 'avg_score': 'mean'}).reset_index()
+        event_day_df = all_events_df.groupby(pd.Grouper(key='endDT', freq='D')).agg(
+            {'enrolls_count': 'sum', 'dtrace_user_count': 'sum', 'avg_score': 'mean', 'feedback_users_count': 'sum', 'bets': 'sum'}).cumsum().reset_index()
         event_day_df["N"] = event_day_df.index
         result['event_day_enroll_data'] = event_day_df[["N", "enrolls_count"]].values.tolist()
+        result['event_day_enroll_last'] =  event_day_df['enrolls_count'].iloc[-1]
+        result['event_day_dtrace_data'] = event_day_df[["N", "dtrace_user_count"]].values.tolist()
+        result['event_day_dtrace_last'] = event_day_df['dtrace_user_count'].iloc[-1]
+        result['event_day_feedback_data'] = event_day_df[["N", "feedback_users_count"]].values.tolist()
+        result['event_day_feedback_last'] = event_day_df['feedback_users_count'].iloc[-1]
+        result['event_day_bets_data'] = event_day_df[["N", "bets"]].values.tolist()
+        result['event_day_bets_last'] = event_day_df['bets'].iloc[-1]
         print(event_day_df)
 
         # event_drace_day = all_events_df.groupby(pd.Grouper(key='startDT', freq='D')).agg({'enrolls_count': 'sum'})
