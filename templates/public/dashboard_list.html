@@ -3,7 +3,7 @@
 {% block header %}
     <div class="container-fluid menu">
         <div class="container">
-           {% comment %} <div class="menu-button d-sm-none">
+            {% comment %} <div class="menu-button d-sm-none">
                 <i class="fas fa-bars"></i>
                 <div class="menu-toggle-panel hide">
                     <i class="fa fa-times"></i>
@@ -53,7 +53,7 @@
 
                     {% if request.user.is_authenticated %}
 
-                      {% comment %}  <li><a href="..">Отчеты</a></li>{% endcomment %}
+                        {% comment %}  <li><a href="..">Отчеты</a></li>{% endcomment %}
 
                         <li>
                             <span class="">{{ request.user.get_full_name }}</span>
@@ -111,7 +111,8 @@
                                         href="{{ dashboard.url }}">{{ dashboard.title }}</a></header>
 
                                 <main>{{ dashboard.description }}</main>
-                                <footer><i class="fa fa-sync"></i> 11 июля 2019</footer>
+                                {% now "m-d" as todays %}
+                                <footer><i class="fa fa-sync"></i>{{ todays }}</footer>
                             </div>
                         </div>
                     </div>
