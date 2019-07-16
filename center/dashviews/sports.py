@@ -5,11 +5,12 @@ from datetime import datetime, timedelta
 
 from django.views.decorators.cache import cache_page
 
+from center import settings
 from center.dash_views import dictfetchall
 from center.sql import users, auction, redcards, events
 
 
-# @cache_page(settings.PAGE_CACHE_TIME)
+@cache_page(settings.PAGE_CACHE_TIME)
 def dash_sports(request, date=(datetime.now() + timedelta(hours=3)).date()):
     try:
         cursor = connections['dwh'].cursor()

@@ -9,7 +9,7 @@ from center.dash_views import dictfetchall
 from center.sql import users, auction, redcards, teams, events, feedback, dtrace
 
 
-# @cache_page(settings.PAGE_CACHE_TIME)
+@cache_page(settings.PAGE_CACHE_TIME)
 def dash_dtrace(request):
     try:
         cursor = connections['dwh'].cursor()

@@ -6,12 +6,12 @@ from datetime import datetime, timedelta
 
 from django.views.decorators.cache import cache_page
 
+from center import settings
 from center.dash_views import dictfetchall
 from center.sql import users, auction, redcards, events
 
-
-@cache_page(60)
 @login_required
+@cache_page(settings.PAGE_CACHE_TIME)
 def dash_auction_result(request, auction_id=None, date=(datetime.now() + timedelta(hours=3)).date()):
     try:
         cursor = connections['dwh'].cursor()
@@ -42,9 +42,8 @@ def dash_auction_result(request, auction_id=None, date=(datetime.now() + timedel
 
     return render(request, "dashboards/prod/auction_sm.html", {'result': result, 'date': date})
 
-
-@cache_page(60)
 @login_required
+@cache_page(settings.PAGE_CACHE_TIME)
 def dash_auction_progress(request, date=None, auction_id=None):
     result = {}
     try:
