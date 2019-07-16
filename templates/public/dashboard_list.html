@@ -111,7 +111,7 @@
                                         href="{{ dashboard.url }}">{{ dashboard.title }}</a></header>
 
                                 <main>{{ dashboard.description }}</main>
-                                {% now "m-d" as todays %}
+                                {% now "d M" as todays %}
                                 <footer><i class="fa fa-sync"></i>{{ todays }}</footer>
                             </div>
                         </div>
