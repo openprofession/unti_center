@@ -32,6 +32,8 @@ urlpatterns = [
                   path('attendance/', views.attendance_dtrace, name='attendance'),
 
                   # PROD BOARDS
+                  path('dashboard/i/', include('django.contrib.flatpages.urls')),
+
                   path('dashboard/all', dash_views.dash_all, name='prod_all'),
                   path('dashboard/auctions', dash_views.dash_auctions, name='prod_auction'),
                   path('dashboard/auction_one', dash_views.dash_auction_one, name='prod_auction_1'),

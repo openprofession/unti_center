@@ -52,11 +52,11 @@
                         <div class="card-header">
                             <h2 class="">{{ result.title }}</h2>
 
-                           {% comment %} {% if end|utc < now|utc %}
-                                <span class="text-success tx-20">Идет</span>
+                            {% if end|utc < now|utc %}
+                                <span class="text-success">Идет</span>
                             {% else %}
-                                <span class="text-danger tx-20">Завершен</span>
-                            {% endif %}{% endcomment %}
+                                <span class="text-danger">Завершен</span>
+                            {% endif %}
                         </div><!-- card-header -->
                         <div class="card-body">
                             <div class="card-body-top">
