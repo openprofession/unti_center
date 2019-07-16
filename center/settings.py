@@ -161,8 +161,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = (
     'center.auth.UNTIBackend',
-    'django.contrib.auth.backends.ModelBackend',
+    #  'django.contrib.auth.backends.ModelBackend',
 )
+
+LOGIN_URL = '/login/unti/'
 
 ASSISTANT_TAGS_NAME = ['assistant', 'island_assistant']
 

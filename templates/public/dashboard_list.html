@@ -50,11 +50,8 @@
             <div class="logo"></div>
             <div class="menu-list  d-sm-block">
                 <ul>
-
                     {% if request.user.is_authenticated %}
-
                         {% comment %}  <li><a href="..">Отчеты</a></li>{% endcomment %}
-
                         <li>
                             <span class="">{{ request.user.get_full_name }}</span>
                         </li>

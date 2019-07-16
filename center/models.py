@@ -35,6 +35,7 @@ class Dashboard(models.Model):
     description = models.TextField(blank=True)
     cover = models.ImageField(blank=True)
     public = models.BooleanField(default=False)
+    admin = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
     url = models.URLField(blank=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default=STATUS_ALFA)

@@ -1,4 +1,5 @@
 import pandas as pd
+from django.contrib.auth.decorators import login_required
 from django.db import connections, OperationalError
 from django.shortcuts import render
 from datetime import datetime, timedelta
@@ -10,6 +11,7 @@ from center.sql import users, auction, redcards, events
 
 
 @cache_page(60)
+@login_required
 def dash_auction_result(request, auction_id=None, date=(datetime.now() + timedelta(hours=3)).date()):
     try:
         cursor = connections['dwh'].cursor()
@@ -41,7 +43,8 @@ def dash_auction_result(request, auction_id=None, date=(datetime.now() + timedel
     return render(request, "dashboards/prod/auction_sm.html", {'result': result, 'date': date})
 
 
-# @cache_page(60)
+@cache_page(60)
+@login_required
 def dash_auction_progress(request, date=None, auction_id=None):
     result = {}
     try:

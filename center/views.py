@@ -15,8 +15,9 @@ def logout(request):
 
 
 def dashboards(request):
-    dashboard_list = Dashboard.objects.filter(active=True, public=True).order_by('-priority')
-    return render(request, 'public/dashboard_list.html', {'dashboards': dashboard_list})
+    public_dashboard_list = Dashboard.objects.exclude(admin=True).filter(active=True, public=True).order_by('-priority')
+    private_dashboard_list = Dashboard.objects.exclude(admin=True).filter(active=True, public=False).order_by('-priority')
+    return render(request, 'public/dashboard_list.html', {'dashboards': public_dashboard_list, 'private_dashboard': private_dashboard_list})
 
 
 def reports(request):
@@ -213,7 +214,7 @@ def test_auction(request):
             "time").cumsum().reset_index()
         df_cumsum["N"] = df_cumsum.index
         df_cumsum = df_cumsum[["N", "count"]]
-        #df_cumsum["time"] = df_cumsum["time"].astype(str)
+        # df_cumsum["time"] = df_cumsum["time"].astype(str)
 
         data_to_graph = df_cumsum.values.tolist()
     return render(request, "dashboards/test_auction.html", {'data_to_graph': data_to_graph})
