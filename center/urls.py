@@ -37,6 +37,7 @@ urlpatterns = [
                   path('dashboard/all', dash_views.dash_all, name='prod_all'),
                   path('dashboard/auctions', dash_views.dash_auctions, name='prod_auction'),
                   path('dashboard/auction_one', dash_views.dash_auction_one, name='prod_auction_1'),
+                  path('dashboard/auction_two', dash_views.dash_auction_two, name='prod_auction_2'),
                   path('dashboard/auction_lab_1', dash_views.dash_auction_labs_1, name='prod_auction_1'),
                   path('dashboard/auction_ms_1', dash_views.dash_auction_2, name='prod_auction_ms_1'),
                   path('dashboard/auction_ms_2', dash_views.dash_auction_3, name='prod_auction_ms_2'),
