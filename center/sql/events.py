@@ -137,6 +137,7 @@ FROM labs.event
 WHERE context.uuid = '9443f94b-b29f-47b4-bcc8-66a59120f61c'
 AND event.isDeleted = 0
 AND timeslot.endDT < '2019-07-16'
+AND type.title IN ('Лаборатория')
 """
 
 event_enrolls_all = """

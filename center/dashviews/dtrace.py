@@ -45,22 +45,32 @@ def dash_dtrace(request):
         print(all_events_df.columns)
 
         event_day_df = all_events_df.groupby(pd.Grouper(key='endDT', freq='D')).agg(
-            {'enrolls_count': 'sum', 'dtrace_user_count': 'sum', 'avg_score': 'mean', 'feedback_users_count': 'sum', 'bets': 'sum'}).cumsum().reset_index()
+            {'enrolls_count': 'sum', 'dtrace_user_count': 'sum', 'avg_score': 'mean', 'feedback_users_count': 'sum',
+             'bets_count': 'sum'}).reset_index()
         event_day_df["N"] = event_day_df.index
         result['event_day_enroll_data'] = event_day_df[["N", "enrolls_count"]].values.tolist()
-        result['event_day_enroll_last'] = event_day_df['enrolls_count'].iloc[-1]
-        result['event_day_dtrace_data'] = event_day_df[["N", "dtrace_user_count"]].values.tolist()
+        result['event_day_enroll_last'] = event_day_df['enrolls_count'].sum()
+        event_day_df['drace_ratio'] = event_day_df['dtrace_user_count'] / event_day_df['enrolls_count']
+        result['event_day_dtrace_data'] = event_day_df[["N", "drace_ratio"]].values.tolist()
+        #result['event_day_dtrace_data'] = event_day_df[["N", "dtrace_user_count"]].values.tolist()
         result['event_day_dtrace_last'] = event_day_df['dtrace_user_count'].iloc[-1]
+
+
         result['event_day_feedback_data'] = event_day_df[["N", "feedback_users_count"]].values.tolist()
-        result['event_day_feedback_last'] = event_day_df['feedback_users_count'].iloc[-1]
-        result['event_day_bets_data'] = event_day_df[["N", "bets"]].values.tolist()
-        result['event_day_bets_last'] = event_day_df['bets'].iloc[-1]
+        result['event_day_feedback_last'] = event_day_df['feedback_users_count'].sum()
+        result['event_day_bets_data'] = event_day_df[["N", "bets_count"]].values.tolist()
+        result['event_day_bets_last'] = event_day_df['bets_count'].sum()
+        event_day_df['endDT'] = event_day_df['endDT'].dt.strftime('%d.%m')
+        result['event_day_chart_ticks'] = event_day_df[["N", "endDT"]].values.tolist()
+
 
         event_rating_df = all_events_df.groupby('event_uuid').agg(
-            {'event_title': 'first', 'dep_title': 'first', 'startDT': 'first', 'endDT': 'first', 'enrolls_count': 'sum', 'dtrace_user_count': 'sum', 'avg_score': 'mean',
+            {'event_title': 'first', 'dep_title': 'first', 'startDT': 'first', 'endDT': 'first', 'enrolls_count': 'sum',
+             'dtrace_user_count': 'sum', 'avg_score': 'mean',
              'feedback_users_count': 'sum',
-             'bets': 'sum'}).reset_index()
-
+             'bets_count': 'sum'}).reset_index()
+        event_rating_df['rating'] = event_rating_df['dtrace_user_count'] / event_rating_df['enrolls_count']
+        event_rating_df = event_rating_df.sort_values('rating', ascending=False)
         result['event_rating'] = event_rating_df.to_dict('record')
 
         print(all_events_df.shape)

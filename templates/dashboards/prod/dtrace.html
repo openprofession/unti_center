@@ -279,8 +279,7 @@
 
                                 <th class="wd-lg-30p tx-left">Название</th>
                                 <th class="wd-lg-20p tx-left">Факультет</th>
-                                <th class="wd-lg-10p tx-right">Начало</th>
-                                <th class="wd-lg-10p tx-right">Окончание</th>
+                                <th class="wd-lg-10p tx-right">Дата</th>
                                 <th class="wd-lg-10p tx-right">Ставок</th>
                                 <th class="wd-lg-10p tx-right">Записей</th>
                                 <th class="wd-lg-10p tx-right">Рефлексий</th>
@@ -299,9 +298,8 @@
                                         style="word-wrap: break-word">{{ event.event_title }}</td>
                                     <td class="text">
                                         {% if  event.dep_title != None %}{{ event.dep_title }} {% endif %}</td>
-                                    <td class="text tx-right">{{ event.startDT }}  </td>
-                                    <td class="text tx-right">{{ event.endDT }}  </td>
-                                    <td class="text tx-right tx-bold">{{ event.bets|stringformat:".0f" }}  </td>
+                                    <td class="text tx-right">{{ event.startDT|date }}  </td>
+                                    <td class="text tx-right tx-bold">{{ event.bets_count|stringformat:".0f" }}  </td>
                                     <td class="text tx-right tx-bold">{{ event.enrolls_count|stringformat:".0f" }}</td>
                                     <td class="text tx-right tx-bold">{% if  event.feedback_users_count > 0 %}
                                         {{ event.feedback_users_count|stringformat:".0f" }}{% endif %}</td>
@@ -440,11 +438,6 @@
             borderWidth: 0,
             borderColor: '#969dab',
             labelMargin: 5,
-            markings: [{
-                xaxis: {from: 0, to: 1},
-                color: '#f7f7f7'
-            }]
-            ,
         },
         yaxis: {
             show: true,
@@ -457,16 +450,17 @@
                 color: '#969dab'
             },
             tickFormatter: function formatter(val, axis) {
-                return +"   " + val / 1000 + 'k';
+                return val  + 'k';
             }
         },
         xaxis: {
             show: true,
             position: 'bottom',
             color: 'rgba(0,0,0,0.1)',
-            tickFormatter: function formatter(val, axis) {
-                return val + 9 + '.07';
-            },
+            ticks: {{ result.event_day_chart_ticks |safe}},
+{% comment %}            tickFormatter: function formatter(val, axis) {
+                return val +'.07';
+            },{% endcomment %}
         },
     });
 
@@ -488,11 +482,6 @@
             borderWidth: 0,
             borderColor: '#969dab',
             labelMargin: 5,
-            markings: [{
-                xaxis: {from: 0, to: 1},
-                color: '#f7f7f7'
-            }]
-            ,
         },
         yaxis: {
             show: true,
@@ -504,7 +493,8 @@
                 size: 11,
                 color: '#969dab'
             },
-            tickFormatter: function formatter(val, axis) {
+
+       tickFormatter: function formatter(val, axis) {
                 return +"   " + val / 1000 + 'k';
             }
         },
@@ -512,9 +502,10 @@
             show: true,
             position: 'bottom',
             color: 'rgba(0,0,0,0.1)',
-            tickFormatter: function formatter(val, axis) {
-                return val + 9 + '.07';
-            },
+            ticks: {{ result.event_day_chart_ticks |safe}},
+{% comment %}            tickFormatter: function formatter(val, axis) {
+                return val + 10 + '.07';
+            },{% endcomment %}
         },
     });
 
@@ -536,11 +527,6 @@
             borderWidth: 0,
             borderColor: '#969dab',
             labelMargin: 5,
-            markings: [{
-                xaxis: {from: 0, to: 1},
-                color: '#f7f7f7'
-            }]
-            ,
         },
         yaxis: {
             show: true,
@@ -560,9 +546,10 @@
             show: true,
             position: 'bottom',
             color: 'rgba(0,0,0,0.1)',
-            tickFormatter: function formatter(val, axis) {
+            ticks: {{ result.event_day_chart_ticks |safe}},
+{% comment %}            tickFormatter: function formatter(val, axis) {
                 return val + 9 + '.07';
-            },
+            },{% endcomment %}
         },
     });
 
@@ -584,11 +571,6 @@
             borderWidth: 0,
             borderColor: '#969dab',
             labelMargin: 5,
-            markings: [{
-                xaxis: {from: 0, to: 1},
-                color: '#f7f7f7'
-            }]
-            ,
         },
         yaxis: {
             show: true,
@@ -608,9 +590,10 @@
             show: true,
             position: 'bottom',
             color: 'rgba(0,0,0,0.1)',
-            tickFormatter: function formatter(val, axis) {
+            ticks: {{ result.event_day_chart_ticks |safe}},
+           {% comment %} tickFormatter: function formatter(val, axis) {
                 return val + 9 + '.07';
-            },
+            },{% endcomment %}
         },
     });
 

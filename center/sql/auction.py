@@ -229,12 +229,21 @@ auction_bets_by_date = """SELECT
                             ON user_auction.userID = user_info.userID
                           LEFT OUTER JOIN xle.event
                             ON user_auction.eventID = event.id
-                        WHERE date(auction.startDt) = %s"""
+                        WHERE date(auction.endDt) = %s"""
 
 auction_latest_id = """
 SELECT auction.id
 FROM xle.auction
 WHERE auction.contextID = 30
+ORDER BY auction.endDT DESC
+LIMIT 1
+"""
+
+auction_latest_id_by_endDT = """
+SELECT auction.id
+FROM xle.auction
+WHERE auction.contextID = 30
+AND date(auction.endDt) = %s
 ORDER BY auction.endDT DESC
 LIMIT 1
 """
