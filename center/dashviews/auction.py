@@ -51,7 +51,7 @@ def dash_auction_result(request, auction_id=None, date=(datetime.now() + timedel
 def dash_auction_result_lab_2(request):
     try:
         cursor = connections['dwh'].cursor()
-        cursor.execute(events.enrolls_auction_lab, ['2019-07-17'])
+        cursor.execute(events.enrolls_auction_lab, ['2019-07-18'])
         enrolls_df = pd.DataFrame(dictfetchall(cursor))
         result = {}
         if not enrolls_df.empty:
