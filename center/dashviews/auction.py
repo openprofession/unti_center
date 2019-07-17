@@ -46,19 +46,21 @@ def dash_auction_result(request, auction_id=None, date=(datetime.now() + timedel
     return render(request, "dashboards/prod/auction_sm.html", {'result': result, 'date': date})
 
 
-
 @cache_page(settings.PAGE_CACHE_TIME)
 def dash_auction_result_lab_2(request):
     try:
         cursor = connections['dwh'].cursor()
         cursor.execute(events.enrolls_auction_lab, ['2019-07-18'])
         enrolls_df = pd.DataFrame(dictfetchall(cursor))
+        enrolls_df = enrolls_df[enrolls_df['event_id'] != 10856]
+        enrolls_df = enrolls_df[enrolls_df['event_id'] != 10940]
         result = {}
         if not enrolls_df.empty:
             # result['enrolls'] = enrolls_df.to_dict('records')
             enrolls_df['manual'] = pd.np.where(enrolls_df['type'] == 'manual', 1, 0)
             enrolls_df['auction_bet'] = pd.np.where(enrolls_df['type'] == 'auction_bet', 1, 0)
             enrolls_df['auction_priority'] = pd.np.where(enrolls_df['type'] == 'auction_priority', 1, 0)
+            enrolls_df['auction_bet'] = enrolls_df['auction_bet'] + enrolls_df['auction_priority']
             enrolls_event_df = enrolls_df.groupby('event_id').agg(
                 {'userID': 'count', 'sizeMin': 'first', 'sizeMax': 'first', 'event_id': 'first', 'title': 'first',
                  'auction_bet': 'sum', 'manual': 'sum', 'place_title': 'first'})
