@@ -76,7 +76,8 @@ SELECT
   timetable.createDT,
   activity.sizeMin,
   activity.sizeMax,
-  place.title AS place_title
+  place.title AS place_title,
+  place.capacity AS place_capacity
 FROM xle.timetable
   LEFT OUTER JOIN xle.event
     ON timetable.runID = event.runID

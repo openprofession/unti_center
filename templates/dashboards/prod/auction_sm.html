@@ -82,12 +82,12 @@
                                     </td>
                                     <td class="text tx-right">{{ event.place_title }}</td>
                                     <td class="text tx-right tx-bold">{{ event.free }} мест
-                                        <small>/ {{ event.free|as_percentage_of:event.sizeMax }}</small>
+                                        <small>/ {{ event.free|as_percentage_of:event.size}}</small>
                                     </td>
                                     <td class="text tx-right">{{ event.auction_bet }}</td>
                                     <td class="text tx-right">{{ event.manual }}</td>
 
-                                    <td class="text tx-right">{{ event.sizeMax|floatformat:"0" }}</td>
+                                    <td class="text tx-right">{{ event.size|floatformat:"0" }}</td>
 
                                 </tr>
                             {% endfor %}
