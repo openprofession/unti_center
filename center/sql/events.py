@@ -179,8 +179,9 @@ FROM labs.event
     ON event.timeslotID = timeslot.id
 WHERE context.uuid = '9443f94b-b29f-47b4-bcc8-66a59120f61c'
 AND event.isDeleted = 0
-AND timeslot.endDT < '2019-07-16'
-AND type.title IN ('Лаборатория')
+AND timeslot.endDT < CURDATE()+1
+AND timeslot.startDT >= '2019-07-10'
+
 """
 
 event_enrolls_all = """
