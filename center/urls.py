@@ -42,6 +42,7 @@ urlpatterns = [
                   path('dashboard/auction_ms_1', dash_views.dash_auction_2, name='prod_auction_ms_1'),
                   path('dashboard/auction_ms_2', dash_views.dash_auction_3, name='prod_auction_ms_2'),
                   path('dashboard/auction_ms_3', dash_views.dash_auction_4, name='prod_auction_ms_2'),
+                  path('dashboard/auction_lab_2', auction.dash_auction_result_lab_2, name='prod_auction_lab2'),
 
                   path('dashboard/auction', auction.dash_auction_progress, name='prod_auction_all'),
                   path('dashboard/auction/id/<int:auction_id>', auction.dash_auction_progress, name='prod_auction_all'),
@@ -50,6 +51,7 @@ urlpatterns = [
                   path('dashboard/sport/<str:date>', sports.dash_sports, name='dash_sports'),
                   path('dashboard/redcards', redcards.dash_redcards, name='dash_redcards'),
                   path('dashboard/auction_result', auction.dash_auction_result, name='dash_auction_result'),
+                  path('dashboard/auction_result/id/<int:auction_id>', auction.dash_auction_result, name='dash_auction_result'),
                   path('dashboard/auction_result/<str:date>', auction.dash_auction_result, name='dash_auction_result_by_id'),
                   path('dashboard/aim', aim.dash_aim, name='dash_aim'),
                   path('dashboard/dtrace', dtrace.dash_dtrace, name='dash_trace'),
