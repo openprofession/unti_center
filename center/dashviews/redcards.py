@@ -8,7 +8,7 @@ from center.dash_views import dictfetchall
 from center.sql import users, auction, redcards, teams
 
 
-@cache_page(settings.PAGE_CACHE_TIME)
+#@cache_page(settings.PAGE_CACHE_TIME)
 def dash_redcards(request):
     # return render(request, "fail.html")
 
@@ -46,15 +46,15 @@ def dash_redcards(request):
         personal_rating_df['score'] = personal_rating_df['green'] - personal_rating_df['red']
         personal_rating_df = personal_rating_df.replace('-', None)
         # personal_rating_df['team'] = pd.np.where(personal_rating_df['team_title'] == 'None', '-', personal_rating_df['team_title'])
-        personal_rating_df = personal_rating_df.sort_values(by='score', ascending=True).reset_index()  # .sort_values(by='score', ascending=True)
+        personal_rating_df = personal_rating_df.sort_values(by='score', ascending=False).reset_index().sort_values(by='score', ascending=True)
         personal_rating_df["N"] = personal_rating_df.index + 1
 
         result['personal_rating'] = personal_rating_df.to_dict('record')
         team_rating_df = cards_df.groupby('team_title').agg({'red': 'sum', 'yellow': 'sum', 'green': 'sum', 'team_title': 'first', 'leaderID': 'nunique'})
         team_rating_df['score'] = team_rating_df['green'] - team_rating_df['red']
-        team_rating_df = team_rating_df.sort_values(by='score', ascending=False).set_index("team_title").reset_index().sort_values(by='score', ascending=True)
+        team_rating_df = team_rating_df.sort_values(by='score', ascending=False).set_index("team_title").reset_index()
         team_rating_df["N"] = team_rating_df.index + 1
-        result['rating'] = team_rating_df.to_dict('record')
+        result['rating'] = team_rating_df.sort_values(by='N', ascending=False).to_dict('record')
         cards_data_df = cards_df
         cards_data_df.loc[-1, 'change_dt'] = pd.Timestamp('2019-07-10 00:00')
         cards_data_df = cards_data_df.groupby(pd.Grouper(key='change_dt', freq='H')).agg({'red': 'sum', 'yellow': 'sum', 'green': 'sum'}).cumsum().reset_index()
