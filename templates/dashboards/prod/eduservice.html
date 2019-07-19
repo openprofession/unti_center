@@ -44,14 +44,81 @@
     <div class="container-fluid d-block">
         <div class="row row-sm">
             <div class="col-lg-6 col-sm-12">
-                {% for service in result.services %}
-                    <p> {{ service }}</p>
-                {% endfor %}
+                <div class="col-12 card card-dashboard-twentyfour mb-2">
+                    <div class="card-header">
+                        <h2 class="">Рейтинг сервисов платформы НТИ</h2>
+                        <span class="tx-20"></span>
+                    </div><!-- card-header -->
+                    <div class="table-responsive">
+                        <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
+                            <thead>
+                            <tr>
+                                <th class="wd-lg-10p tx-right">Рейтинг</th>
+                                <th class="wd-lg-70p tx-left">Сервис</th>
+
+                                <th class="wd-lg-10p tx-right">Соглашений</th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for service in result.services %}
+                                <tr>
+                                    <td class="text tx-right tx-bold tx-">#{{ service.N }}</td>
+                                    <td class="text tx-bold"
+                                        style="word-wrap: break-word"> {{ service.service}}   </td>
+                                    <td class="text tx-right tx-bold tx-15">{{ service.team }}</td>
+
+                                </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                    </div><!-- table-responsive -->
+                </div>
+
+
+
+
             </div>
             <div class="col-lg-6 col-sm-12">
-                {% for team in result.teams %}
-                    <p> {{ team }}</p>
-                {% endfor %}
+
+             <div class="col-12 card card-dashboard-twentyfour mb-2">
+                    <div class="card-header">
+                        <h2 class="">Рейтинг команд по подписанным соглашеням</h2>
+                        <span class="tx-20"></span>
+                    </div><!-- card-header -->
+                    <div class="table-responsive">
+                        <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
+                            <thead>
+                            <tr>
+                                <th class="wd-lg-10p tx-right">Рейтинг</th>
+                                <th class="wd-lg-70p tx-left">Команда</th>
+
+                                <th class="wd-lg-10p tx-right">Соглашений</th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for team in result.teams %}
+                                <tr>
+                                    <td class="text tx-right tx-bold tx-">#{{ team.N }}</td>
+                                    <td class="text tx-bold"
+                                        style="word-wrap: break-word"> {{ team.team}}   </td>
+                                    <td class="text tx-right tx-bold tx-15">{{ team.service }}</td>
+
+                                </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                    </div><!-- table-responsive -->
+                </div>
             </div>
 
 
