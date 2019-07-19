@@ -28,11 +28,27 @@ def dash_eduservice_rating(request):
         r = requests.get("https://eduservices.2035.university/rest/v2/queries/srvcat_AgreementConfirm/agreementConfirmByDate?startDate=2019-07-01&endDate=2019-07-30",
                          headers={"Authorization": "Bearer {}".format(token)})
 
-        agr_df = pd.read_json(r.content)
-        print(agr_df.shape)
-        print(agr_df.columns)
-        # for agreement_data in payload:
-        #    print('x')
+        rows_list = []
+        input_rows = json.loads(r.content)
+        for row in input_rows:
+            dict_agr = {}
+            dict_agr.update({'agreement': row['typeAgreement']['_instanceName'], 'number': row['number'], 'service': row['service']['_instanceName'], 'createDT': row['createTs'],
+                             'updateDT': row['updateTs'], 'team': row['user']['organizationName']})
+            rows_list.append(dict_agr)
+
+        agr_df = pd.DataFrame(rows_list)
+
+        team_df = agr_df.groupby('team').agg({'service': 'count'}).sort_values('service', ascending=False).reset_index()
+        team_df["N"] = team_df.index + 1
+        service_df = agr_df.groupby('service').agg({'team': 'count'}).sort_values('team', ascending=False).reset_index()
+        service_df["N"] = service_df.index + 1
+        result['teams'] = team_df.to_dict('record')
+        result['services'] = service_df.to_dict('record')
+        # print(agr_df.shape)
+        # print(agr_df.columns)
+
+
+
     except OperationalError as e:
         print(e)
         return render(request, "fail.html")

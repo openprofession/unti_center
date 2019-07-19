@@ -44,10 +44,14 @@
     <div class="container-fluid d-block">
         <div class="row row-sm">
             <div class="col-lg-6 col-sm-12">
-
+                {% for service in result.services %}
+                    <p> {{ service }}</p>
+                {% endfor %}
             </div>
             <div class="col-lg-6 col-sm-12">
-
+                {% for team in result.teams %}
+                    <p> {{ team }}</p>
+                {% endfor %}
             </div>
 
 
