@@ -20,7 +20,7 @@ from django.views.generic import RedirectView
 
 from center import views, settings
 from center import dash_views
-from center.dashviews import sports, redcards, auction, aim, dtrace, sport_results
+from center.dashviews import sports, redcards, auction, aim, dtrace, sport_results, eduservice, timetable
 
 urlpatterns = [
                   path('', include('social_django.urls', namespace='social')),
@@ -57,6 +57,9 @@ urlpatterns = [
                   path('dashboard/dtrace', dtrace.dash_dtrace, name='dash_trace'),
 
                   path('dashboard/sport_rating', sport_results.dash_sport_rating, name='dash_sport_rating'),
+                  path('dashboard/service_rating', eduservice.dash_eduservice_rating, name='dash_service_rating'),
+
+                  path('dashboard/timetable', timetable.dash_timetable, name='timetable'),
 
                   path('dashboard/feedback', RedirectView.as_view(
                       url='https://app.powerbi.com/view?r=eyJrIjoiOGQyNmU5MGEtNmVmMC00OTRlLWIzZDAtYWI4ZjYzZDcxODcxIiwidCI6ImIzMzQ2YTIwLTU1YzUtNGU0Yy04ZGM0LTBmMThjNjU0MTE3MSIsImMiOjl9',

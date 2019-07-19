@@ -222,3 +222,52 @@ GROUP BY event.uuid
 """
 
 
+timetable_by_leader = """
+SELECT
+  xle.user_info.leaderID AS leaderID,
+  xle.user_info.firstname AS firstname,
+  xle.user_info.lastname AS lastname,
+  xle.event.uuid AS event_uuid,
+  xle.event.title AS event_title,
+  xle.place.title AS place_title,
+  xle.type.title,
+  xle.timeslot.startDT,
+  xle.timeslot.endDT
+
+FROM xle.timetable
+  LEFT OUTER JOIN xle.user_info
+    ON timetable.userID=user_info.userID
+  LEFT OUTER JOIN xle.event
+    ON xle.timetable.runID = event.runID
+  LEFT OUTER JOIN xle.place
+  ON event.placeID = place.id
+    LEFT OUTER JOIN xle.run
+      ON event.runID = run.id
+  LEFT OUTER JOIN xle.timeslot
+      ON event.timeslotID = timeslot.id
+    LEFT OUTER JOIN xle.activity
+      ON run.activityID = activity.id
+    LEFT OUTER JOIN xle.activity_type
+      ON activity.id = activity_type.activityID
+    LEFT OUTER JOIN xle.type
+      ON activity_type.typeID = type.id
+
+WHERE xle.event.id IN (SELECT
+    event.id
+  FROM xle.event
+    LEFT OUTER JOIN xle.run
+      ON event.runID = run.id
+    LEFT OUTER JOIN xle.context_run
+      ON xle.run.id = context_run.runID
+    LEFT OUTER JOIN xle.timeslot
+      ON event.timeslotID = timeslot.id
+    LEFT OUTER JOIN xle.activity
+      ON run.activityID = activity.id
+    LEFT OUTER JOIN xle.activity_type
+      ON activity.id = activity_type.activityID
+    LEFT OUTER JOIN xle.type
+      ON activity_type.typeID = type.id
+  WHERE context_run.contextID = 30
+  AND date(xle.timeslot.endDT) = '2019-07-19'
+  GROUP BY event.id) and xle.user_info.leaderID={}
+  """
