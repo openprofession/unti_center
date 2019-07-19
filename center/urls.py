@@ -20,7 +20,11 @@ from django.views.generic import RedirectView
 
 from center import views, settings
 from center import dash_views
-from center.dashviews import sports, redcards, auction, aim, dtrace, sport_results, eduservice, timetable, edumap
+from center.dashviews import (
+    sports, redcards, auction, aim, dtrace,
+    sport_results, eduservice, timetable, edumap,
+    data_export,
+)
 
 urlpatterns = [
                   path('', include('social_django.urls', namespace='social')),
@@ -74,6 +78,12 @@ urlpatterns = [
                   path('demo_feedback/', views.demo_feedback, name='demo_feedback'),
                   path('demo_test/', views.demo_test, name='demo_test'),
                   path('test_auction/', views.test_auction, name='test_auction'),
-                  path('test_all/', views.test_all, name='test_auction')
+                  path('test_all/', views.test_all, name='test_auction'),
+
+                  path('reports', data_export.exports_list,
+                       name='exports_list'),
+                  path('reports/<int:export_pk>', data_export.exports_list,
+                       name='exports_list_detail'),
+
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
               static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

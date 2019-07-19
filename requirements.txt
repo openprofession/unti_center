@@ -8,3 +8,6 @@ celery==4.3.0
 redis==3.2.1
 pandas==0.24.2
 gunicorn==19.9.0
+
+XlsxWriter==1.1.8
+django-widget-tweaks==1.4.5

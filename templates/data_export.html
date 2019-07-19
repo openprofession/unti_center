@@ -1,0 +1,179 @@
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Refresh" content="300"/>
+    <title>Остров 10-22 Светофор</title>
+
+    <!-- vendor css -->
+    <link href="/static/azia/lib/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="/static/azia/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="/static/azia/lib/typicons.font/typicons.css" rel="stylesheet">
+
+    <!-- azia CSS -->
+    <link rel="stylesheet" href="/static/azia/css/azia.css">
+    <link rel="stylesheet" href="/static/azia/css/circle.css">
+
+
+</head>
+<body class="az-body az-dashboard-eight">
+<header class="page user-events-page bg-white">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <a href="/" class="user-events__main-logo navbar-brand mr-4">
+                <img src="/static/img/app.png" alt="" style="max-height: 40px">
+            </a>
+
+
+            <div class="collapse navbar-collapse" id="navbar-top">
+                <ul class="navbar-nav mr-auto text-center">
+                    <div class="text-danger text-center mr-auto tx-36-f">Мониторинг процессов Острова 10-22</div>
+                </ul>
+            </div>
+
+        </nav>
+    </div>
+</header>
+
+<div class="az-content az-content-dashboard-eight">
+    <div class="container-fluid d-block">
+
+<!-- ======================================================================= -->
+<div class="row row-sm">
+
+<div class="col-lg-6">
+<div class="row">
+<div class="col-12 mb-2">
+    <h2 class="az-content-title tx-24 tx-center mb-0">Выберите источник данных</h2>
+</div>
+<div class="col-12 mb-4">
+
+    <div class="list-group">
+        {% for export in exports %}
+      <a href="{% url 'exports_list_detail' export_pk=export.pk %}"
+         class="list-group-item {% if export == selected_export %}active{% endif %}">
+        <h4 class="list-group-item-heading">{{ export.title }}</h4>
+        <p class="list-group-item-text">{{ export.description }}</p>
+      </a>
+        {% endfor %}
+    </div>
+
+</div>
+</div>
+</div>
+
+<div class="col-lg-6">
+{% if selected_export %}
+<div class="row">
+<div class="col-12 mb-2">
+</div>
+<div class="col-12 mb-4">
+
+
+
+<div class="card">
+  <div class="card-header">
+    Экспорт данных
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ selected_export.title }}</h5>
+    <p class="card-text">{{ selected_export.description }}</p>
+
+    {% if form.errors %}
+  <div class="section-block__item">
+    <div class="row align-items-center">
+      <div class="col-md-9">
+
+            <!-- Form Errors -->
+
+        <h3>Ошибки:</h3>
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ field.label }}: </strong> {{ error|escape }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+
+      </div>
+    </div>
+  </div>
+    {% endif %}
+<!-- ----------------------------------------------------------------------- -->
+<form action="" method="POST">
+{% csrf_token %}
+{#{{ form }}#}
+
+{% for field in form %}
+  <div class="form-group">
+    {{ field.label }}
+    {{ field|attr:"class:form-control selectpicker search_block" }}
+    <small  class="form-text text-muted">
+        {{ field.help_text }}
+    </small>
+  </div>
+{% endfor %}
+
+
+  <button type="submit" class="btn btn-primary">Скачать</button>
+</form>
+<!-- ----------------------------------------------------------------------- -->
+
+
+
+  </div>
+</div>
+
+
+
+</div>
+</div>
+{% endif %}
+
+</div>
+
+</div>
+
+
+
+
+
+
+<!-- ======================================================================= -->
+
+
+
+
+</div><!-- az-content -->
+
+{% comment %}    <div class="az-footer ht-40">
+      <div class="container pd-t-0-f ht-100p">
+        <span>&copy; 2018 Azia Responsive Bootstrap 4 Dashboard Template</span>
+      </div><!-- container -->
+    </div><!-- az-footer -->{% endcomment %}
+
+<script src="/static/azia/lib/jquery/jquery.min.js"></script>
+<script src="/static/azia/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/azia/lib/ionicons/ionicons.js"></script>
+<script src="/static/azia/lib/jquery.flot/jquery.flot.js"></script>
+<script src="/static/azia/lib/jquery.flot/jquery.flot.pie.js"></script>
+<script src="/static/azia/lib/jquery.flot/jquery.flot.resize.js"></script>
+<script src="/static/azia/lib/chart.js/Chart.bundle.min.js"></script>
+
+<script src="/static/azia/js/azia.js"></script>
+<script src="/static/azia/js/chart.peity.js"></script>
+<script src="/static/azia/lib/peity/jquery.peity.min.js"></script>
+<script src="/static/azia/js/chart.flot.sampledata.js"></script>
+<script src="/static/azia/js/easypiechart.min.js"></script>
+
+</body>
+</html>

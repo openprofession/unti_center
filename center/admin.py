@@ -45,4 +45,30 @@ class ReportAdmin(admin.ModelAdmin):
     )
 
 
+@reg_admin_model(models.ExportFilter)
+class ExportFilterAdmin(admin.ModelAdmin):
+    list_display = (
+        'name_column',
+        'name_url_arg',
+        'name_verbose',
+        # 'description',
+        'operator',
+        'is_choices',
+        'is_disabled',
+        'data_type',
+    )
+
+
+@reg_admin_model(models.DataExport)
+class DataExportAdmin(admin.ModelAdmin):
+    list_display = (
+        'title',
+        # 'description',
+        # 'sql',
+        # 'filters',
+        'is_disabled',
+        'result_file_name',
+    )
+
+
 
