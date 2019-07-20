@@ -91,7 +91,7 @@
                         <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
                             <thead>
                             <tr>
-                                <th class="wd-lg-10p tx-right">Рейтинг</th>
+                                <th class="wd-lg-10p tx-right">#</th>
                                 <th class="wd-lg-70p tx-left">Сервис</th>
 
                                 <th class="wd-lg-10p tx-right">Соглашений</th>
@@ -130,10 +130,10 @@
                         <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
                             <thead>
                             <tr>
-                                <th class="wd-lg-10p tx-right">Рейтинг</th>
-                                <th class="wd-lg-70p tx-left">Команда</th>
+                                <th class="wd-lg-10p wd-sm-5p tx-right">#</th>
+                                <th class="wd-lg-30p wd-sm-20p tx-left">Команда</th>
 
-                                <th class="wd-lg-10p tx-right">Соглашений</th>
+                                <th class="wd-lg-10p wd-sm-5p tx-right">Соглашений</th>
 
 
                             </tr>
@@ -142,10 +142,10 @@
 
                             {% for team in result.teams %}
                                 <tr>
-                                    <td class="text tx-right tx-bold tx-">#{{ team.N }}</td>
+                                    <td class="text tx-right tx-bold ">#{{ team.N }}</td>
                                     <td class="text tx-bold"
                                         style="word-wrap: break-word"> {{ team.team }}   </td>
-                                    <td class="text tx-right tx-bold tx-15">{{ team.service }}</td>
+                                    <td class="text tx-right tx-bold">{{ team.service }}</td>
 
                                 </tr>
                             {% endfor %}
