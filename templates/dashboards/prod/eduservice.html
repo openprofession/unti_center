@@ -31,10 +31,11 @@
             <a href="/" class="user-events__main-logo navbar-brand mr-4">
                 <img src="/static/img/app.png" alt="" style="max-height: 40px">
             </a>
+             <div class="text-danger text-center mr-auto tx-18-f tx-uppercase">Рейтинг сервисов НТИ</div>
 
-            <div class="collapse navbar-collapse" id="navbar-top">
-                <div class="text-danger text-center mr-auto tx-36-f tx-uppercase">Рейтинг сервисов НТИ</div>
-            </div>
+{% comment %}            <div class="" id="navbar-top">
+
+            </div>{% endcomment %}
 
         </nav>
     </div>
@@ -42,9 +43,46 @@
 
 <div class="az-content az-content-dashboard-eight  pt-3">
     <div class="container-fluid d-block">
+        <div class="row row-sm--lg">
+            <div class="col-sm-12 col-lg-4 mb-3">
+                <div class="card card-body card-dashboard-fifteen p-3">
+                    <h1>{{ result.agr_count }}</h1>
+                    <label class="tx-danger">Соглашений</label>
+                    <span>Общее количество подписанных соглашений.</span>
+  {% comment %}                  <div class="chart-wrapper">
+                        <div id="flotChart1" class="flot-chart" style="padding: 0px;">
+
+                    </div><!-- chart-wrapper -->{% endcomment %}
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-4 mb-3">
+                <div class="card card-body card-dashboard-fifteen p-3">
+                    <h1>{{ result.srv_count }}</h1>
+                    <label class="tx-danger">Сервисов</label>
+                    <span>Количество подписанных сервисов НТИ </span>
+                    {% comment %}                  <div class="chart-wrapper">
+                        <div id="flotChart1" class="flot-chart" style="padding: 0px;">
+
+                    </div><!-- chart-wrapper -->{% endcomment %}
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-4 mb-3">
+                <div class="card card-body card-dashboard-fifteen p-3">
+                    <h1>{{ result.team_count }}</h1>
+                    <label class="tx-danger">ВУЗов</label>
+                    <span>Количество ВУЗов подписавшихся на сервисы НТИ</span>
+                 {% comment %}                  <div class="chart-wrapper">
+                        <div id="flotChart1" class="flot-chart" style="padding: 0px;">
+
+                    </div><!-- chart-wrapper -->{% endcomment %}
+                </div>
+            </div>
+        </div>
+
+
         <div class="row row-sm">
             <div class="col-lg-6 col-sm-12">
-                <div class="col-12 card card-dashboard-twentyfour mb-2">
+                <div class="col-12 card card-dashboard-twentyfour">
                     <div class="card-header">
                         <h2 class="">Рейтинг сервисов платформы НТИ</h2>
                         <span class="tx-20"></span>
@@ -67,7 +105,7 @@
                                 <tr>
                                     <td class="text tx-right tx-bold tx-">#{{ service.N }}</td>
                                     <td class="text tx-bold"
-                                        style="word-wrap: break-word"> {{ service.service}}   </td>
+                                        style="word-wrap: break-word"> {{ service.service }}   </td>
                                     <td class="text tx-right tx-bold tx-15">{{ service.team }}</td>
 
                                 </tr>
@@ -80,12 +118,10 @@
                 </div>
 
 
-
-
             </div>
             <div class="col-lg-6 col-sm-12">
 
-             <div class="col-12 card card-dashboard-twentyfour mb-2">
+                <div class="col-12 card card-dashboard-twentyfour">
                     <div class="card-header">
                         <h2 class="">Рейтинг команд по подписанным соглашениям</h2>
                         <span class="tx-20"></span>
@@ -108,7 +144,7 @@
                                 <tr>
                                     <td class="text tx-right tx-bold tx-">#{{ team.N }}</td>
                                     <td class="text tx-bold"
-                                        style="word-wrap: break-word"> {{ team.team}}   </td>
+                                        style="word-wrap: break-word"> {{ team.team }}   </td>
                                     <td class="text tx-right tx-bold tx-15">{{ team.service }}</td>
 
                                 </tr>

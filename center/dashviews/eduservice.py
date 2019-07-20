@@ -13,7 +13,7 @@ from center.dash_views import dictfetchall
 from center.sql import users, auction, redcards, events, sport, teams
 
 
-@cache_page(180 or settings.PAGE_CACHE_TIME)
+# @cache_page(180 or settings.PAGE_CACHE_TIME)
 def dash_eduservice_rating(request):
     result = {}
     try:
@@ -44,9 +44,17 @@ def dash_eduservice_rating(request):
         service_df["N"] = service_df.index + 1
         result['teams'] = team_df.to_dict('record')
         result['services'] = service_df.to_dict('record')
+        result['agr_count'] = agr_df['agreement'].count()
+        result['srv_count'] = len(agr_df['service'].unique())
+        result['team_count'] = len(agr_df['team'].unique())
+
+        agr_df['date'] = pd.to_datetime(agr_df['createDT'])
         # print(agr_df.shape)
         # print(agr_df.columns)
+        print(agr_df['date'].to_csv)
+        agr_chart_df = agr_df.groupby(pd.Grouper(key='date', freq='1D')).cumsum()
 
+        print(agr_chart_df.to_csv)
 
 
     except OperationalError as e:
