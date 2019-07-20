@@ -46,3 +46,19 @@ FROM map
 GROUP BY map.id) t1
 GROUP BY t1.id
 """
+
+edumap_agr_likes = """
+SELECT
+  users.leader_id,
+  university.name AS u_name,
+  agreement.name AS agr_name,
+  agreement.subject AS agr_subject,
+  agreement.approve_link AS agr_appprove
+FROM map_ostrov.agreement_like
+  LEFT OUTER JOIN map_ostrov.agreement
+    ON agreement_like.agreement_id = agreement.id
+  LEFT OUTER JOIN map_ostrov.users
+    ON agreement_like.user_id = users.id
+  INNER JOIN map_ostrov.university
+    ON agreement.u_id = university.id
+"""
