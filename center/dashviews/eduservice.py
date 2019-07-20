@@ -51,10 +51,10 @@ def dash_eduservice_rating(request):
         agr_df['date'] = pd.to_datetime(agr_df['createDT'])
         # print(agr_df.shape)
         # print(agr_df.columns)
-        print(agr_df['date'].to_csv)
-        agr_chart_df = agr_df.groupby(pd.Grouper(key='date', freq='1D')).cumsum()
+        #print(agr_df['date'].to_csv)
+        #agr_chart_df = agr_df.groupby(pd.Grouper(key='date', freq='1D')).cumsum()
 
-        print(agr_chart_df.to_csv)
+        #print(agr_chart_df.to_csv)
 
 
     except OperationalError as e:
