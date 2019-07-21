@@ -47,13 +47,15 @@ def dash_sport_rating(request):
 
 
         enrolls_line_df = sport_enrolls_df.groupby(pd.Grouper(key='date', freq='D')).agg({'event_user': 'count', 'value': 'count'}).reset_index()
-        enrolls_line_df['N'] = enrolls_line_df.index + 1
+        enrolls_line_df['N'] = enrolls_line_df.index
         enrolls_line_df['date'] = enrolls_line_df['date'].dt.strftime('%d.%m')
+        enrolls_line_df = enrolls_line_df.query('N < 10')
         team_line_df = sport_enrolls_df.groupby('team_title').agg({'event_user': 'count', 'value': 'count', 'leaderID_x': 'nunique', 'team_users': 'first'}).reset_index()
         team_line_df = pd.merge(team_line_df, ang_teams, on='team_title', how='left')
         team_line_df['rating'] = team_line_df['ang'] / team_line_df['team_users']
         team_line_df = team_line_df.sort_values(by='rating', ascending=False).reset_index()
         team_line_df['N'] = team_line_df.index + 1
+
 
         event_rating_df['title'] = event_rating_df['title'].str.rstrip()
         event_rating_df = event_rating_df.groupby('event_id_x').agg({'event_user': 'count', 'value': 'count', 'sizeMax': 'first', 'title': 'first'}).reset_index()
