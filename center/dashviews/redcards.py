@@ -54,7 +54,7 @@ def dash_redcards(request):
         team_rating_df['score'] = team_rating_df['green'] - team_rating_df['red']
         team_rating_df = team_rating_df.sort_values(by='score', ascending=False).set_index("team_title").reset_index()
         team_rating_df["N"] = team_rating_df.index + 1
-        result['rating'] = team_rating_df.sort_values(by='N', ascending=False).to_dict('record')
+        result['rating'] = team_rating_df.sort_values(by='N', ascending=True).to_dict('record')
         cards_data_df = cards_df
         cards_data_df.loc[-1, 'change_dt'] = pd.Timestamp('2019-07-10 00:00')
         cards_data_df = cards_data_df.groupby(pd.Grouper(key='change_dt', freq='H')).agg({'red': 'sum', 'yellow': 'sum', 'green': 'sum'}).cumsum().reset_index()
