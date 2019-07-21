@@ -30,11 +30,15 @@ def dash_eduservice_rating(request):
 
         rows_list = []
         input_rows = json.loads(r.content)
+        #print(input_rows)
         for row in input_rows:
-            dict_agr = {}
-            dict_agr.update({'agreement': row['typeAgreement']['_instanceName'], 'number': row['number'], 'service': row['service']['_instanceName'], 'createDT': row['createTs'],
-                             'updateDT': row['updateTs'], 'team': row['user']['organizationName']})
-            rows_list.append(dict_agr)
+            try:
+                dict_agr = {}
+                dict_agr.update({'agreement': row['typeAgreement']['_instanceName'], 'number': row['number'], 'service': row['service']['_instanceName'], 'createDT': row['createTs'],
+                                 'updateDT': row['updateTs'], 'team': row['user']['organizationName']})
+                rows_list.append(dict_agr)
+            except KeyError as ke:
+                print(ke)
 
         agr_df = pd.DataFrame(rows_list)
 
