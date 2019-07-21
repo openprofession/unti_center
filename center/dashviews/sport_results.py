@@ -39,8 +39,8 @@ def dash_sport_rating(request):
         # print(sport_enrolls_df.shape)
         # sport_enrolls_df.to_clipboard()
         sport_enrolls_df['date'] = pd.to_datetime(sport_enrolls_df['eventDT'])
-
-        ang_users = sport_enrolls_df.groupby('leaderID_x').agg({'team_title': 'first', 'value': 'count'}).reset_index()
+        #sport_enrolls_df.to_clipboard()
+        ang_users = sport_enrolls_df.groupby('leaderID_y').agg({'team_title': 'first', 'value': 'count'}).reset_index()
         ang_users.rename(columns={'value': 'ang'}, inplace=True)
         ang_users = ang_users.query('ang > 4')
         ang_teams = ang_users.groupby('team_title').agg({'ang': 'count'})
