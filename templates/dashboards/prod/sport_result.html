@@ -62,10 +62,14 @@
                         </div>
                         <div>
                             <h4> {{ result.sum_attendance|as_percentage_of:result.sum_enroll }} </h4>
-                            <label><span class=""></span>посещений от записей</label>
+                            <label>посещений от записей</label>
+                        </div>
+                        <div>
+                            <h4> {{ result.ang_teams }}</h4>
+                            <label>Вовлеченных команд</label>
                         </div>
                     </div>
-                    <div class="chart-wrapper">
+                    <div class="chart-wrapper pl-4">
                         <div id="sportChart" class="flot-chart">
 
                         </div>
@@ -84,9 +88,9 @@
                             <tr>
                                 <th class="wd-lg-10p tx-right">#</th>
                                 <th class="wd-lg-70p tx-left">Мероприятие</th>
-                                <th class="wd-lg-10p tx-right">Посетило</th>
+                                <th class="wd-lg-10p tx-right">Посещений</th>
                                 <th class="wd-lg-10p tx-right">Могло посетить</th>
-                                <th class="wd-lg-10p tx-right">Рейтинг</th>
+                         {% comment %}       <th class="wd-lg-10p tx-right">Рейтинг</th>{% endcomment %}
 
 
                             </tr>
@@ -101,7 +105,7 @@
                                     <td class="text tx-right tx-bold">{{ event.value }}<i
                                             class="fa fa-users tx-right" aria-hidden="true"></i></td>
                                     <td class="text tx-right tx-bold"> {{ event.sizeMax|floatformat:"0" }}</td>
-                                    <td class="text tx-right tx-bold"> {{ event.rating|as_percentage_of:1 }}</td>
+                             {% comment %}       <td class="text tx-right tx-bold"> {{ event.rating|as_percentage_of:1 }}</td>{% endcomment %}
                                 </tr>
                             {% endfor %}
 
@@ -124,7 +128,9 @@
                                 <th class="wd-lg-10p tx-right">#</th>
                                 <th class="wd-lg-70p tx-left">Команда</th>
                                 <th class="wd-lg-10p tx-right">Посещаемость</th>
-                                <th class="wd-lg-10p tx-right">Участников</th>
+                                <th class="wd-lg-10p tx-right">Активных участников</th>
+                                <th class="wd-lg-10p tx-right">Всего участников</th>
+
 
 
                             </tr>
@@ -137,8 +143,9 @@
                                     <td class="text tx-bold"
                                         style="word-wrap: break-word"> {{ team.team_title }}  </td>
                                     <td class="text tx-right tx-bold">{{ team.rating|as_percentage_of:1 }}</td>
-                                    <td class="text tx-right tx-bold"> {{ team.team_users|floatformat:"0" }}<i
-                                            class="fa fa-users tx-right" aria-hidden="true"></i></td>
+                                              <td class="text tx-right tx-bold"> {{ team.leaderID_x|floatformat:"0" }}</td>
+                                    <td class="text tx-right tx-bold"> {{ team.team_users|floatformat:"0" }}</td>
+
 
                                 </tr>
                             {% endfor %}

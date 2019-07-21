@@ -43,19 +43,21 @@ def dash_sport_rating(request):
         enrolls_line_df = sport_enrolls_df.groupby(pd.Grouper(key='date', freq='D')).agg({'event_user': 'count', 'value': 'count'}).reset_index()
         enrolls_line_df['N'] = enrolls_line_df.index + 1
         enrolls_line_df['date'] = enrolls_line_df['date'].dt.strftime('%d.%m')
-        team_line_df = sport_enrolls_df.groupby('team_title').agg({'event_user': 'count', 'value': 'count', 'team_users': 'first'}).reset_index()
+        team_line_df = sport_enrolls_df.groupby('team_title').agg({'event_user': 'count', 'value': 'count', 'leaderID_x': 'nunique', 'team_users': 'first'}).reset_index()
 
         team_line_df['enrolls_plan'] = team_line_df['team_users'] * 10
         team_line_df['rating'] = team_line_df['value'] / team_line_df['enrolls_plan']
         team_line_df = team_line_df.sort_values(by='rating', ascending=False).reset_index()
         team_line_df['N'] = team_line_df.index + 1
 
+        event_rating_df['title'] = event_rating_df['title'].str.rstrip()
         event_rating_df = event_rating_df.groupby('event_id_x').agg({'event_user': 'count', 'value': 'count', 'sizeMax': 'first', 'title': 'first'}).reset_index()
         event_rating_df = event_rating_df.groupby('title').agg({'event_user': 'sum', 'value': 'sum', 'sizeMax': 'sum'}).reset_index()
         event_rating_df['rating'] = event_rating_df['value'] / event_rating_df['sizeMax']
-        event_rating_df = event_rating_df.sort_values(by='rating', ascending=False).reset_index()
+        event_rating_df = event_rating_df.sort_values(by='value', ascending=False).reset_index()
         event_rating_df['N'] = event_rating_df.index + 1
-        #event_rating_df.to_clipboard()
+
+        # event_rating_df.to_clipboard()
 
         result['enrolls_line'] = enrolls_line_df[['N', 'event_user']].values.tolist()
         result['attendance_line'] = enrolls_line_df[['N', 'value']].values.tolist()
@@ -65,6 +67,8 @@ def dash_sport_rating(request):
 
         result['team_rating'] = team_line_df.to_dict('record')
         result['event_rating'] = event_rating_df.to_dict('record')
+
+        result['ang_teams'] = team_line_df.query('rating > 0.5')['N'].count()
     except OperationalError as e:
         print(e)
         return render(request, "fail.html")
