@@ -13,7 +13,7 @@ from center.dash_views import dictfetchall
 from center.sql import users, auction, redcards, events, sport, teams
 
 
-@cache_page(120 or settings.PAGE_CACHE_TIME)
+@cache_page(180 or settings.PAGE_CACHE_TIME)
 def dash_eduservice_rating(request):
     result = {}
     try:
