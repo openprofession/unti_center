@@ -90,7 +90,7 @@
                                 <th class="wd-lg-70p tx-left">Мероприятие</th>
                                 <th class="wd-lg-10p tx-right">Посещений</th>
                                 <th class="wd-lg-10p tx-right">Могло посетить</th>
-                         {% comment %}       <th class="wd-lg-10p tx-right">Рейтинг</th>{% endcomment %}
+                                {% comment %}       <th class="wd-lg-10p tx-right">Рейтинг</th>{% endcomment %}
 
 
                             </tr>
@@ -105,7 +105,7 @@
                                     <td class="text tx-right tx-bold">{{ event.value }}<i
                                             class="fa fa-users tx-right" aria-hidden="true"></i></td>
                                     <td class="text tx-right tx-bold"> {{ event.sizeMax|floatformat:"0" }}</td>
-                             {% comment %}       <td class="text tx-right tx-bold"> {{ event.rating|as_percentage_of:1 }}</td>{% endcomment %}
+                                    {% comment %}       <td class="text tx-right tx-bold"> {{ event.rating|as_percentage_of:1 }}</td>{% endcomment %}
                                 </tr>
                             {% endfor %}
 
@@ -127,10 +127,9 @@
                             <tr>
                                 <th class="wd-lg-10p tx-right">#</th>
                                 <th class="wd-lg-70p tx-left">Команда</th>
-                                <th class="wd-lg-10p tx-right">Посещаемость</th>
-                                <th class="wd-lg-10p tx-right">Активных участников</th>
+                                <th class="wd-lg-10p tx-right">Индекс вовлеченности</th>
+                                <th class="wd-lg-10p tx-right">Вовлеченных участников</th>
                                 <th class="wd-lg-10p tx-right">Всего участников</th>
-
 
 
                             </tr>
@@ -143,7 +142,7 @@
                                     <td class="text tx-bold"
                                         style="word-wrap: break-word"> {{ team.team_title }}  </td>
                                     <td class="text tx-right tx-bold">{{ team.rating|as_percentage_of:1 }}</td>
-                                              <td class="text tx-right tx-bold"> {{ team.leaderID_x|floatformat:"0" }}</td>
+                                    <td class="text tx-right tx-bold"> {{ team.ang|floatformat:"0" }}</td>
                                     <td class="text tx-right tx-bold"> {{ team.team_users|floatformat:"0" }}</td>
 
 

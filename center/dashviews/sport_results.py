@@ -40,13 +40,18 @@ def dash_sport_rating(request):
         # sport_enrolls_df.to_clipboard()
         sport_enrolls_df['date'] = pd.to_datetime(sport_enrolls_df['eventDT'])
 
+        ang_users = sport_enrolls_df.groupby('leaderID_x').agg({'team_title': 'first', 'value': 'count'}).reset_index()
+        ang_users.rename(columns={'value': 'ang'}, inplace=True)
+        ang_users = ang_users.query('ang > 4')
+        ang_teams = ang_users.groupby('team_title').agg({'ang': 'count'})
+
+
         enrolls_line_df = sport_enrolls_df.groupby(pd.Grouper(key='date', freq='D')).agg({'event_user': 'count', 'value': 'count'}).reset_index()
         enrolls_line_df['N'] = enrolls_line_df.index + 1
         enrolls_line_df['date'] = enrolls_line_df['date'].dt.strftime('%d.%m')
         team_line_df = sport_enrolls_df.groupby('team_title').agg({'event_user': 'count', 'value': 'count', 'leaderID_x': 'nunique', 'team_users': 'first'}).reset_index()
-
-        team_line_df['enrolls_plan'] = team_line_df['team_users'] * 10
-        team_line_df['rating'] = team_line_df['value'] / team_line_df['enrolls_plan']
+        team_line_df = pd.merge(team_line_df, ang_teams, on='team_title', how='left')
+        team_line_df['rating'] = team_line_df['ang'] / team_line_df['team_users']
         team_line_df = team_line_df.sort_values(by='rating', ascending=False).reset_index()
         team_line_df['N'] = team_line_df.index + 1
 
@@ -68,7 +73,7 @@ def dash_sport_rating(request):
         result['team_rating'] = team_line_df.to_dict('record')
         result['event_rating'] = event_rating_df.to_dict('record')
 
-        result['ang_teams'] = team_line_df.query('rating > 0.5')['N'].count()
+        result['ang_teams'] = team_line_df.query('ang/team_users > 0.55')['N'].count()
     except OperationalError as e:
         print(e)
         return render(request, "fail.html")
