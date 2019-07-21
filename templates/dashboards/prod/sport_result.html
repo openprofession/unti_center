@@ -45,7 +45,7 @@
         <div class="row row-sm">
             <div class="col-lg-6 col-sm-12">
                 <div class="col-12 card card card-dashboard-audience-metrics mb-2"
-                     style="background-color: white; height: 35vh">
+                     style="background-color: white; min-height: fit-content">
                     <div class="card-header" style="background-color: white">
                         <h2 class="">Посещаемость спортивных мероприятий </h2>
                         <span class="tx-20"></span>
@@ -68,13 +68,15 @@
                             <h4> {{ result.ang_teams }}</h4>
                             <label>Вовлеченных команд</label>
                         </div>
+
                     </div>
-                    <div class="chart-wrapper pl-4">
+                    <div class="pb-3 pl-2" style="position: relative;">
                         <div id="sportChart" class="flot-chart">
 
                         </div>
 
                     </div>
+
 
                 </div>
                 <div class="col-12 card card-dashboard-twentyfour">
@@ -86,7 +88,7 @@
                         <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
                             <thead>
                             <tr>
-                                <th class="wd-lg-10p tx-right">#</th>
+                                <th class="wd-lg-5p tx-right pd-x-1">#</th>
                                 <th class="wd-lg-70p tx-left">Мероприятие</th>
                                 <th class="wd-lg-10p tx-right">Посещений</th>
                                 <th class="wd-lg-10p tx-right">Могло посетить</th>
@@ -99,7 +101,7 @@
 
                             {% for event in result.event_rating %}
                                 <tr>
-                                    <td class="text tx-right tx-bold "># {{ event.N }}</td>
+                                    <td class="text tx-right tx-bold pd-x-5-f" ># {{ event.N }}</td>
                                     <td class="text tx-bold"
                                         style="word-wrap: break-word"> {{ event.title }}  </td>
                                     <td class="text tx-right tx-bold">{{ event.value }}<i
@@ -125,7 +127,7 @@
                         <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
                             <thead>
                             <tr>
-                                <th class="wd-lg-10p tx-right">#</th>
+                                <th class="wd-lg-5p tx-right">#</th>
                                 <th class="wd-lg-70p tx-left">Команда</th>
                                 <th class="wd-lg-10p tx-right">Индекс вовлеченности</th>
                                 <th class="wd-lg-10p tx-right">Вовлеченных участников</th>
@@ -138,7 +140,7 @@
 
                             {% for team in result.team_rating %}
                                 <tr>
-                                    <td class="text tx-right tx-bold "># {{ team.N }}</td>
+                                    <td class="text tx-right tx-bold pd-x-5-f"># {{ team.N }}</td>
                                     <td class="text tx-bold"
                                         style="word-wrap: break-word"> {{ team.team_title }}  </td>
                                     <td class="text tx-right tx-bold">{{ team.rating|as_percentage_of:1 }}</td>

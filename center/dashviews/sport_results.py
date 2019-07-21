@@ -66,6 +66,7 @@ def dash_sport_rating(request):
 
         result['enrolls_line'] = enrolls_line_df[['N', 'event_user']].values.tolist()
         result['attendance_line'] = enrolls_line_df[['N', 'value']].values.tolist()
+        enrolls_line_df['N'] = enrolls_line_df['N'] - 1
         result['time_line'] = enrolls_line_df[['N', 'date']].values.tolist()
         result['sum_enroll'] = enrolls_line_df['event_user'].sum()
         result['sum_attendance'] = enrolls_line_df['value'].sum()
