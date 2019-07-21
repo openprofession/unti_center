@@ -51,10 +51,9 @@ def dash_dtrace(request):
         result['event_day_enroll_data'] = event_day_df[["N", "enrolls_count"]].values.tolist()
         result['event_day_enroll_last'] = event_day_df['enrolls_count'].iloc[-1]
         event_day_df['drace_ratio'] = event_day_df['dtrace_user_count'] / event_day_df['enrolls_count']
-        #result['event_day_dtrace_data'] = event_day_df[["N", "drace_ratio"]].values.tolist()
+        # result['event_day_dtrace_data'] = event_day_df[["N", "drace_ratio"]].values.tolist()
         result['event_day_dtrace_data'] = event_day_df[["N", "dtrace_user_count"]].values.tolist()
         result['event_day_dtrace_last'] = event_day_df['dtrace_user_count'].iloc[-1]
-
 
         result['event_day_feedback_data'] = event_day_df[["N", "feedback_users_count"]].values.tolist()
         result['event_day_feedback_last'] = event_day_df['feedback_users_count'].iloc[-1]
@@ -63,9 +62,8 @@ def dash_dtrace(request):
         event_day_df['endDT'] = event_day_df['endDT'].dt.strftime('%d.%m')
         result['event_day_chart_ticks'] = event_day_df[["N", "endDT"]].values.tolist()
 
-
         event_rating_df = all_events_df.groupby('event_uuid').agg(
-            {'event_title': 'first', 'type_title':'first', 'dep_title': 'first', 'startDT': 'first', 'endDT': 'first', 'enrolls_count': 'sum',
+            {'event_title': 'first', 'type_title': 'first', 'dep_title': 'first', 'startDT': 'first', 'endDT': 'first', 'enrolls_count': 'sum',
              'dtrace_user_count': 'sum', 'avg_score': 'mean',
              'feedback_users_count': 'sum',
              'bets_count': 'sum'}).reset_index()
@@ -75,6 +73,47 @@ def dash_dtrace(request):
 
         print(all_events_df.shape)
 
+    except OperationalError:
+        print('Operational fail')
+        return render(request, "fail.html")
+
+    return render(request, "dashboards/prod/dtrace.html", {'result': result})
+
+
+@cache_page(settings.PAGE_CACHE_TIME)
+def dash_dtrace_team(request):
+    result = {}
+    try:
+        cursor = connections['dwh'].cursor()
+
+        # Все мероприятия острова с факультетом
+        cursor.execute(events.event_department_all)
+        all_events_df = pd.DataFrame(dictfetchall(cursor))
+        print(all_events_df.shape)
+
+        # Все мероприятия острова с записями
+        cursor.execute(events.event_enrolls_all_aggr)
+        event_enrolls_df = pd.DataFrame(dictfetchall(cursor))
+        print(event_enrolls_df.shape)
+        all_events_df = all_events_df.merge(event_enrolls_df, on='event_uuid', how='left')
+
+        # Все мероприятия острова с обратной связью
+        cursor.execute(feedback.event_feedback_rating_aggr)
+        event_feedback_df = pd.DataFrame(dictfetchall(cursor))
+        all_events_df = all_events_df.merge(event_feedback_df, on='event_uuid', how='left')
+        print(event_feedback_df.shape)
+
+        # Все мероприятия остова с персональным цифровым следом
+        cursor.execute(dtrace.event_material_aggr)
+        event_dtrace = pd.DataFrame(dictfetchall(cursor))
+        all_events_df = all_events_df.merge(event_dtrace, on='event_uuid', how='left')
+
+        # Все команды острова
+        cursor.execute(teams.user_teams)
+        teams_load_df = pd.DataFrame(dictfetchall(cursor))
+
+
+        print('dtrace_team')
     except OperationalError:
         print('Operational fail')
         return render(request, "fail.html")

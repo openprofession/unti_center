@@ -55,7 +55,7 @@ urlpatterns = [
                   path('dashboard/auction_result/<str:date>', auction.dash_auction_result, name='dash_auction_result_by_id'),
                   path('dashboard/aim', aim.dash_aim, name='dash_aim'),
                   path('dashboard/dtrace', dtrace.dash_dtrace, name='dash_trace'),
-                  path('dashboard/dtrace_team', dtrace.dash_dtrace_team, 'dash_trace_team'),
+                  #path('dashboard/dtrace_team', dtrace.dash_dtrace_team, 'dash_trace_team'),
 
                   path('dashboard/sport_rating', sport_results.dash_sport_rating, name='dash_sport_rating'),
                   path('dashboard/service_rating', eduservice.dash_eduservice_rating, name='dash_service_rating'),
