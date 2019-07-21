@@ -268,6 +268,6 @@ WHERE xle.event.id IN (SELECT
     LEFT OUTER JOIN xle.type
       ON activity_type.typeID = type.id
   WHERE context_run.contextID = 30
-  AND date(xle.timeslot.endDT) = '2019-07-19'
+  AND date(xle.timeslot.endDT) = '2019-07-21'
   GROUP BY event.id) and xle.user_info.leaderID={}
   """
