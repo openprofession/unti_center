@@ -11,7 +11,8 @@ SELECT
   event.uuid as event_uuid,
   activity.sizeMin,
   activity.sizeMax,
-  CONCAT(event.id,'_',user_info.untiID) AS event_user
+  CONCAT(event.id,'_',user_info.untiID) AS event_user,
+  CONCAT(date(timetable.dt),'_',user_info.untiID) AS date_user
 FROM xle.timetable
   LEFT OUTER JOIN xle.event
     ON timetable.runID = event.runID
@@ -24,7 +25,7 @@ FROM xle.timetable
   LEFT OUTER JOIN xle.user_info
     ON timetable.userID = user_info.userID
 WHERE activity_type.typeID = 192
-group by event_user
+group by date_user
 """
 
 sport_attendance_all = """
