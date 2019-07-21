@@ -16,7 +16,7 @@ GROUP BY user_info.leaderID"""
 team_count = """
 SELECT
   team.id AS team_id,
-  COUNT(user.id) AS team_users
+  COUNT(DISTINCT(user.id)) AS team_users
 FROM  people.team_user
   LEFT OUTER JOIN  people.team
     ON team_user.teamID = team.id

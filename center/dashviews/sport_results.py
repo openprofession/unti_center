@@ -39,12 +39,11 @@ def dash_sport_rating(request):
         # print(sport_enrolls_df.shape)
         # sport_enrolls_df.to_clipboard()
         sport_enrolls_df['date'] = pd.to_datetime(sport_enrolls_df['eventDT'])
-        #sport_enrolls_df.to_clipboard()
+        # sport_enrolls_df.to_clipboard()
         ang_users = sport_enrolls_df.groupby('leaderID_y').agg({'team_title': 'first', 'value': 'count'}).reset_index()
         ang_users.rename(columns={'value': 'ang'}, inplace=True)
         ang_users = ang_users.query('ang > 4')
         ang_teams = ang_users.groupby('team_title').agg({'ang': 'count'})
-
 
         enrolls_line_df = sport_enrolls_df.groupby(pd.Grouper(key='date', freq='D')).agg({'event_user': 'count', 'value': 'count'}).reset_index()
         enrolls_line_df['N'] = enrolls_line_df.index
@@ -53,9 +52,8 @@ def dash_sport_rating(request):
         team_line_df = sport_enrolls_df.groupby('team_title').agg({'event_user': 'count', 'value': 'count', 'leaderID_x': 'nunique', 'team_users': 'first'}).reset_index()
         team_line_df = pd.merge(team_line_df, ang_teams, on='team_title', how='left')
         team_line_df['rating'] = team_line_df['ang'] / team_line_df['team_users']
-        team_line_df = team_line_df.sort_values(by='rating', ascending=False).reset_index()
+        team_line_df = team_line_df.sort_values(by=['rating', 'team_users'], ascending=[False, False]).reset_index()
         team_line_df['N'] = team_line_df.index + 1
-
 
         event_rating_df['title'] = event_rating_df['title'].str.rstrip()
         event_rating_df = event_rating_df.groupby('event_id_x').agg({'event_user': 'count', 'value': 'count', 'sizeMax': 'first', 'title': 'first'}).reset_index()
