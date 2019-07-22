@@ -81,7 +81,7 @@ def dash_dtrace(request):
     return render(request, "dashboards/prod/dtrace.html", {'result': result})
 
 
-# @cache_page(settings.PAGE_CACHE_TIME)
+@cache_page(180 or settings.PAGE_CACHE_TIME)
 def dash_dtrace_teams(request):
     result = {}
     try:
