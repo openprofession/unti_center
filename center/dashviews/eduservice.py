@@ -38,6 +38,7 @@ def dash_eduservice_rating(request):
                                  'updateDT': row['updateTs'], 'team': row['user']['organizationName']})
                 rows_list.append(dict_agr)
             except KeyError as ke:
+                #print(row)
                 print(ke)
 
         agr_df = pd.DataFrame(rows_list)
@@ -63,6 +64,7 @@ def dash_eduservice_rating(request):
 
     except OperationalError as e:
         print(e)
+
         return render(request, "fail.html")
 
     return render(request, "dashboards/prod/eduservice.html", {'result': result})

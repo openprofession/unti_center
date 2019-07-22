@@ -1,10 +1,145 @@
+{% load tags %}
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Refresh" content="300"/>
+    <!-- Meta -->
+    <meta name="description" content="Спортивный рейтинг">
+
+
+    <title>Остров 10-22 СЦ Рейтинг по цифровому следу</title>
+
+    <!-- vendor css -->
+    <link href="/static/azia/lib/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="/static/azia/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="/static/azia/lib/typicons.font/typicons.css" rel="stylesheet">
+
+    <!-- azia CSS -->
+    <link rel="stylesheet" href="/static/azia/css/azia.css">
+
 </head>
-<body>
+
+<body class="az-body az-dashboard-eight">
+<header class="page user-events-page bg-white">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <a href="/" class="user-events__main-logo navbar-brand mr-4">
+                <img src="/static/img/app.png" alt="" style="max-height: 40px">
+            </a>
+
+            <div class="collapse navbar-collapse" id="navbar-top">
+                <div class="text-danger text-center mr-auto tx-36-f tx-uppercase">Рейтинг по цифровому следу</div>
+            </div>
+
+        </nav>
+    </div>
+</header>
+
+<div class="az-content az-content-dashboard-eight  pt-3">
+    <div class="container-fluid d-block">
+        <div class="row row-sm">
+            <div class="col-lg-6 col-sm-12">
+
+                <div class="col-12 card card-dashboard-twentyfour">
+                    <div class="card-header">
+                        <h2 class="">Рейтинг команд по рефлексии</h2>
+                        <span class="tx-20"></span>
+                    </div><!-- card-header -->
+                    <div class="table-responsive">
+                        <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
+                            <thead>
+                            <tr>
+                                <th class="wd-lg-5p tx-right pd-x-1">#</th>
+                                <th class="wd-lg-70p tx-left">Мероприятие</th>
+                                <th class="wd-lg-10p tx-right">Рейтинг по рефлексии</th>
+                                <th class="wd-lg-10p tx-right">Рефлексий</th>
+                                <th class="wd-lg-10p tx-right">Мероприятий</th>
+                                {% comment %}       <th class="wd-lg-10p tx-right">Рейтинг</th>{% endcomment %}
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for team in result.team_reflex_rating %}
+                                <tr>
+                                    <td class="text tx-right tx-bold pd-x-5-f"># {{ team.N }}</td>
+                                    <td class="text tx-bold"
+                                        style="word-wrap: break-word"> {{ team.team_title }}  </td>
+                                    <td class="text tx-right tx-bold">{{ team.value_rating|as_percentage_of:1 }}</td>
+                                    <td class="text tx-right tx-bold">{{ team.value }}</td>
+                                    <td class="text tx-right tx-bold">{{ team.event_uuid }}</td>
+
+                                    {% comment %}        <td class="text tx-right tx-bold"> {{ event.sizeMax|floatformat:"0" }}</td>{% endcomment %}
+                                    {% comment %}       <td class="text tx-right tx-bold"> {{ event.rating|as_percentage_of:1 }}</td>{% endcomment %}
+                                </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                    </div><!-- table-responsive -->
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <div class="col-12 card card-dashboard-twentyfour">
+                    <div class="card-header">
+                        <h2 class="">Рейтинг команд по занятию спортом</h2>
+                        <span class="tx-20"></span>
+                    </div><!-- card-header -->
+                    <div class="table-responsive">
+                        <table class="table {% comment %}table-striped table-dashboard-two mg-b-0{% endcomment %}">
+                            <thead>
+                            <tr>
+                                <th class="wd-lg-5p tx-right pd-x-1">#</th>
+                                <th class="wd-lg-70p tx-left">Мероприятие</th>
+                                <th class="wd-lg-10p tx-right">Рейтинг по цифровому следу</th>
+                                <th class="wd-lg-10p tx-right">Цифрового следа</th>
+                                <th class="wd-lg-10p tx-right">Мероприятий</th>
+                                {% comment %}       <th class="wd-lg-10p tx-right">Рейтинг</th>{% endcomment %}
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for team in result.team_dtrace_rating %}
+                                <tr>
+                                    <td class="text tx-right tx-bold pd-x-5-f"># {{ team.N }}</td>
+                                    <td class="text tx-bold"
+                                        style="word-wrap: break-word"> {{ team.team_title }}  </td>
+                                                          <td class="text tx-right tx-bold">{{ team.dtrace_rating|as_percentage_of:1 }}</td>
+                                    <td class="text tx-right tx-bold">{{ team.dtrace }}</td>
+                                    <td class="text tx-right tx-bold">{{ team.event_uuid }}</td>
+
+                                </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                        </table>
+                    </div><!-- table-responsive -->
+                </div>
+            </div>
+
+
+        </div>
+    </div><!-- container -->
+</div><!-- az-content -->
+
+
+<script src="/static/azia/lib/jquery/jquery.min.js"></script>
+<script src="/static/azia/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/azia/lib/ionicons/ionicons.js"></script>
+<script src="/static/azia/lib/jquery.flot/jquery.flot.js"></script>
+<script src="/static/azia/lib/jquery.flot/jquery.flot.resize.js"></script>
+<script src="/static/azia/lib/chart.js/Chart.bundle.min.js"></script>
+
+<script src="/static/azia/js/azia.js"></script>
 
 </body>
 </html>

@@ -17,15 +17,8 @@ FROM now.aim_feedback
 
 event_feedback_rating = """
 SELECT
-  user_info.leaderID,
-  user_info.untiID,
-  event.uuid,
-  event.title,
-  timeslot.startDT,
-  timeslot.endDT,
-  user_feedback_answer.value,
-  feedback_question.type,
-  feedback_question.title
+  concat(user_info.leaderID, "_", event.uuid) AS user_event,
+  user_feedback_answer.value
 FROM xle.user_feedback_answer
   LEFT OUTER JOIN xle.event
     ON user_feedback_answer.eventID = event.id
@@ -35,7 +28,8 @@ FROM xle.user_feedback_answer
     ON user_feedback_answer.userID = user_info.userID
   LEFT OUTER JOIN xle.feedback_question
     ON user_feedback_answer.feedbackQuestionID = feedback_question.id
-WHERE feedback_question.type = 'rating'"""
+WHERE feedback_question.type = 'rating'
+GROUP BY user_event"""
 
 event_feedback_rating_aggr = """
 SELECT

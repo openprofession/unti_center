@@ -190,17 +190,19 @@ SELECT
   user_info.leaderID,
   event.uuid AS event_uuid,
   event.title AS event_title,
-  timetable.checkin
-FROM timetable
-  LEFT OUTER JOIN user_info
+  timetable.checkin,
+  concat(user_info.leaderID, "_", event.uuid) AS user_event
+FROM xle.timetable
+  LEFT OUTER JOIN xle.user_info
     ON timetable.userID = user_info.userID
-  LEFT OUTER JOIN event
+  LEFT OUTER JOIN xle.event
     ON timetable.runID = event.runID
-  LEFT OUTER JOIN context_run
+  LEFT OUTER JOIN xle.context_run
     ON timetable.runID = context_run.runID
-  LEFT OUTER JOIN context
+  LEFT OUTER JOIN xle.context
     ON context_run.contextID = context.id
 WHERE context.uuid = '9443f94b-b29f-47b4-bcc8-66a59120f61c'
+AND event.isDeleted = 0
 """
 
 
@@ -217,8 +219,10 @@ FROM xle.timetable
     ON timetable.runID = context_run.runID
   LEFT OUTER JOIN xle.context
     ON context_run.contextID = context.id
-WHERE context.uuid = '9443f94b-b29f-47b4-bcc8-66a59120f61c'
+WHERE context.uuid = '9443f94b-b29f-47b4-bcc8-66a59120f61c' 
+AND event.isDeleted = 0
 GROUP BY event.uuid
+
 """
 
 
