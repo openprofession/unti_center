@@ -54,7 +54,7 @@
                                 <div class="card-body-top">
 
                                     <div> Зарегистрировано
-                                        <h6><span></span>{{ users_registered_count }}
+                                        <h6><span></span>1054
                                             <small class="text-black-50">/ {{ user_count }}</small>
                                         </h6>
                                     </div>
@@ -63,7 +63,7 @@
                                 </div><!-- card-body-top -->
 
                                 <div class="chart-wrapper">
-                                    <div id="flotBarRegister" class="flot-chart"></div>
+                                    <div id="flotBarRegister" class="flot-chart" style="height: 25vh;"></div>
                                 </div><!-- chart-wrapper -->
                             </div><!-- card-body -->
                         </div>
@@ -77,16 +77,16 @@
                     <div class="col-12 mb-0">
                         <h2 class="az-content-title tx-24 tx-center mb-3">Активность в приложениях</h2>
                     </div>
-                    <div class="col-lg-4 col-sm-12  mb-0">
-                        <div class="card card-dashboard-twenty mb-3" style="min-height: 22.4vh">
+                    <div class="col-lg-6 col-sm-12  mb-0">
+                        <div class="card card-dashboard-twenty mb-3" style="min-height: 34.5vh">
                             <div class="card-body">
-                                <label class="az-content-label tx-13">Личный кабинет</label>
+                                <label class="az-content-label tx-20">Личный кабинет</label>
                                 <p>Заходили в личный кабинет</p>
                                 <div class="expansion-value">
-                                    <strong>{{ users_active_lk_today }}
+                                    <strong class="tx-30">{{ users_active_lk_today }}
                                         <small> / {{ user_count }}</small>
                                     </strong>
-                                    <strong>{{ users_active_lk_today|as_percentage_of:user_count }}</strong>
+                                    <strong class="tx-30">{{ users_active_lk_today|as_percentage_of:user_count }}</strong>
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar bg-orange wd-{{ users_active_lk_today|as_percentage_of_round5:user_count }}p"
@@ -98,10 +98,10 @@
 
                                 </div>
                                 <div class="expansion-value">
-                                    <strong> {{ users_active_lk_all }}
+                                    <strong class="tx-30"> {{ users_active_lk_all }}
                                         <small> / {{ user_count }}</small>
                                     </strong>
-                                    <strong>{{ users_active_lk_all|as_percentage_of:user_count }}</strong>
+                                    <strong class="tx-30">{{ users_active_lk_all|as_percentage_of:user_count }}</strong>
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar bg-success wd-{{ users_active_lk_all|as_percentage_of_round5:user_count }}p"
@@ -116,16 +116,16 @@
                             </div>
                         </div><!-- card -->
                     </div>
-                    <div class="col-lg-4 col-sm-12">
-                        <div class="card card-dashboard-twenty" style="min-height: 22.4vh">
-                            <div class="card-body">
-                                <label class="az-content-label tx-13">Мобильные приложения</label>
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="card card-dashboard-twenty" style="min-height: 34.5vh">
+                            <div class="card-body ">
+                                <label class="az-content-label tx-20">Мобильные приложения</label>
                                 <p>Запущено мобильное приложение</p>
                                 <div class="expansion-value">
-                                    <strong>{{ users_active_mob_today }}
+                                    <strong class="tx-30">{{ users_active_mob_today }}
                                         <small> / {{ user_count }}</small>
                                     </strong>
-                                    <strong>{{ users_active_mob_today|as_percentage_of:user_count }}</strong>
+                                    <strong class="tx-30">{{ users_active_mob_today|as_percentage_of:user_count }}</strong>
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar bg-danger wd-{{ users_active_mob_today|as_percentage_of_round5:user_count }}p"
@@ -137,10 +137,10 @@
 
                                 </div>
                                 <div class="expansion-value">
-                                    <strong>{{ users_active_mob_all }}
+                                    <strong class="tx-30">{{ users_active_mob_all }}
                                         <small> / {{ user_count }}</small>
                                     </strong>
-                                    <strong>{{ users_active_mob_all|as_percentage_of:user_count }}</strong>
+                                    <strong class="tx-30">{{ users_active_mob_all|as_percentage_of:user_count }}</strong>
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar bg-danger wd-{{ users_active_mob_all|as_percentage_of_round5:user_count }}p"
@@ -155,8 +155,8 @@
                             </div>
                         </div><!-- card -->
                     </div>
-                    <div class="col-lg-4 col-sm-12">
-                        <div class="card card-dashboard-twenty" style="min-height: 22.4vh">
+                    {% comment %}               <div class="col-lg-4 col-sm-12">
+                        <div class="card card-dashboard-twenty" style="min-height: 34.5vh">
                             <div class="card-body">
                                 <label class="az-content-label tx-13">Карта развития</label>
                                 <p>Занимались картой развития</p>
@@ -190,12 +190,12 @@
                                 </div>
                             </div>
                         </div><!-- card -->
-                    </div>
+                    </div>{% endcomment %}
                 </div>
             </div><!-- col -->
         </div><!-- row -->
-        <div class="row row-sm">
-            <div class="col-lg-6" style="opacity:.25"> {% comment %}Посещамость мероприятий{% endcomment %}
+        {% comment %}  <div class="row row-sm">
+            <div class="col-lg-6" style="opacity:.25"> Посещамость мероприятий
                 <div class="row ">
                     <div class="col-12 mb-0">
                         <h2 class="az-content-title tx-24 tx-center mb-3">Посещаемость мероприятий</h2>
@@ -227,7 +227,7 @@
                         <div class="card card-dashboard-five">
                             <div class="card-header">
                                 <h6 class="card-title">На мероприятиях НЕ по расписанию</h6>
-                                {% comment %}       <span class="card-text">Ходят на свои мероприятия</span>{% endcomment %}
+                                       <span class="card-text">Ходят на свои мероприятия</span>
                             </div>
                             <div class="card-body">
                                 <div class="mg-b-10 mg-sm-b-0 mg-sm-r-10">
@@ -250,12 +250,12 @@
                     </div>
                     <div class="col-lg-4 col-sm-12">
                         <div class="card card-dashboard-five">
-                            {% comment %}<div class="card-header">
+                            <div class="card-header">
                                 <h6 class="card-title mg-b-10">Ходят на свои мероприятия</h6>
-                            </div><!-- card-header -->{% endcomment %}
+                            </div><!-- card-header -->
                             <div class="card-header">
                                 <h6 class="card-title">Отсутсвуют на мероприятиях</h6>
-                                {% comment %}       <span class="card-text">Ходят на свои мероприятия</span>{% endcomment %}
+                                       <span class="card-text">Ходят на свои мероприятия</span>
                             </div>
                             <div class="card-body">
                                 <div class="mg-b-10 mg-sm-b-0 mg-sm-r-10">
@@ -279,7 +279,7 @@
 
                 </div>
             </div><!-- col -->
-            <div class="col-lg-6" style="opacity:.25"> {% comment %}Посещамость мероприятий{% endcomment %}
+            <div class="col-lg-6" style="opacity:.25"> Посещамость мероприятий
                 <div class="row ">
                     <div class="col-12 mb-0">
                         <h2 class="az-content-title tx-24 tx-center mb-3">Обратная связь</h2>
@@ -311,7 +311,7 @@
                         <div class="card card-dashboard-five">
                             <div class="card-header">
                                 <h6 class="card-title">Оставлено оценок по лабораториям</h6>
-                                {% comment %}       <span class="card-text">Ходят на свои мероприятия</span>{% endcomment %}
+                                       <span class="card-text">Ходят на свои мероприятия</span>
                             </div>
                             <div class="card-body">
                                 <div class="mg-b-10 mg-sm-b-0 mg-sm-r-10">
@@ -334,12 +334,12 @@
                     </div>
                     <div class="col-lg-4 col-sm-12">
                         <div class="card card-dashboard-five">
-                            {% comment %}<div class="card-header">
+                            <div class="card-header">
                                 <h6 class="card-title mg-b-10">Ходят на свои мероприятия</h6>
-                            </div><!-- card-header -->{% endcomment %}
+                            </div><!-- card-header -->
                             <div class="card-header">
                                 <h6 class="card-title">Оставлено оценок по мастер классам</h6>
-                                {% comment %}       <span class="card-text">Ходят на свои мероприятия</span>{% endcomment %}
+                                       <span class="card-text">Ходят на свои мероприятия</span>
                             </div>
                             <div class="card-body">
                                 <div class="mg-b-10 mg-sm-b-0 mg-sm-r-10">
@@ -364,9 +364,9 @@
                 </div>
             </div><!-- col -->
 
-            {% comment %}Загрузка аудиторий{% endcomment %}
+            Загрузка аудиторий
 
-        </div>
+        </div>{% endcomment %}
         <div class="row row-sm">
             <div class="col-lg-6"> {% comment %}Обратная связь{% endcomment %}
                 <div class="row">
@@ -405,7 +405,7 @@
                                     </div><!-- chart-legend -->
                                 </div>
                                 <div class="chart-wrapper">
-                                    <div id="flotBarAuction" class="flot-chart">
+                                    <div id="flotBarAuction" class="flot-chart" style="height: 25vh;">
 
                                     </div>
                                 </div><!-- chart-wrapper -->
@@ -416,40 +416,60 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="row " style="opacity:.25">
-                    <div class="col-12 mb-0">
-                        <h2 class="az-content-title tx-24 tx-center mb-3">Загрузка аудиторий</h2>
-                    </div>
-                    <div class="col-12">
-                        <div class="card" style="min-height: 22.4vh">
+
+                <div class="col-12 mb-0">
+                    <h2 class="az-content-title tx-24 tx-center mb-3">Сбор обратной связи о мероприятиях</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12" >
+                        <div class="card card-dashboard-five" style="min-height: 41vh">
+                            <div class="card-header">
+                                <h6 class="card-title tx-20">Собрано оценок</h6>
+                            </div>
                             <div class="card-body">
-                                <div class="col-12">
-                                    <div id="flotPie" class="wd-100p ht-150"></div>
-                                </div><!-- col -->
-                                {% comment %}  <div class="col-sm-4 col-md-5 mg-t-30 mg-sm-t-0">
-                                    <ul class="list-unstyled">
-                                        <li class="d-flex align-items-center"><span
-                                                class="d-inline-block wd-10 ht-10 bg-purple mg-r-10"></span> Very
-                                            Satisfied (26%)
-                                        </li>
-                                        <li class="d-flex align-items-center mg-t-5"><span
-                                                class="d-inline-block wd-10 ht-10 bg-primary mg-r-10"></span> Satisfied
-                                            (39%)
-                                        </li>
-                                        <li class="d-flex align-items-center mg-t-5"><span
-                                                class="d-inline-block wd-10 ht-10 bg-teal mg-r-10"></span> Not Satisfied
-                                            (20%)
-                                        </li>
-                                        <li class="d-flex align-items-center mg-t-5"><span
-                                                class="d-inline-block wd-10 ht-10 bg-gray-500 mg-r-10"></span> Satisfied
-                                            (15%)
-                                        </li>
-                                    </ul>
-                                </div><!-- col -->{% endcomment %}
+                                <div class="mg-b-10 mg-sm-b-0 mg-sm-r-10">
+                                    <div class="c100 green p{{ dtrace_values.0|as_percentage_of_round5:dtrace_values.2 }}">
+                                        <span>{{ dtrace_values.0|as_percentage_of:dtrace_values.2 }}</span>
+                                        <div class="slice" >
+                                            <div class="bar"></div>
+                                            <div class="fill"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% comment %}<div>
+                                    <h4>{{ dtrace_values.0 }}
+                                        <small> / {{ dtrace_values.2 }}</small>
+                                    </h4>
+                                </div>{% endcomment %}
                             </div><!-- card-body -->
                         </div>
                     </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="card card-dashboard-five">
+                            <div class="card-header">
+                                <h6 class="card-title tx-20">Собрано цифрового следа</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="mg-b-10 mg-sm-b-0 mg-sm-r-10">
+                                    <div class="c100 orange p{{ dtrace_values.1|as_percentage_of_round5:dtrace_values.2 }}">
+                                        <span>{{ dtrace_values.1|as_percentage_of:dtrace_values.2 }}</span>
+                                        <div class="slice">
+                                            <div class="bar"></div>
+                                            <div class="fill"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                               {% comment %} <div>
+                                    <h4>{{ dtrace_values.1 }}
+                                        <small> / {{ dtrace_values.2 }}</small>
+                                    </h4>
+                                </div>{% endcomment %}
+                            </div><!-- card-body -->
+                        </div>
+
+                    </div>
                 </div>
+
             </div>
         </div>
 
@@ -515,25 +535,25 @@
                 }
             }
         });
-        $.plot('#flotPie', [
-            {label: 'Низкая загруженность', data: [[1, 5]], color: '#fd7e14'},
-            {label: 'Средняя загруженность', data: [[1, 20]], color: '#3bb001'},
-            {label: 'Высокая загруженность', data: [[1, 4]], color: '#dc3545'},
-        ], {
-            series: {
-                pie: {
-                    show: true,
-                    radius: 1,
-                    innerRadius: 0.5,
-                    label: {
-                        show: true,
-                        radius: 3 / 4,
-                        formatter: labelFormatter
-                    }
-                }
-            },
-            {% comment %}   legend: {show: false}{% endcomment %}
-        });
+        {% comment %}        $.plot('#flotPie', [
+                    {label: 'Низкая загруженность', data: [[1, 5]], color: '#fd7e14'},
+                    {label: 'Средняя загруженность', data: [[1, 20]], color: '#3bb001'},
+                    {label: 'Высокая загруженность', data: [[1, 4]], color: '#dc3545'},
+                ], {
+                    series: {
+                        pie: {
+                            show: true,
+                            radius: 1,
+                            innerRadius: 0.5,
+                            label: {
+                                show: true,
+                                radius: 3 / 4,
+                                formatter: labelFormatter
+                            }
+                        }
+                    },
+                       legend: {show: false}
+                });{% endcomment %}
         $.plot('#flotBarAuction', [{
             data: {{ event_bet_dyn_data }},
             bars: {

@@ -9,7 +9,7 @@ from django.utils.html import escape
 from django.views.decorators.cache import cache_page
 
 from center import settings
-from center.sql import users, auction
+from center.sql import users, auction, events, feedback, dtrace
 
 
 @cache_page(settings.PAGE_CACHE_TIME)
@@ -46,7 +46,7 @@ def dash_all(request):
             # в формате list of lists
             data_to_graph = df_cumsum.values.tolist()
             data_to_graph_series = df2.values.tolist()
-            print(data_to_graph_series)
+
 
         cursor.execute(auction.auction_bets_1)
         df_auction = pd.DataFrame(dictfetchall(cursor))
@@ -94,6 +94,29 @@ def dash_all(request):
 
             # готовим данные для построения графика в формате list of lists
             data_to_graph_dyn = df_cumsum.values.tolist()
+
+        cursor = connections['dwh'].cursor()
+
+        # Все мероприятия острова с факультетом
+        cursor.execute(events.event_enrolls_all)
+        all_enrolls_df = pd.DataFrame(dictfetchall(cursor))
+        print(all_enrolls_df.shape)
+
+        # Все мероприятия острова с обратной связью
+        cursor.execute(feedback.event_feedback_rating)
+        event_feedback_df = pd.DataFrame(dictfetchall(cursor))
+        all_enrolls_df = pd.merge(all_enrolls_df, event_feedback_df, on='user_event', how='left')
+        print(all_enrolls_df.shape)
+
+        # Все мероприятия остова с персональным цифровым следом
+        cursor.execute(dtrace.event_material_all)
+        event_dtrace = pd.DataFrame(dictfetchall(cursor))
+        all_enrolls_df = pd.merge(all_enrolls_df, event_dtrace, on='user_event', how='left')
+        print(all_enrolls_df.shape)
+
+        all_enrolls_df = all_enrolls_df.agg({'value': 'count', 'dtrace': 'count', 'event_uuid': 'count'})
+        print(all_enrolls_df.shape)
+        dtrace_values = all_enrolls_df.to_list()
     except OperationalError:
         print('Operational fail')
         return render(request, "fail.html")
@@ -112,7 +135,7 @@ def dash_all(request):
         'users_registered_data_series': data_to_graph_series,
         "title": df_auction['title'].iloc[0], "endDT": endDT,
         "bet_count": bet_count, "event_bet_dyn_data": data_to_graph_dyn,
-        'auction_user_count': auction_user_count
+        'auction_user_count': auction_user_count, 'dtrace_values': dtrace_values
     })
 
 

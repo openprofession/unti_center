@@ -224,11 +224,11 @@
 }
 .c100 {
   position: relative;
-  font-size: 120px;
+  font-size: 300px;
   width: 1em;
   height: 1em;
   border-radius: 50%;
-  float: left;
+  float: right;
   margin: 0 0.1em 0.1em 0;
   background-color: #cccccc;
 }
